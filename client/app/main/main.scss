@@ -28,3 +28,19 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+md-card {
+    height: 500px;
+    width: 100%;
+    position: relative;
+}
+.save{
+    position: absolute;
+    bottom: 20px;
+    float: left;
+}
+.pass{
+    position: absolute;
+    bottom: 20px;
+    float: right;
+}
