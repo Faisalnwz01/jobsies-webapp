@@ -45,6 +45,11 @@ var all = {
     clientID:     process.env.GOOGLE_ID || 'id',
     clientSecret: process.env.GOOGLE_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/google/callback'
+  },
+  linkedin: {
+    clientID:     process.env.LINKEDIN_ID || 'id',
+    clientSecret: process.env.LINKEDIN_SECRET || 'secret',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/linkedin/callback'
   }
 };
 

@@ -1,0 +1,97 @@
+
+<div layout="column" layout-fill class='resumeFormal container nopadding'>
+<h1>fancy</h1>
+<md-whiteframe class="md-whiteframe-z1">
+<a class='col-md-4 col-md-offset-8' href="/profile"><md-button  class="md-raised md-primary glyphicon glyphicon-plus" ng-click="update()"> Edit Your Resume</md-button></a>
+<div class = 'contactInfo'>
+<h1>
+{{profileInformation.name}}
+</h1>
+<div>
+<span class="glyphicon glyphicon-home"></span>
+<span class="content">{{profileInformation.linkedin.location.name}}</span>
+<span class="glyphicon glyphicon-earphone"></span>
+<span class="content">{{profileInformation.number || '123-456-7890'}}</span>
+<div>
+  <span class="glyphicon glyphicon-envelope"></span>
+  <span class="content">{{profileInformation.email}}</span>
+</div>
+</div>
+</div>
+<br>
+<br>
+
+<div class="row">
+    <div class="col-md-3 educationFormal">
+    <h2>EDUCATION</h2>
+    </div>
+    <div ng-repeat="educations in profileInformation.linkedin.educations.values">
+      <div class="col-md-3 educationFormal">
+    </div>
+
+    <div class="col-md-7" >
+      <div class="boldText"><strong>{{educations.schoolName}}</strong>
+      </div>
+
+        <span><i>{{educations.degree}}</span>,
+        <span>{{educations.fieldOfStudy}}</i></span>
+  </div>
+      <div class="col-md-2 educationFormal">
+        <span class="start-year">{{educations.startDate.year}}</span>
+        -
+        <span class="end-year">{{educations.endDate.year}}</span>
+      </div>
+      <br>
+      <br>
+      <br>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 educationFormal">
+    <h2>SKILLS</h2>
+    </div>
+
+
+  <ul class="col-md-7 col-lg-7 skills">
+    <li class="skill first" ng-repeat="skill in profileInformation.linkedin.skills.values">
+      <span class="skill-name">{{skill.skill.name}}</span>
+    </li>
+  </ul>
+</div>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-md-3 educationFormal">
+    <h2>EXPERIENCE</h2>
+    </div>
+<div ng-repeat="position in profileInformation.linkedin.positions.values">
+  <div class="col-md-3 educationFormal">
+    </div>
+
+
+    <div class="col-md-7">
+      <div class='bold'><strong>{{position.company.name}}</strong>
+      </div>
+      <div><i>{{position.title}}</i>
+      </div>
+        <br>
+      <div>{{position.summary}}
+      </div>
+      <br>
+
+
+  </div>
+      <div class="col-md-2 educationFormal">
+        <span class="start-year">{{position.startDate.total}}</span>
+        -
+        <span class="end-year">{{position.endDate.total}}</span>
+      </div>
+</div>
+</div>
+
+
+</md-whiteframe>
+</div>

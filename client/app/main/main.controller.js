@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, Auth, $http, socket, $location, $window) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -20,7 +20,10 @@ angular.module('jobsiesApp')
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
+$scope.loginOauth =function (provider) {
+  $window.location.href ='/auth/' + provider;
 
+}
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });

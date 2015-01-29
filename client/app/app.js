@@ -6,7 +6,12 @@ angular.module('jobsiesApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngLinkedIn',
+  'ngMaterial',
+  'angular-carousel',
+  'xeditable'
+
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
