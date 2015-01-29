@@ -1,8 +1,23 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="background">
+<div class="row">
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+      </md-toolbar>
+      <md-content class="md-padding" ng-controller="LeftCtrl">
+        <md-button ng-click="close()" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </md-button>
+        <p hide-md show-gt-md>
+          This sidenav is locked open on your device. To go back to the default behavior,
+          narrow your display.
+        </p>
+      </md-content>
+    </md-sidenav>
   <div class="container">
-    <div class="row">
+
       <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
 
         <md-card ng-hide="searchDone">
@@ -21,6 +36,18 @@
               <md-button class="md-raised md-warn pass">Pass</md-button>
               <md-button class="md-raised md-primary save"  ng-click="savedJob(job)">Save</md-button>
          </div>
+         <div>
+          <md-button ng-click="toggleLeft()"
+            class="md-primary" hide-gt-md>
+            Toggle left
+          </md-button>
+        </div>
+        <div>
+          <md-button ng-click="toggleRight()"
+            class="md-primary">
+            Toggle right
+          </md-button>
+        </div>
         </md-card>
         <div ng-show="searchDone">
           <p>Try searching for another job</p>
@@ -29,5 +56,17 @@
         </div>
       </div>
     </div>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+      </md-toolbar>
+      <md-content ng-controller="RightCtrl" class="md-padding">
+        <md-button ng-click="close()" class="md-primary">
+          Close Sidenav Right
+        </md-button>
+      </md-content>
+    </md-sidenav>
+  </section>
+</div>
   </div>
 </div>

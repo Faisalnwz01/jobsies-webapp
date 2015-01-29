@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, socket, $timeout, $mdSidenav, $log) {
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -34,10 +34,11 @@ angular.module('jobsiesApp')
     $scope.search = function(now) { 
       var indeed_client = new Indeed("85923786885096");
     indeed_client.search({
-        q: 'javascript perl ajax',
+        q: 'javascript',
         l: 'new york',
-        limit: '25',
+        limit: '1000',
         start: now,
+        allbit: '1',
         highlight: 0,
         userip: '1.2.3.4',
         useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
@@ -63,8 +64,35 @@ angular.module('jobsiesApp')
       }
     }
    }
+  $scope.toggleLeft = function() {
+    $mdSidenav('left').toggle()
+                      .then(function(){
+                          $log.debug("toggle left is done");
+                      });
+  };
+  $scope.toggleRight = function() {
+    $mdSidenav('right').toggle()
+                        .then(function(){
+                          $log.debug("toggle RIGHT is done");
+                        });
+  };
 
 
 
-
-  });
+  })
+.controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
+  $scope.close = function() {
+    $mdSidenav('left').close()
+                      .then(function(){
+                        $log.debug("close LEFT is done");
+                      });
+  };
+})
+.controller('RightCtrl', function($scope, $timeout, $mdSidenav, $log) {
+  $scope.close = function() {
+    $mdSidenav('right').close()
+                        .then(function(){
+                          $log.debug("close RIGHT is done");
+                        });
+  };
+}); 
