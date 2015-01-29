@@ -10,16 +10,17 @@
 
       <md-card ng-hide="searchDone">
          <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
-          <div class="card-title">{{job.jobtitle}}</div>
-          <div class="card-city">{{job.formattedLocationFull}}</div>
-          <div class="card-company">{{job.company}}</div>
-          <div class="card-details">{{job.snippet}}</div>
-          <div class="card-url"><a href="{{job.url}}" target="_blank">Apply</a></div>
-
-          <div>{{$index}}</div>
+            <div class="card-title">{{job.jobtitle}}</div>
+            <div class="card-city">{{job.formattedLocationFull}}</div>
+            <div class="card-company">{{job.company}}</div>
+            <div class="card-details">{{job.snippet}}</div>
+            <div class="card-url"><a href="{{job.url}}" target="_blank">Apply</a></div>
+            <div>{{$index}}</div>
         </div>
-         <div><button ng-click="savedJob(job)" class="btn btn-primary save">Save</button></div>
-         <div><button class="btn btn-primary pass">Pass</button></div>
+         <div>
+            <md-button class="md-raised md-primary pass">Pass</md-button>
+            <md-button class="md-raised md-primary save"  ng-click="savedJob(job)">Save</md-button>
+       </div>
       </md-card>
       <div ng-show="searchDone">
         <p>Try searching for another job</p>
