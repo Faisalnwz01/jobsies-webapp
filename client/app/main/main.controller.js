@@ -24,4 +24,24 @@ angular.module('jobsiesApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $scope.jobArray;
+
+
+    $scope.search = function(now) { 
+      var indeed_client = new Indeed("85923786885096");
+    indeed_client.search({
+        q: 'javascript',
+        l: 'new york',
+        limit: '25',
+        start: now,
+        userip: '1.2.3.4',
+        useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
+    }, function(search_response){
+      console.log(search_response)
+      $scope.jobArray = search_response.results;
+      $scope.$apply();
+    });
+    }
+  $scope.search();
   });
