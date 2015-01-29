@@ -1,6 +1,15 @@
+.background {
+  background: #466368;
+  background: radial-gradient(#648880, #293f50);
+  height: 100%;
+}
+.fillerdiv{
+    height: 300px;
+}
 .thing-form {
     margin: 20px 0;
 }
+
 
 #banner {
     border-bottom: none;
@@ -30,17 +39,72 @@
 }
 
 md-card {
-    height: 500px;
+    height: 600px;
     width: 100%;
     position: relative;
+    background-color: #fff;
+}
+.buttons {
+    bottom: 0;
 }
 .save{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    position: relative;
+    bottom: 0%;
+    width: 100px;
+    height: 40px;
+    float: right;
+    right: 10%;
 }
 .pass{
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
+    position: relative;
+    bottom: 0%;
+    width: 100px;
+    height: 40px;
+    float: left;
+    left: 10%;
+}
+
+.apply {
+    left: 30%;
+    width: 200px;
+}
+.card-title {
+    font-size: 25px;
+}
+.card-details {
+    font-size: 20px;
+}
+.card-city {
+    font-size: 18px;
+}
+.date-posted {
+    font-size: 18px;
+}
+.card-city {
+    font-size: 18px;
+}
+.card-company {
+    font-size: 23px;
+}
+
+#navbar-main {
+    background-color: #fff;
+    border: none;
+    margin-bottom: none;
+}
+
+#navbar {
+    background-color: #fff;
+    border: none;
+    margin-bottom: none;
+}
+
+.navbar-static-top {
+    background-color: #fff;
+    border: none;
+    margin-bottom: none;
+}
+
+li.a.active {
+    background-color: #fff;
 }

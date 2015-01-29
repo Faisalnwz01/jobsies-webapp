@@ -1,33 +1,33 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<header class="hero-unit" id="banner">
- 
-</header>
+<div class="background">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-
-      <md-card ng-hide="searchDone">
-         <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
-            <div class="card-title">{{job.jobtitle}}</div>
-            <div class="card-city">{{job.formattedLocationFull}}</div>
-            <div class="card-company">{{job.company}}</div>
-            <div class="card-details">{{job.snippet}}</div>
-            <div class="card-url"><a href="{{job.url}}" target="_blank">Apply</a></div>
-            <div>{{$index}}</div>
+        <md-card ng-hide="searchDone">
+          <md-content class="md-padding">
+           <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
+              <div class="card-title"><strong>{{job.jobtitle}}</strong></div>
+              <div class="date-posted">{{job.formattedRelativeTime}}</div>
+              <div class="card-city">{{job.formattedLocationFull}}</div><br>
+              <div class="card-company"><strong>{{job.company}}</strong></div><br>
+              <div class="card-details">{{job.snippet}}</div><br><br>
+              <img style='max-width:300px;max-height:150px” src=”http://data.scrapelogo.com/http://www.{{company.job}}.com/logo'>
+              <a href="{{job.url}}" target="_blank"><md-button class="md-raised apply">Read More...</md-button></a>
+          </div>
+          </md-content>
+           <div class="buttons">
+              <md-button class="md-raised md-warn pass">Pass</md-button>
+              <md-button class="md-raised md-primary save"  ng-click="savedJob(job)">Save</md-button>
+         </div>
+        </md-card>
+        <div ng-show="searchDone">
+          <p>Try searching for another job</p>
         </div>
-         <div>
-            <md-button class="md-raised md-primary pass">Pass</md-button>
-            <md-button class="md-raised md-primary save"  ng-click="savedJob(job)">Save</md-button>
-       </div>
-      </md-card>
-      <div ng-show="searchDone">
-        <p>Try searching for another job</p>
+        <div class="fillerdiv">
+        </div>
       </div>
-      {{jobArray}}
     </div>
   </div>
 </div>
-<footer class="footer">
-</footer>
