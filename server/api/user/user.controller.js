@@ -5,6 +5,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var _ = require('lodash');
+var underscore = require('underscore'); 
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -45,7 +46,7 @@ exports.update = function(req, res) {
 
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
-    var updated = _.merge(user, req.body);
+    var updated = underscore.extend(user, req.body);
     updated.save(function (err) {
         console.log(updated, 'updatedddddddd')
       if (err) { return handleError(res, err); }
