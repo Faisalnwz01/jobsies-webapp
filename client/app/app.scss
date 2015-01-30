@@ -19,6 +19,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'fancyTemplate/fancyTemplate.scss';
+@import 'formalTemplate/formalTemplate.scss';
 @import 'main/main.scss';
+@import 'resume/resume.scss';
+@import 'resumeEdit/resumeEdit.scss';
 @import 'modal/modal.scss';
 // endinjector

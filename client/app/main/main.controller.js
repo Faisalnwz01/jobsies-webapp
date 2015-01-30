@@ -2,6 +2,7 @@
 
 angular.module('jobsiesApp')
   .controller('MainCtrl', function ($scope, $http, socket, $timeout, $mdSidenav, $log) {
+
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -20,7 +21,10 @@ angular.module('jobsiesApp')
     $scope.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
+$scope.loginOauth =function (provider) {
+  $window.location.href ='/auth/' + provider;
 
+}
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
@@ -31,7 +35,7 @@ angular.module('jobsiesApp')
     $scope.totalResults;
     $scope.jobsSeen = 0;
 
-    $scope.search = function(now) { 
+    $scope.search = function(now) {
       var indeed_client = new Indeed("85923786885096");
     indeed_client.search({
         q: 'javascript',
@@ -95,4 +99,4 @@ angular.module('jobsiesApp')
                           $log.debug("close RIGHT is done");
                         });
   };
-}); 
+});
