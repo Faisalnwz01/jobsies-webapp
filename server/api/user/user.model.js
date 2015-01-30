@@ -17,7 +17,20 @@ var UserSchema = new Schema({
   salt: String,
   google: {},
   github: {},
+
+  first_name: {type: String, required: false },
+  last_name: {type: String, required: false },
+  jobs_liked: Array,
+  jobs_disliked: Array,
+  phone: Number,
+  street_address: String,
+  city: String,
+  state: String,
+  zip: Number,
+  resume: {},
+  cover_letter: {},
   linkedin: {}
+
 });
 
 /**

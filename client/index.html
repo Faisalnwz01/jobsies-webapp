@@ -23,6 +23,8 @@
       <!-- injector:css -->
       <!-- endinjector -->
     <!-- endbuild -->
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+
   </head>
   <body ng-app="jobsiesApp">
     <!--[if lt IE 7]>
@@ -81,6 +83,7 @@
           <script src="app/admin/admin.js"></script>
           <script src="app/fancyTemplate/fancyTemplate.directive.js"></script>
           <script src="app/formalTemplate/formalTemplate.directive.js"></script>
+          <script src="app/main/indeed.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/resume/resume.controller.js"></script>
@@ -95,5 +98,11 @@
           <script src="components/socket/socket.service.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
+           <script src="/bower_components/angular-material/angular-material.js"></script>
+          <script src="indeed.js"></script>
+          <script type="text/javascript">
+          var indeed_client = new Indeed("85923786885096");
+          </script>
+
 </body>
 </html>
