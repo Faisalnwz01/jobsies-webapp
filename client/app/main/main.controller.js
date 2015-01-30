@@ -29,7 +29,6 @@ $scope.loginOauth =function (provider) {
       socket.unsyncUpdates('thing');
     });
 
-    $scope.jobArray;
     $scope.currentJob = 0;
     $scope.page = 0;
     $scope.totalResults;
@@ -47,9 +46,13 @@ $scope.loginOauth =function (provider) {
         userip: '1.2.3.4',
         useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
     }, function(search_response){
-      console.log(search_response)
       $scope.jobArray = search_response.results;
       $scope.totalResults = search_response.totalResults;
+      $http.post('/api/jobs/cheerio', $scope.jobArray)
+        .success(function(results){
+           console.log(results);
+           $scope.jobArray = results;
+        })
       $scope.$apply();
     });
     }
