@@ -4,14 +4,22 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var JobSchema = new Schema({
-	job_id: {type: String, required: true },
-	title: {type: String, required: true },
-	description: String,
-	salary_min: Number,
-	salary_max: Number,
-	info_link: String,
-	skills_required: Array,
-	contact_info: String,
+//ideed
+  jobkey: String,
+  jobtitle: String,
+  snippet: String, 
+  formattedLocation: String, 
+  company: String, 
+  expired: Boolean, 
+  url: String, 
+//cheeiro
+  qualifications: String, 
+  job_picture: String,
+  salary: String, 
+  contact_information: String
+  user_ids: Array, 
+  recruiter_id: Array
+ 
 	
 });
 
