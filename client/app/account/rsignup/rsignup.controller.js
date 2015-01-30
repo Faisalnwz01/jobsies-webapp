@@ -18,7 +18,7 @@ angular.module('jobsiesApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/rhome');
         })
         .catch( function(err) {
           err = err.data;

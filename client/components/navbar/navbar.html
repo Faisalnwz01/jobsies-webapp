@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">jobsies</a>
+      <a ng-hide="isRecruiter()" href="/" class="navbar-brand">jobsies</a>
+      <a ng-show="isRecruiter()" href="/rhome" class="navbar-brand">jobsies</a>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
@@ -15,7 +16,9 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-        <li ng-show="isRecruiter()" ng-class="{active: isActive('/radmin')}"><a href="/radmin">Recruiter Admin</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/jobpost')}"><a href="/jobpost">Post a Job</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/radmin')}"><a href="/radmin">Job Stats</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/radmin')}"><a href="/radmin">Interested Users</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
