@@ -16,7 +16,7 @@ var JobSchema = new Schema({
   qualifications: String, 
   job_picture: String,
   salary: String, 
-  contact_information: String
+  contact_information: String, 
   user_ids: Array, 
   recruiter_id: Array
  
