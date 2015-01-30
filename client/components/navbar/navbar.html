@@ -7,7 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">jobsies</a>
+      <a ng-hide="isRecruiter()" href="/" class="navbar-brand">jobsies</a>
+      <a ng-show="isRecruiter()" href="/rhome" class="navbar-brand">jobsies</a>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
@@ -15,10 +16,15 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/jobpost')}"><a href="/jobpost">Post a Job</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/radmin')}"><a href="/radmin">Job Stats</a></li>
+        <li ng-show="isRecruiter()" ng-class="{active: isActive('/radmin')}"><a href="/radmin">Interested Users</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ng-hide="isRecruiter()" ng-class="{active: isActive('/resume')}"><a href="/resume">Resume Builder</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/rsignup')}"><a href="/rsignup">Recruiters</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
         <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>

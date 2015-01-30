@@ -12,25 +12,17 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  company: {
+    type: String,
+    default: null
+  }, 
   hashedPassword: String,
   provider: String,
   salt: String,
-  google: {},
-  github: {},
-
-  first_name: {type: String, required: false },
-  last_name: {type: String, required: false },
-  jobs_liked: Array,
-  jobs_disliked: Array,
-  phone: Number,
-  street_address: String,
-  city: String,
-  state: String,
-  zip: Number,
+  jobs_saved: Array,
   resume: {},
   cover_letter: {},
   linkedin: {}
-
 });
 
 /**
