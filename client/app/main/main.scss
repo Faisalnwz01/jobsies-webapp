@@ -2,6 +2,7 @@
   background: #466368;
   background: radial-gradient(#648880, #293f50);
   height: 100%;
+  width: 100%;
 }
 .fillerdiv{
     height: 300px;
@@ -107,4 +108,16 @@ md-card {
 
 li.a.active {
     background-color: #fff;
+}
+
+.md-sidenav-left {
+    height: 920px;
+    float: left;
+}
+
+.cards {
+    top: 30px;
+    float: right;
+    left: -12%;
+    margin-left: 5%;
 }
