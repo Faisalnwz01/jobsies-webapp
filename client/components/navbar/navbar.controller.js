@@ -5,15 +5,13 @@ angular.module('jobsiesApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    }, {
-      'title': 'Resume Builder',
-      'link': '/resume'
     }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.isRecruiter = Auth.isRecruiter;
 
     $scope.logout = function() {
       Auth.logout();

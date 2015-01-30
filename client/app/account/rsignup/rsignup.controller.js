@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('RsignupCtrl', function ($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -12,8 +12,10 @@ angular.module('jobsiesApp')
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
-          password: $scope.user.password
-      })
+          password: $scope.user.password,
+          role: 'recruiter',
+          company: $scope.user.company
+        })
         .then( function() {
           // Account created, redirect to home
           $location.path('/');
