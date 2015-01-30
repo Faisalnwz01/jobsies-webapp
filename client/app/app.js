@@ -7,7 +7,11 @@ angular.module('jobsiesApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'ngMaterial'
+  'ngLinkedIn',
+  'ngMaterial',
+  'angular-carousel',
+  'xeditable'
+
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

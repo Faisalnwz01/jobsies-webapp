@@ -5,6 +5,9 @@ angular.module('jobsiesApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      'title': 'Resume Builder',
+      'link': '/resume'
     }];
 
     $scope.isCollapsed = true;

@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -31,6 +32,25 @@ exports.create = function (req, res, next) {
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
+  });
+};
+
+
+exports.update = function(req, res) {
+  console.log('hit on backend')
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, user) {
+    console.log(user, 'user')
+    console.log(req.body, 'req.bodyyyyyy')
+
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    var updated = _.merge(user, req.body);
+    updated.save(function (err) {
+        console.log(updated, 'updatedddddddd')
+      if (err) { return handleError(res, err); }
+      return res.json(200, updated);
+    });
   });
 };
 
