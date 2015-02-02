@@ -4,7 +4,6 @@ angular.module('jobsiesApp')
     .factory('indeedapi', function($http, $q) {
         return {
             getIndeedJobs: function(query, location, start) {
-                console.log(location)
                 return new $q(function(resolve, reject) {
                     var indeed_client = new Indeed("85923786885096");
                     indeed_client.search({

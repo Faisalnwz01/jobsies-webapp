@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('MainCtrl', function ($scope, $http, socket, $timeout, User, $mdSidenav, $log, indeedapi, Auth) {
+  .controller('MainCtrl', function ($scope, $http, socket, SaveJobs, $timeout, User, $mdSidenav, $log, indeedapi, Auth) {
     // $scope.$on('$destroy', function () {
     //   socket.unsyncUpdates('thing');
     // });
@@ -43,9 +43,10 @@ $scope.locationCutter();
       $scope.totalResults = jobs.totalResults;
    })
    
-   
+  
 
    $scope.savedJob= function(job){
+    console.log(job)
     $scope.currentJob += 1;
     $scope.jobsSeen += 1;
     if($scope.jobsSeen == $scope.totalResults){
@@ -58,6 +59,9 @@ $scope.locationCutter();
         indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25*$scope.page);
       }
     }
+     SaveJobs.postJobs(job).then(function (data) {
+       console.log(data, 'from saved job funciton')
+     })
    }
 
 
