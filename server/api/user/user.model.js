@@ -21,7 +21,7 @@ var UserSchema = new Schema({
   salt: String,
   jobs_saved: Array,
   resume: {},
-  cover_letter: {},
+  cover_letter: String,
   linkedin: {}
 });
 
