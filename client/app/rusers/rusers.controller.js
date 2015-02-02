@@ -15,7 +15,7 @@ angular.module('jobsiesApp')
    	console.log(user);
     $scope.currentUser += 1;
     $scope.userSeen += 1;
-    $http.post('/api/users/'+Auth.getCurrentUser()._id+'/',{users_saved: user}).success(function(data) {
+    $http.post('/api/users/'+Auth.getCurrentUser()._id+'/savedUser',{users_saved: user}).success(function(data) {
     	console.log(data);
     });
    }
