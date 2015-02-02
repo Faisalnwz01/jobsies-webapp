@@ -25,7 +25,7 @@ var UserSchema = new Schema({
   job_postings: Array,
   users_saved: Array,
   resume: {},
-  cover_letter: {},
+  cover_letter: String,
   linkedin: {}
 });
 

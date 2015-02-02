@@ -46,6 +46,9 @@ exports.update = function(req, res) {
   });
 };
 
+
+
+
 // Deletes a job from the DB.
 exports.destroy = function(req, res) {
   Job.findById(req.params.id, function (err, job) {

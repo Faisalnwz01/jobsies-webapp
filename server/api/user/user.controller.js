@@ -49,6 +49,38 @@ exports.update = function(req, res) {
   });
 };
 
+exports.savedUsers = function(req, res) {
+  console.log('hit on backend')
+  User.findById(req.params.id, function (err, user) {
+    console.log(user, 'user')
+    console.log(req.body, 'req.bodyyyyyy')
+
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    user.users_saved.push(req.body.users_saved);
+    user.save(function (err, user) {
+        console.log(user, 'updatedddddddd')
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
+  });
+};
+
+exports.jobPost = function(req, res) {
+  console.log('hit on backend')
+  User.findById(req.params.id, function (err, user) {
+    console.log(user, 'user')
+    console.log(req.body, 'req.bodyyyyyy')
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    user.job_postings.push(req.body.job_postings);
+    user.save(function (err, user) {
+        console.log(user, 'updatedddddddd')
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
+  });
+};
 /**
  * Get a single user
  */

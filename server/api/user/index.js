@@ -15,5 +15,6 @@ router.put('/:id', auth.isAuthenticated(), controller.addJobsie);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.post('/:id', controller.update);
-
+router.post('/:id/savedUser', controller.savedUsers);
+router.post('/:id/jobPost', controller.jobPost);
 module.exports = router;

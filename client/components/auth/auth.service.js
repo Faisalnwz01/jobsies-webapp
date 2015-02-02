@@ -140,6 +140,9 @@ angular.module('jobsiesApp')
         return currentUser.role === 'recruiter';
       },
 
+      isUser: function() {
+        return currentUser.role === 'user';
+      },
       /**
        * Get auth token
        */
