@@ -7,6 +7,8 @@ var authTypes = ['github', 'twitter', 'facebook', 'google', 'linkedin'];
 
 var UserSchema = new Schema({
   name: String,
+  first_name: String,
+  last_name: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -20,10 +22,21 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   jobs_saved: Array,
+  job_postings: Array,
+  users_saved: Array,
   resume: {},
   cover_letter: {},
   linkedin: {}
 });
+
+
+
+UserSchema.statics.recruitersByUser = function(recruiter, cb){
+  return this.findOne({ recruiter: recruiter._id })
+        .populate('recruiter')
+        .exec(cb);
+}
+
 
 /**
  * Virtuals
