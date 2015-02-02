@@ -18,9 +18,7 @@ var JobSchema = new Schema({
   salary: String, 
   contact_information: String,
   user_ids: Array, 
-  recruiter_id: Array
- 
-	
+  recruiter_id: String
 });
 
 module.exports = mongoose.model('Job', JobSchema);
