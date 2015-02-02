@@ -1,62 +1,50 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('MainCtrl', function ($scope, $http, socket, $timeout, $mdSidenav, $log) {
-
-//     $scope.awesomeThings = [];
-
-//     $http.get('/api/things').success(function(awesomeThings) {
-//       $scope.awesomeThings = awesomeThings;
-//       socket.syncUpdates('thing', $scope.awesomeThings);
-//     });
-
-//     $scope.addThing = function() {
-//       if($scope.newThing === '') {
-//         return;
-//       }
-//       $http.post('/api/things', { name: $scope.newThing });
-//       $scope.newThing = '';
-//     };
-
-//     $scope.deleteThing = function(thing) {
-//       $http.delete('/api/things/' + thing._id);
-//     };
-// $scope.loginOauth =function (provider) {
-//   $window.location.href ='/auth/' + provider;
-
-// }
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
+  .controller('MainCtrl', function ($scope, $http, socket, $timeout, User, $mdSidenav, $log, indeedapi, Auth) {
+    // $scope.$on('$destroy', function () {
+    //   socket.unsyncUpdates('thing');
+    // });
 
     $scope.currentJob = 0;
     $scope.page = 0;
     $scope.totalResults;
     $scope.jobsSeen = 0;
 
-    $scope.search = function(now) {
-      var indeed_client = new Indeed("85923786885096");
-    indeed_client.search({
-        q: 'javascript',
-        l: 'new york',
-        limit: '1000',
-        start: now,
-        allbit: '1',
-        highlight: 0,
-        userip: '1.2.3.4',
-        useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
-    }, function(search_response){
-      $scope.jobArray = search_response.results;
-      $scope.totalResults = search_response.totalResults;
-      $http.post('/api/jobs/cheerio', $scope.jobArray)
-        .success(function(results){
-           console.log(results);
-           $scope.jobArray = results;
-        })
-      $scope.$apply();
-    });
+
+    $scope.updateJob = function () {
+      console.log($scope.userHeadline)
+      $scope.locationCutter();
+      var getJobs = indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation , 0)
+     getJobs.then(function(jobs){
+      $scope.jobArray = jobs.jobArray;
+      $scope.totalResults = jobs.totalResults;
+   })
+     
     }
-   $scope.search();
+
+  $scope.user = Auth.getCurrentUser();
+  
+  $scope.userHeadline = $scope.user.linkedin.headline
+  $scope.locationCutter = function(){ 
+    if ($scope.user.linkedin.location.name.toLowerCase().search('greater') !== -1){
+        $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
+        $scope.jobLocation = $scope.jobLocation.replace('area', '')    
+
+          
+    } 
+
+  }
+$scope.locationCutter();
+
+    var getJobs = indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation , 0)
+   getJobs.then(function(jobs){
+      $scope.jobArray = jobs.jobArray;
+      $scope.totalResults = jobs.totalResults;
+   })
+   
+   
+
    $scope.savedJob= function(job){
     $scope.currentJob += 1;
     $scope.jobsSeen += 1;
@@ -67,10 +55,12 @@ angular.module('jobsiesApp')
       if($scope.jobsSeen < $scope.totalResults){
         $scope.page +=1;
         $scope.currentJob = 0;
-        $scope.search(25*$scope.page);
+        indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25*$scope.page);
       }
     }
    }
+
+
   $scope.toggleLeft = function() {
     $mdSidenav('left').toggle()
                       .then(function(){
