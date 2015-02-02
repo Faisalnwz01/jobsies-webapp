@@ -18,6 +18,11 @@
     <!-- this is the end of right sidebar -->
             <div class="col-md-9 container cards">
       <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+        <h2 editable-text="userHeadline" onaftersave='updateJob()' style='background-color: white;'>{{userHeadline}} </h2>
+        <h2 editable-text="jobLocation" onaftersave='updateJob()' style='background-color: white;'>{{jobLocation}} </h2>
+
+        
+        
         <md-card ng-hide="searchDone">
         <md-content class="md-padding">
         <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
