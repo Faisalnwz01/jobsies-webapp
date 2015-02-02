@@ -20,4 +20,7 @@ $scope.show = function(type){
   }
   $scope.image[type] = true;
 }
+
+
+
   });
