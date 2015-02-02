@@ -37,17 +37,12 @@ exports.create = function (req, res, next) {
 
 
 exports.update = function(req, res) {
-  console.log('hit on backend')
   if(req.body._id) { delete req.body._id; }
   User.findById(req.params.id, function (err, user) {
-    console.log(user, 'user')
-    console.log(req.body, 'req.bodyyyyyy')
-
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     var updated = underscore.extend(user, req.body);
     updated.save(function (err) {
-        console.log(updated, 'updatedddddddd')
       if (err) { return handleError(res, err); }
       return res.json(200, updated);
     });
@@ -130,7 +125,20 @@ exports.changePassword = function(req, res, next) {
     }
   });
 };
-
+////add jobsies
+exports.addJobsie = function(req, res, next){
+   if(req.body._id) { delete req.body._id; }
+   User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    user.jobs_saved.push(req.body.jobs_saved);
+    console.log(user, "updated")
+    user.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, user);
+    });
+  });
+}
 /**
  * Get my info
  */
