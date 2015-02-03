@@ -45,7 +45,7 @@
       ga('create', 'UA-XXXXX-X');
       ga('send', 'pageview');
     </script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -69,11 +69,12 @@
       <script src="bower_components/angular-touch/angular-touch.js"></script>
       <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
       <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+      <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
       <script src="bower_components/materialize/bin/materialize.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
-
+    
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
@@ -86,6 +87,8 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/autocomplete/autoController.js"></script>
+          <script src="app/autocomplete/autocomplete.directive.js"></script>
           <script src="app/coverLetter/coverLetter.controller.js"></script>
           <script src="app/coverLetter/coverLetter.js"></script>
           <script src="app/fancyTemplate/fancyTemplate.directive.js"></script>
@@ -114,6 +117,7 @@
           <script src="app/rusers/rusers.js"></script>
           <script src="app/rusersaved/rusersaved.controller.js"></script>
           <script src="app/rusersaved/rusersaved.js"></script>
+          <script src="app/user_preferences/user_preferences.service.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
@@ -123,6 +127,7 @@
           <!-- endinjector -->
         <!-- endbuild -->
            <script src="/bower_components/angular-material/angular-material.js"></script>
+           
           <script src="indeed.js"></script>
           <script type="text/javascript">
           var indeed_client = new Indeed("85923786885096");
