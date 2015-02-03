@@ -20,29 +20,28 @@ angular.module('jobsiesApp')
       $scope.jobArray = jobs.jobArray;
       $scope.totalResults = jobs.totalResults;
    })
-     
+
     }
-           
+
   $scope.user = Auth.getCurrentUser();
-  
-  $scope.userHeadline = $scope.user.linkedin.headline
-  $scope.locationCutter = function(){ 
+
+  $scope.userHeadline = $scope.user.linkedin.headline;
+  $scope.locationCutter = function(){
     if ($scope.user.linkedin.location.name.toLowerCase().search('greater') !== -1){
         $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
-        $scope.jobLocation = $scope.jobLocation.replace('area', '')   
-          
-    } 
+        $scope.jobLocation = $scope.jobLocation.replace('area', '')
+
+    }
 
   }
 $scope.locationCutter();
-
     var getJobs = indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation , 0)
    getJobs.then(function(jobs){
       $scope.jobArray = jobs.jobArray;
       $scope.totalResults = jobs.totalResults;
    })
-   
-  
+
+
 
    $scope.savedJob= function(job){
     console.log(job)
@@ -63,12 +62,10 @@ $scope.locationCutter();
      })
    }
 
-
-   $scope.populate = function(){
-    $http.get('/api/users/populate/'+$scope.user._id).success(function(data){
-    console.log(data, "populate");
+    $http.get('/api/users/me').success(function(data){
+    $scope.savejobs = data.jobs_saved;
    })
-  }
+
 
   $scope.toggleLeft = function() {
     $mdSidenav('left').toggle()

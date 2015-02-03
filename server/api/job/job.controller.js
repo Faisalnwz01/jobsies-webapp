@@ -74,7 +74,7 @@ exports.getCheerio = function(req, res){
       var qualReg = /[Q][uU][aA][lL][iI][fF][iI][cC][aA][tT][iI][oO][nN]/g;
       var reqReg = /[R][Ee][Qq][Uu][Ii][Rr][Ee][Mm][Ee][Nn][Tt]/g;
       var skillReg = /[S][Kk][Ii][lL][Ll][Ss]/g;
-      var contactReg = /^([a-zA-Z0-9_\.\-])+\@([a-zA-Z0-9\-])+\.([a-zA-Z0-9]{3})+$/g;
+      var contactReg = /^(([^<>()[\]\\.,;:\s@\]+(\.[^<>()[\]\\.,;:\s@\]+)*)|(\.+\))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
       var htmlFromIndeed = response.body;
       var $ = cheerio.load(htmlFromIndeed);
       var logo = $('.cmp_logo').find('img').attr('src');
@@ -84,7 +84,7 @@ exports.getCheerio = function(req, res){
         var skillsIndex = summary_text.search(skillReg);
         var contact = summary_text.search(contactReg);
         console.log(contact, "contact")
-        var summary = summary_text.slice(summaryIndex, summaryIndex+500) || 
+        var summary = summary_text.slice(summaryIndex, summaryIndex+500) ||
         summary_text.slice(requirementIndex, requirementIndex+500) ||
         summary_text.slice(skillsIndex, skillsIndex+500) ||
         "NA";
