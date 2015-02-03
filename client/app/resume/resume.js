@@ -6,6 +6,12 @@ angular.module('jobsiesApp')
       .state('resume', {
         url: '/resume',
         templateUrl: 'app/resume/resume.html',
-        controller: 'ResumeCtrl'
+        controller: 'ResumeCtrl', 
+             resolve: {
+        	       // User: 'User',
+        	       user: function(User){
+        	       	return User.get().$promise; 
+        	       }
+        }
       });
   });

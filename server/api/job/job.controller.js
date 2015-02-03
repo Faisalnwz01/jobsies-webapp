@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 // Get a single job
 exports.show = function(req, res) {
   console.log('hit it');
-  Job.find({_id: req.params.id}, function (err, job) {
+  Job.find({jobkey: req.params.id}, function (err, job) {
     console.log(job)
     if(err) { return handleError(res, err); }
     if(!job) { return res.send(404); }

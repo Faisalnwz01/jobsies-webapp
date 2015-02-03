@@ -50,16 +50,11 @@ exports.update = function(req, res) {
 };
 
 exports.savedUsers = function(req, res) {
-  console.log('hit on backend')
   User.findById(req.params.id, function (err, user) {
-    console.log(user, 'user')
-    console.log(req.body, 'req.bodyyyyyy')
-
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     user.users_saved.push(req.body.users_saved);
     user.save(function (err, user) {
-        console.log(user, 'updatedddddddd')
       if (err) { return handleError(res, err); }
       return res.json(200, user);
     });
@@ -79,6 +74,21 @@ exports.jobPost = function(req, res) {
       if (err) { return handleError(res, err); }
       return res.json(200, user);
     });
+  });
+};
+
+/**
+ * Get a single user
+ */
+exports.resume = function (req, res, next) {
+  var userId = req.params.id;
+  console.log(req.params)
+
+  User.findById(userId, function (err, user) {
+    console.log(user)
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
   });
 };
 /**
@@ -132,7 +142,6 @@ exports.addJobsie = function(req, res, next){
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     user.jobs_saved.push(req.body.jobs_saved);
-    console.log(user, "updated")
     user.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, user);
@@ -160,3 +169,18 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
+exports.preferences = function(req, res, next){
+  if(req.body._id) { delete req.body._id; }
+  User.findById(req.params.id, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.send(404); }
+    var updated = underscore.extend(user, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, updated);
+    });
+  });
+}
+function handleError(res, err) {
+  return res.send(500, err);
+}
