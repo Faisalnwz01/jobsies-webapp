@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('MainCtrl', function ($scope, $http, socket, SaveJobs, $timeout, User, $mdSidenav, $log, indeedapi, Auth) {
+  .controller('MainCtrl', function ($scope, $http, socket, SaveJobs, $timeout, User, $mdSidenav, $log, indeedapi, Auth, userPreferences) {
     // $scope.$on('$destroy', function () {
     //   socket.unsyncUpdates('thing');
     // });
@@ -11,28 +11,29 @@ angular.module('jobsiesApp')
     $scope.totalResults;
     $scope.jobsSeen = 0;
 
-
-    $scope.updateJob = function () {
-      console.log($scope.userHeadline)
-      $scope.locationCutter();
-      var getJobs = indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation , 0)
+    $scope.updateJob = function (headline, location) {
+      $scope.user.jobSought = headline;
+      $scope.user.locationSought = location
+      var getJobs = indeedapi.getIndeedJobs(headline, location , 0)
      getJobs.then(function(jobs){
       $scope.jobArray = jobs.jobArray;
-      $scope.totalResults = jobs.totalResults;
-   })
-     
-    }
+      $scope.totalResults = jobs.totalResults; 
+      userPreferences.savePreferences($scope.user)
+   })   
+  }
            
   $scope.user = Auth.getCurrentUser();
-  
-  $scope.userHeadline = $scope.user.linkedin.headline
+  $scope.options = {
+    country: 'us',
+    types: '(cities)'
+  }
+  $scope.userHeadline = $scope.user.jobSought || $scope.user.linkedin.headline;
   $scope.locationCutter = function(){ 
-    if ($scope.user.linkedin.location.name.toLowerCase().search('greater') !== -1){
+    $scope.jobLocation = $scope.user.locationSought || $scope.user.linkedin.location.name
+    if ($scope.jobLocation.toLowerCase().search('greater') !== -1){
         $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
         $scope.jobLocation = $scope.jobLocation.replace('area', '')   
-          
     } 
-
   }
 $scope.locationCutter();
 
@@ -58,9 +59,7 @@ $scope.locationCutter();
         indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25*$scope.page);
       }
     }
-     SaveJobs.postJobs(job).then(function (data) {
-       console.log(data, 'from saved job funciton')
-     })
+     SaveJobs.postJobs(job)
    }
 
 

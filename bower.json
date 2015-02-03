@@ -19,8 +19,8 @@
     "ngLinkedIn": "~0.1.4",
     "angular-material": "~0.7.0",
     "angular-carousel": "~0.3.9",
-    "angular-xeditable": "~0.1.8"
-
+    "angular-xeditable": "~0.1.8",
+    "ngAutocomplete": "~1.0.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

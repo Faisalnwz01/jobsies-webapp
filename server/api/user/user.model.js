@@ -17,7 +17,9 @@ var UserSchema = new Schema({
   company: {
     type: String,
     default: null
-  }, 
+  },
+  jobSought: String,
+  locationSought: String, 
   hashedPassword: String,
   provider: String,
   salt: String,

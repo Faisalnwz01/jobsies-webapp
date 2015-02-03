@@ -10,16 +10,19 @@
           <md-button ng-click="close()" class="md-primary" hide-gt-md>
           Close Sidenav Left
           </md-button>
-          <p hide-md show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior, narrow your display.
-          </p>
+          <p>I want to work as a</p>
+           <input type="text" class="form-control" ng-model="userHeadline"/>
+           <p>in</p>
+         <input type="text" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation"/>
+         <md-button type="submit" ng-click="updateJob(userHeadline, jobLocation)">
+            Update
+          </md-button>
           </md-content>
           </md-sidenav>
     <!-- this is the end of right sidebar -->
             <div class="col-md-9 container cards">
       <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-        <h2 editable-text="userHeadline" onaftersave='updateJob()' style='background-color: white;'>{{userHeadline}} </h2>
-        <h2 editable-text="jobLocation" onaftersave='updateJob()' style='background-color: white;'>{{jobLocation}} </h2>
+
 
         
         
