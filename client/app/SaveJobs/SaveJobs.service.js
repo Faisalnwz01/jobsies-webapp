@@ -27,6 +27,13 @@ angular.module('jobsiesApp')
                 if(user.jobs_saved.indexOf(jobs.jobkey)===-1){
                   $http.put('/api/users/'+user._id, {jobs_saved: jobs})
                 }
-            }
+            },
+          // populateJobs: function() {
+          //   var userProfile;
+          //   $http.get('/api/users/me').success(function(data){
+          //    userProfile = data
+          //    })
+          //   return userProfile;
+          // }
         };
     });
