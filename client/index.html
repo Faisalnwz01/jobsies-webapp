@@ -16,6 +16,7 @@
       <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
       <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
       <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+      <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -44,7 +45,7 @@
       ga('create', 'UA-XXXXX-X');
       ga('send', 'pageview');
     </script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -68,10 +69,12 @@
       <script src="bower_components/angular-touch/angular-touch.js"></script>
       <script src="bower_components/angular-carousel/dist/angular-carousel.js"></script>
       <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+      <script src="bower_components/ngAutocomplete/src/ngAutocomplete.js"></script>
+      <script src="bower_components/materialize/bin/materialize.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
-
+    
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
@@ -84,6 +87,8 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/autocomplete/autoController.js"></script>
+          <script src="app/autocomplete/autocomplete.directive.js"></script>
           <script src="app/cover/cover.directive.js"></script>
           <script src="app/fancy/fancy.controller.js"></script>
           <script src="app/fancy/fancy.js"></script>
@@ -98,6 +103,9 @@
           <script src="app/main/indeed.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/recruiterhome/recruiterhome.directive.js"></script>
+          <script src="app/recruiterhomethree/recruiterhomethree.directive.js"></script>
+          <script src="app/recruiterhometwo/recruiterhometwo.directive.js"></script>
           <script src="app/resume/resume.controller.js"></script>
           <script src="app/resume/resume.js"></script>
           <script src="app/resumeEdit/resumeEdit.controller.js"></script>
@@ -112,6 +120,7 @@
           <script src="app/rusers/rusers.js"></script>
           <script src="app/rusersaved/rusersaved.controller.js"></script>
           <script src="app/rusersaved/rusersaved.js"></script>
+          <script src="app/user_preferences/user_preferences.service.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
@@ -121,6 +130,7 @@
           <!-- endinjector -->
         <!-- endbuild -->
            <script src="/bower_components/angular-material/angular-material.js"></script>
+           
           <script src="indeed.js"></script>
           <script type="text/javascript">
           var indeed_client = new Indeed("85923786885096");

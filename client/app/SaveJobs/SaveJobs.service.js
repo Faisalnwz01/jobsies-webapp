@@ -5,7 +5,6 @@ angular.module('jobsiesApp')
 
         return {
             postJobs: function(jobs) {
-                console.log(jobs);
                 var user = Auth.getCurrentUser();
 
                 $http.get('/api/jobs/' + jobs.jobkey).then(function(data) {
@@ -13,22 +12,28 @@ angular.module('jobsiesApp')
 
                         jobs['user_ids'] = user._id
                         $http.post('/api/jobs', jobs).then(function(data) {
-                            console.log(data)
+                            return;
                         })
                     } else {
                       console.log(data.data[0].user_ids.indexOf(user._id) === -1)
                         if (data.data[0].user_ids.indexOf(user._id) === -1) {
                             data.data[0].user_ids.push(user._id);
                             $http.put('/api/jobs/' + jobs.jobkey, data.data[0]).then(function(data) {
-                                console.log(data);
+                                return;
                             })
                         }
                     }
                 })
-                console.log(user)
                 if(user.jobs_saved.indexOf(jobs.jobkey)===-1){
-                  $http.put('/api/users/'+user._id, {jobs_saved: jobs.jobkey})
+                  $http.put('/api/users/'+user._id, {jobs_saved: jobs})
                 }
-            }
+            },
+          // populateJobs: function() {
+          //   var userProfile;
+          //   $http.get('/api/users/me').success(function(data){
+          //    userProfile = data
+          //    })
+          //   return userProfile;
+          // }
         };
     });

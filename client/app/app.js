@@ -10,7 +10,8 @@ angular.module('jobsiesApp', [
   'ngLinkedIn',
   'ngMaterial',
   'angular-carousel',
-  'xeditable'
+  'xeditable',
+  'ngAutocomplete'
 
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
