@@ -19,23 +19,23 @@ angular.module('jobsiesApp')
      getJobs.then(function(jobs){
       $scope.jobArray = jobs.jobArray;
 // <<<<<<< HEAD
-      $scope.totalResults = jobs.totalResults; 
+      $scope.totalResults = jobs.totalResults;
       userPreferences.savePreferences($scope.user)
-   })   
+   })
   }
-           
+
   $scope.user = Auth.getCurrentUser();
   $scope.options = {
     country: 'us',
     types: '(cities)'
   }
   $scope.userHeadline = $scope.user.jobSought || $scope.user.linkedin.headline;
-  $scope.locationCutter = function(){ 
+  $scope.locationCutter = function(){
     $scope.jobLocation = $scope.user.locationSought || $scope.user.linkedin.location.name
     if ($scope.jobLocation.toLowerCase().search('greater') !== -1){
         $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
-        $scope.jobLocation = $scope.jobLocation.replace('area', '')   
-    } 
+        $scope.jobLocation = $scope.jobLocation.replace('area', '')
+    }
 // =======
 //       $scope.totalResults = jobs.totalResults;
 //    })
@@ -64,6 +64,7 @@ $scope.locationCutter();
 
 
    $scope.savedJob= function(job){
+    toast('Job Saved!! :)', 4000 )
     console.log(job)
     $scope.currentJob += 1;
     $scope.jobsSeen += 1;
