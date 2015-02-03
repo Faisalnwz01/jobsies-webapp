@@ -166,4 +166,6 @@ exports.preferences = function(req, res, next){
     });
   });
 }
-
+function handleError(res, err) {
+  return res.send(500, err);
+}
