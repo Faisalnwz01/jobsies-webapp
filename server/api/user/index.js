@@ -17,4 +17,5 @@ router.post('/', controller.create);
 router.post('/:id', controller.update);
 router.post('/:id/savedUser', controller.savedUsers);
 router.post('/:id/jobPost', controller.jobPost);
+router.get('/:id/resume', controller.resume); 
 module.exports = router;

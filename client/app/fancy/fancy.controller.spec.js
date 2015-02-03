@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: CoverLetterCtrl', function () {
+describe('Controller: FancyCtrl', function () {
 
   // load the controller's module
   beforeEach(module('jobsiesApp'));
 
-  var CoverLetterCtrl, scope;
+  var FancyCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    CoverLetterCtrl = $controller('CoverLetterCtrl', {
+    FancyCtrl = $controller('FancyCtrl', {
       $scope: scope
     });
   }));

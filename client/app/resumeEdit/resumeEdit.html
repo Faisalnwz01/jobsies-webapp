@@ -2,7 +2,7 @@
 <div class='row container'>
 
 <h1>{{profileInformation.linkedin.contacts.information}}</h1>
-  <h2>Edit Your Resume Information</h2>
+  <center><h2>Edit Your Resume Information</h2></center>
 
 
 </div>
@@ -54,6 +54,44 @@
   </div>
 
 <!-- Jeff added ui-view here to connect profile.html here when page goes to /main/profile -->
+<div id="cover" class = "container">
+  
+  <h2 class=''>Cover Letter <span><md-button ng-click="filter()">
+    {{profileInformation.linkedin.ShowCoverLetter}}
+  </md-button></span></h2>
+  <form editable-form name="coverForm" onaftersave="update()">
+  <hr />
+  <div class="row education" ng-show="profileInformation.linkedin.ShowCoverLetter">
+ 
+      <div class = "col-md-9">
+      <strong class ='editTitles'>Cover Letter <md-button aria-label="Cover Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="coverForm.$show()" ng-show="!coverForm.$visible" ng-hide="coverForm.$visible">
+      </md-button></strong><br />
+      <p class ="cover" editable-textarea="profileInformation.cover_letter">
+        {{ profileInformation.cover_letter }}
+      </p>
+    </div>
+    
+    <div class="col-md-3 education">
+ 
+      <span class="experience-details">
+       <div ng-show="coverForm.$visible" class='row'>
+            <md-button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="coverForm.$waiting">
+            Save
+            </md-button>
+            <md-button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="coverForm.$waiting" ng-click="coverForm.$cancel()">
+            Cancel
+            </md-button>
+
+        </div>
+      </span>
+    </div>
+      </form>
+  </div>
+     
+</div>
+
+
+
 <div id="experiences" class = "container">
   <h2 class='editTitles'>Education</h2>
   <hr />
@@ -180,14 +218,7 @@
           <div class="editTitles" ng-show="textBtnFormSkill.$visible">Skill Name</div>
           <li class= 'menu-left'>
             <span class="ability-title" editable-text="skill.skill.name">{{skill.skill.name}}</span>
-            <div class="editTitles" ng-show="textBtnFormSkill.$visible">Skill Level</div>
-            <span editable-select="skill.skill.level" e-name="textBtnFormSkill" e-ng-options="stars for stars in [5,4,3,2,1]">
-            </span>
-            <span class="ability-score">
-
-            <span class="glyphicon glyphicon-star filled" ng-repeat="i in getNumber(skill.skill.level) track by $index" ng-hide="textBtnFormSkill.$visible"></span>
-
-            </span>
+       
           </li>
           <!--  <strong editable-text = "skill.skill.level">{{skill.skill}}</strong> -->
         </ul>
@@ -229,54 +260,97 @@
 <div id="contact" class="container">
   <h2 class='editTitles'>Contact Information</h2>
 <hr />
-  <div class="row" ng-repeat="contact in profileInformation.linkedin.contacts.contacts">
-   <form editable-form name="contactForm" onaftersave="update()" shown="newContact">
-    <div class="col-md-6">
+   <form editable-form name="emailForm" onaftersave="update()" shown="email">
+  <div class="col-md-6">
       <ul class="no-bullets">
         <li>
-            <span class="editTitles">{{contact.feild}} - </span>
-      <span class="editTitles" ng-show="contactForm.$visible">Contact</span>
-          <a href="{{contact.information}}" target="_blank" editable-text="contact.information">
-          {{contact.information}} </a>
+            <span class="icon icon-linkedin">Email Address -</span>
+          <a href="/" target="_blank" editable-text="profileInformation.linkedin.emailAddress">
+          {{profileInformation.linkedin.emailAddress}}</a>
+        </li>
+      </ul>
 
+    </div>
+      <div class = "row">
+          <ul>
             <center>
-            <span ng-show="contactForm.$visible">
-            <md-button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="contactForm.$waiting">
+            <span ng-show="emailForm.$visible">
+            <md-button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="emailForm.$waiting">
             Save
             </md-button>
-            <md-button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="contactForm.$waiting" ng-click="contactForm.$cancel()">
+            <md-button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="emailForm.$waiting" ng-click="emailForm.$cancel()">
             Cancel
             </md-button>
             </span>
-            <md-button class="md-raised md-warn glyphicon glyphicon-trash" ng-click="deleteFilteredItem(contact.$$hashKey, profileInformation.linkedin.contacts)" ng-show="contactForm.$visible"> Delete</md-button>
           </center>
+          </ul>
+          </div>
+            <md-button aria-label="phone Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="emailForm.$show()" ng-show="!emailForm.$visible" ng-hide="emailForm.$visible">
+      </md-button>
+</form>
+    <br>
+
+ <form editable-form name="phoneForm" onaftersave="update()" shown="phone">
+    <div class="col-md-6">
+      <ul class="no-bullets">
+        <li>
+            <span class="icon icon-linkedin">Phone Number -</span>
+          <span editable-text="profileInformation.linkedin.phone">
+          {{profileInformation.linkedin.phone || '123-456-7890'}}</span>
         </li>
       </ul>
     </div>
-       <div class="col-md-2">
-        <ul class="no-bullets">
-          <li class= 'menu-left'>
-
-            <md-button aria-label="Contact Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="contactForm.$show()" ng-show="!contactForm.$visible" ng-hide="contactForm.$visible">
+        <div class = "row">
+          <ul>
+            <center>
+            <span ng-show="phoneForm.$visible">
+            <md-button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="phoneForm.$waiting">
+            Save
+            </md-button>
+            <md-button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="phoneForm.$waiting" ng-click="phoneForm.$cancel()">
+            Cancel
+            </md-button>
+            </span>
+          </center>
+          </ul>
+          </div>
+<md-button aria-label="phone Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="phoneForm.$show()" ng-show="!phoneForm.$visible" ng-hide="phoneForm.$visible">
       </md-button>
-        </li>
-      </ul>
-        </div>
-<!--     <div class="col-md-6">
+      </form>
+        <br>
+
+ <form editable-form name="linkedinurlForm" onaftersave="update()" shown="phone">
+          <div class="col-md-6">
       <ul class="no-bullets">
         <li>
-          <a href="{{profileInformation.linkedin.values[0].publicProfileUrl}}" target="_blank" editable-text="profileInformation.linkedin.publicProfileUrl">
-            <span class="icon icon-linkedin">LinkedIn - </span>
+            <span class="icon icon-linkedin">Linkedin -</span>
+          <a href="{{profileInformation.linkedin.publicProfileUrl}} " target="_blank" editable-text="profileInformation.linkedin.publicProfileUrl">
           {{profileInformation.linkedin.publicProfileUrl}}        </a>
         </li>
       </ul>
-    </div> -->
+    </div>
+      <div class = "row">
+          <ul>
+            <center>
+            <span ng-show="linkedinurlForm.$visible">
+            <md-button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="linkedinurlForm.$waiting">
+            Save
+            </md-button>
+            <md-button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="linkedinurlForm.$waiting" ng-click="linkedinurlForm.$cancel()">
+            Cancel
+            </md-button>
+            </span>
+          </center>
+          </ul>
+          </div>
+<md-button aria-label="Contact Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="linkedinurlForm.$show()" ng-show="!linkedinurlForm.$visible" ng-hide="linkedinurlForm.$visible">
+      </md-button>
 
 </form>
-</div>
+ 
 
 
-     <!--  <md-button  class="md-raised md-primary glyphicon glyphicon-plus" ng-click="addContact()" shown="{{contact.feild}}"> Add Contact</md-button> -->
+
 </div>
 <br>
 
