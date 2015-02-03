@@ -22,15 +22,14 @@ angular.module('jobsiesApp')
    })
      
     }
-
+           
   $scope.user = Auth.getCurrentUser();
   
   $scope.userHeadline = $scope.user.linkedin.headline
   $scope.locationCutter = function(){ 
     if ($scope.user.linkedin.location.name.toLowerCase().search('greater') !== -1){
         $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
-        $scope.jobLocation = $scope.jobLocation.replace('area', '')    
-
+        $scope.jobLocation = $scope.jobLocation.replace('area', '')   
           
     } 
 
@@ -64,6 +63,12 @@ $scope.locationCutter();
      })
    }
 
+
+   $scope.populate = function(){
+    $http.get('/api/users/populate/'+$scope.user._id).success(function(data){
+    console.log(data, "populate");
+   })
+  }
 
   $scope.toggleLeft = function() {
     $mdSidenav('left').toggle()
