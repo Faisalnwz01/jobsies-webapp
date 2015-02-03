@@ -8,11 +8,11 @@
 	                        <textarea ng-model="job.company" class="form-control" rows="1" placeholder="Enter Company"></textarea><br>
 	                        <textarea ng-model="job.snippet" class="form-control" rows="3" placeholder="Enter Description"></textarea><br>
 	                        <textarea ng-model="job.qualifications" class="form-control" rows="3" placeholder="Enter 5 qualifications"></textarea><br>
-	                        <md-button class="md-raised md-primary save" type="submit" ng-click="postJob(job)">Save</md-button>
+	                        <md-button class="md-raised md-primary save" type="submit" ng-click="postJob(job); formReset()">Save</md-button>
 	                     </form>
                     </md-content>
                     <div class="buttons">
-                        <md-button class="md-raised md-warn pass">Discard</md-button>
+                        <md-button class="md-raised md-warn pass" ng-click="discardForm()">Discard</md-button>
                     </div>
                 </md-card>
              </div>
