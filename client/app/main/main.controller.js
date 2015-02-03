@@ -12,6 +12,7 @@ angular.module('jobsiesApp')
     $scope.jobsSeen = 0;
 
     $scope.updateJob = function (headline, location) {
+      $scope.searchDone = false;
       $scope.user.jobSought = headline;
       $scope.user.locationSought = location
       var getJobs = indeedapi.getIndeedJobs(headline, location , 0)
