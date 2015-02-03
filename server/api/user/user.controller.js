@@ -76,6 +76,21 @@ exports.jobPost = function(req, res) {
     });
   });
 };
+
+/**
+ * Get a single user
+ */
+exports.resume = function (req, res, next) {
+  var userId = req.params.id;
+  console.log(req.params)
+
+  User.findById(userId, function (err, user) {
+    console.log(user)
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
 /**
  * Get a single user
  */
