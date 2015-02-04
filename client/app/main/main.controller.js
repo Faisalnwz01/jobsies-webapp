@@ -29,7 +29,7 @@ angular.module('jobsiesApp')
     country: 'us',
     types: '(cities)'
   }
-  $scope.userHeadline = $scope.user.jobSought || $scope.user.linkedin.headline;
+  $scope.userHeadline = $scope.user.jobSought || $scope.user.linkedin.positions.values[0].title;
   $scope.locationCutter = function(){
     $scope.jobLocation = $scope.user.locationSought || $scope.user.linkedin.location.name
     if ($scope.jobLocation.toLowerCase().search('greater') !== -1){
@@ -61,6 +61,12 @@ $scope.locationCutter();
       $scope.totalResults = jobs.totalResults;
    })
 
+$scope.saveJobsies = function(){
+  SaveJobs.populateJobs().then(function(data){
+    $scope.savedJobsFrontPage = data || [];
+  })
+}
+$scope.saveJobsies();
 
 
    $scope.savedJob= function(job){
@@ -79,11 +85,12 @@ $scope.locationCutter();
       }
     }
      SaveJobs.postJobs(job)
+
+     $scope.savedJobsFrontPage.push(job)
+     console.log($scope.savedJobsFrontPage, "front page")
    }
 
-    $http.get('/api/users/me').success(function(data){
-    $scope.savejobs = data.jobs_saved;
-   })
+   
 
 
   $scope.toggleLeft = function() {
