@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jobsiesApp')
-    .factory('SaveJobs', function($http, Auth) {
+    .factory('SaveJobs', function($http, Auth, $q) {
 
         return {
             postJobs: function(jobs) {
@@ -25,15 +25,17 @@ angular.module('jobsiesApp')
                     }
                 })
                 if(user.jobs_saved.indexOf(jobs.jobkey)===-1){
+                  console.log(user.jobs_saved, "user jobs saved")
+                  console.log("jobkey", jobs.jobkey)
                   $http.put('/api/users/'+user._id, {jobs_saved: jobs})
                 }
             },
-          // populateJobs: function() {
-          //   var userProfile;
-          //   $http.get('/api/users/me').success(function(data){
-          //    userProfile = data
-          //    })
-          //   return userProfile;
-          // }
+           populateJobs: function() {
+             return new $q(function(resolve, reject) {
+            $http.get('/api/users/me').success(function(data){
+                resolve(data.jobs_saved);
+             })
+          })
+          }
         };
     });
