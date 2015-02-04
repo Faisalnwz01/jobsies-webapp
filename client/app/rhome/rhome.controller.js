@@ -18,6 +18,7 @@ angular.module('jobsiesApp')
 
     $scope.currentUser = 0;
     $scope.userSeen = 0;
+    $scope.currentJob = 0;
 
     $http.get('/api/users/').success(function(users){
       $scope.users = users;
@@ -43,8 +44,11 @@ angular.module('jobsiesApp')
     $scope.userID = Auth.getCurrentUser()._id;
       $scope.showjobs = false;
 
-
-
+    $scope.showPostedJob = false;
+    $scope.showPosition = function(index) {
+      $scope.showPostedJob = true;
+      $scope.currentJob = index;
+    }
 
     $scope.showJobPost = function() {
       if ($scope.showjobs === false) {
@@ -81,9 +85,9 @@ angular.module('jobsiesApp')
         var jobs_id = jobs._id
             $http.post('/api/users/'+Auth.getCurrentUser()._id+'/jobPost',{job_postings: jobs_id}).success(function(data) {
           console.log(data);
+          $scope.formReset();
       });
       });
-      $scope.formReset();
      }
 $scope.formReset = function() {
     $scope.job.jobtitle = '';
