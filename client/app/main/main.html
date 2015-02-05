@@ -1,176 +1,96 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="background">
-  <div class="row">
-    <!-- this is start of right side navbar -->
-          <md-sidenav class="md-sidenav-left md-whiteframe-z2 col-md-3" md-component-id="left" md-is-locked-open="$media('gt-md')">
-          <md-toolbar class="md-theme-indigo">
-          <h1 class="md-toolbar-tools">ToolKit</h1>
-          </md-toolbar>
-          <md-button class="apply" ng-click="toggleRight()" class="md-primary">
-            Saved Jobs
+    <div class="row">
+        <!-- this is start of right side navbar -->
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2 col s2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">ToolKit</h1>
+            </md-toolbar>
+            <md-button class="apply" ng-click="toggleRight()" class="md-primary">
+                Saved Jobs
             </md-button>
-          <md-content class="md-padding" ng-controller="LeftCtrl">
-          <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-          </md-button>
-          <p>I want to work as a</p>
-           <input type="text" class="form-control" ng-model="userHeadline"/>
-           <p>in</p>
-         <input type="text" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation"/>
-<!--
-         <div class="input-field col s6">
-         <input ng-model="userHeadline" id="job" type="text" class="validate">
-         <label for="job">Job</label>
-         </div> -->
-
-          <button ng-click="updateJob(userHeadline, jobLocation)" class="btn waves-effect waves-light" type="submit" name="action">Update
-               <i class="mdi-content-send right"></i>
-         </button>
-          </md-content>
-          </md-sidenav>
-    <!-- this is the end of right sidebar -->
-
-            <div class="col-md-9 container cards">
-      <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-
-
-
-
-        <md-card ng-hide="searchDone">
-        <md-content class="md-padding">
-        <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
-          <div class="card-title"><strong>{{job.jobtitle}}</strong>
-          </div>
-          <div class="date-posted">{{job.formattedRelativeTime}}</div>
-          <div class="card-city">{{job.formattedLocationFull}}</div>
-          <br>
-          <div class="card-company"><strong>{{job.company}}</strong>
-          </div>
-          <br>
-          <div class="card-details">{{job.snippet}}</div>
-          <div class="card-details">{{job.summary}}</div>
-          <br>
-          <br>
-          <img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}'>
-          <a href="{{job.url}}" target="_blank">
-            <md-button class="md-raised apply">Read More...</md-button>
-          </a>
-          <div>
-
-          </div>
-
-        </md-content>
-        <div class="buttons">
-          <md-button class="md-raised md-warn pass" ng-click="saveOrPass('pass')">Pass</md-button>
-          <md-button class="md-raised md-primary save" ng-click="saveOrPass('save', job)">Save</md-button>
-        </div>
-        </div>
-        </md-card>
-        <div ng-show="searchDone">
-          <p>Change your preferences to look for more jobs</p>
-        </div>
-        <div class="fillerdiv">
-        </div>
-      </div>
-    </div>
-<!--   </div> -->
-   <!--  <div id="flyer" ng-hide="searchDone" class="clearfix flip-container">
-    <div   ng-repeat="job in jobArray" ng-show="$index===currentJob" class="flipper">
-      <div class="front">
-        <div id="flyer_mediation">
-          <h3>Job Title</h3>
-          <h3>Time Posted</h3>
-          <h3>job Location</h3>
-          <h3>job company</h3>
-          <hgroup>
-          <h1>Job Description</h1>
-          <h1 class="lighter">Powered BY </h1>
-          </hgroup>
-        </div>
-        <div id="flyer_uebersetzung">
-          <h3><em>=</em> {{job.jobtitle}} </h3>
-          <h3><em>=</em> {{job.formattedRelativeTime}} <strong></strong></h3>
-          <h3><em>=</em> {{job.formattedLocationFull}} <strong></strong></h3>
-          <h3><em>=</em> {{job.company}} <strong></strong></h3>
-          <h5>= {{job.snippet}} <strong>STREIT</strong></h5>
-          <h2> Jobsies</h2>
-          <a href="#0" class="umdrehen"> -->
-            <!-- <img style='max-width:20;max-height:20' src='http://indeed.com/{{job.logo}}'> -->
-         <!--  </a>
-        </div>
-        </div> --> <!-- front -->
-       <!--  <div class="back">
-          <div id="flyer_back_header">
-            <div id="flyer_back_eins">
-              <p>Job requirments:</p>
-              <h5> {{job.summary}}</h5>
-            </div>
-            <div id="flyer_back_zwei">
-              <p>Job Summary</p>
-              <p>job summary can be posted here i guess</p>
-            </div>
-            </div>  --><!-- Ende Flyer_back_header -->
-            <!-- <footer id="flyer_back_footer" class="clearfix">
-              <div class="relative">
-                <div class="col-1-4">
-                  <a href="{{job.url}}" target="_blank">
-                  <md-button class="md-raised apply">Read More...</md-button> </a>
-                </div>
-                <div class="col-1-25">
-                  <md-button class="apply" ng-click="toggleRight()" class="md-primary">Saved Jobs </md-button>
-                </div>
-                <div class="col-1-3">
-                  <md-button class="md-raised md-warn pass">Pass</md-button>
-                  <md-button class="md-raised md-primary save" ng-click="savedJob(job)">Save</md-button>
-                  <img style='max-width:35px;max-height:35px' src='http://indeed.com/{{job.logo}}'>
-                </a>
-              </div>
-              </div> --> <!-- Ende .relative -->
-          <!--   </footer>
-          </div>
-          </div> --> <!-- flipper -->
-      <!--   </div> -->
-        <!-- start of right side navbar -->
-        <md-sidenav  class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-        <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools">Sidenav Right</h1>
-        </md-toolbar>
-        <md-content ng-controller="RightCtrl" class="md-padding">
-      <!--  <div class = jumbotron ng-repeat="job in savejobs">
-        <a href="{{job.url}}"><h4>{{job.jobtitle}} At {{job.company}}</h4></a>
-        <h6>{{job.city}}, {{job.state}}</h6>
-        <h6>{{job.date | date}}</h6>
-       </div> -->
-
-
-       <div ng-repeat="job in savedJobsFrontPage" class="row">
-
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
-              <p>{{job.formattedLocationFull}} <br> {{job.date | date}}
-              </p>
-            </div>
-            <div class="card-action">
-              <a href="{{job.url}}" target="_blank">More Info </a>
-              <button ng-click="removeJobFromUser(job)">Remove job</button>
-            </div>
-          </div>
-
-      </div>
-
-        <md-button ng-click="close()" class="md-primary">
-        </md-button>
-        </md-content>
+            <md-content class="md-padding" ng-controller="LeftCtrl">
+                <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                    Close Sidenav Left
+                </md-button>
+                <p>I want to work as a</p>
+                <input type="text" class="form-control" ng-model="userHeadline" />
+                <p>in</p>
+                <input type="text" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" />
+                <button ng-click="updateJob(userHeadline, jobLocation)" class="btn waves-effect waves-light" type="submit" name="action">Update
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </md-content>
         </md-sidenav>
+        <!-- this is the end of right sidebar -->
 
+        <div class="col s8 offset-s1">
+            <div class=" card col s7 " ng-hide="searchDone">
+                <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
+                    <div class='card-image'>
+                        <h2>{{job.jobtitle}}</h2>
+                        <div class="date-posted">Job Posted: {{job.formattedRelativeTime}}</div>
+                        <div class="card-city">In {{job.formattedLocationFull}}</div>
+                        <br>
+                        <div class="card-details">{{job.snippet}}</div>
+                        <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://www.talentsquare.com/wp-content/uploads/2013/12/Find_Jobs.jpg"'>
+                        </center>
+
+                    </div>
+                    <div id="buttonsDiv" class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Click here for more details!<i class="mdi-navigation-more-vert right"></i></span>
+
+                        <div>
+                            <md-button class="md-raised md-warn pass" ng-click="saveOrPass('pass')">Pass</md-button>
+                            <md-button class="md-raised md-primary save" ng-click="saveOrPass('save', job)">Save</md-button>
+                        </div>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4">{{job.jobtitle}} <i class="mdi-navigation-close right"></i></span>
+
+                        <div class="date-posted">{{job.formattedRelativeTime}}</div>
+                        <div class="card-city">{{job.formattedLocationFull}}</div>
+                        <br>
+                        <!-- <div class="card-company"><strong>{{job.company}}</strong>
+                            </div> -->
+                        <br>
+
+                        <div class="card-details">{{job.summary}}</div>
+                        <br>
+                        <br>
+
+                        <a target="_blank" href="{{job.url}}">
+                            <md-button class="md-raised apply">Read More...</md-button>
+                        </a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Sidenav Right</h1>
+            </md-toolbar>
+            <md-content ng-controller="RightCtrl" class="md-padding">
+                <div ng-repeat="job in savedJobsFrontPage" class="row">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
+                            <p>{{job.formattedLocationFull}}
+                                <br> {{job.date | date}}
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{job.url}}" target="_blank">More Info </a>
+                            <button ng-click="removeJobFromUser(job)">Remove job</button>
+                        </div>
+                    </div>
+                </div>
+                <md-button ng-click="close()" class="md-primary">
+                </md-button>
+            </md-content>
+        </md-sidenav>
     </div>
-    <!-- <button ng-click="loginOauth('linkedin')">clickme</button> -->
-    <!-- <footer class="footer">
-      <div class="container">
-        <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-        <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-      </div> -->
-      </div>
-  </div>
+</div>
