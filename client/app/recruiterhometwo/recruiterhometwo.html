@@ -1,17 +1,20 @@
- <div class="col-md-9 container cards">
-            <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-                <md-card>
-                    <md-content class="md-padding">
-                        <div ng-repeat="user in users_saved" ng-show="$index===currentUser">
-                            <div class="card-title"><strong>{{user.name}}</strong>
-                            </div>
-                            <div class="date-posted">{{user.linkedin.headline}}</div>
-                            <br>
-                            <br>
-                            <md-button class="md-raised apply">Read More...</md-button>
-                            </a>
-
-                    </md-content>
-                    </div>
-                </md-card>
-        </div>
+            <div class="card" ng-repeat="job in jobs" ng-show="$index===currentJob">
+              <div class="card-image waves-effect waves-block waves-light">
+                <div class="user-information">
+                {{job.jobtitle}}<br>
+                {{job.company}}<br>
+                {{job.formattedLocation}}<br>
+                Requires:<br>
+                {{job.qualifications}}
+                </div>
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">{{job.jobtitle}}<i class="mdi-navigation-more-vert right"></i></span>
+                <br>
+                <p><a href="#!">This is a link</a></p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
+                {{job.snippet}}<br>
+                Number of users saving this job: {{job.user_ids.length}}
+              </div>
