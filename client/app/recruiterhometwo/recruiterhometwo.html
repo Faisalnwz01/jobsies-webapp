@@ -1,7 +1,11 @@
             <div class="card" ng-repeat="job in jobs" ng-show="$index===currentJob">
               <div class="card-image waves-effect waves-block waves-light">
                 <div class="user-information">
-                {{job.jobtitle}}
+                {{job.jobtitle}}<br>
+                {{job.company}}<br>
+                {{job.formattedLocation}}<br>
+                Requires:<br>
+                {{job.qualifications}}
                 </div>
               </div>
               <div class="card-content">
@@ -11,5 +15,6 @@
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                {{job.snippet}}<br>
+                Number of users saving this job: {{job.user_ids.length}}
               </div>
