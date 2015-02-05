@@ -148,11 +148,11 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
-              <p>{{job.city}}, {{job.state}} <br> {{job.date | date}}
+              <p>{{job.formattedLocationFull}} <br> {{job.date | date}}
               </p>
             </div>
             <div class="card-action">
-              <a href="{{job.url}}">More Info </a>
+              <a href="{{job.url}}" target="_blank">More Info </a>
               <a href='#'>main page</a>
             </div>
           </div>
