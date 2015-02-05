@@ -16,13 +16,19 @@ angular.module('jobsiesApp')
           
                 
                 console.log($scope.profileInformation)
+                  $scope.coverLetterJob= $scope.profileInformation.cover_letter.length -1
+if(!$scope.profileInformation.linkedin.currentCoverLetter){
+  $scope.profileInformation.linkedin.currentCoverLetter = $scope.profileInformation.cover_letter[$scope.coverLetterJob]
+}
+$scope.update()
+                 
+  
 
             })
             $scope.update = function() {
                 console.log($scope.profileInformation, 'this is profileInformation')
                 console.log(User.save($scope.profileInformation))
             }
-
 
 
  $scope.filter= function(){
@@ -34,6 +40,15 @@ angular.module('jobsiesApp')
 }
 $scope.update(); 
  } 
+
+
+  $scope.getCoverLetterJob = function(job){
+      $scope.coverLetterJob = job 
+      $scope.linkedin.currentCoverLetter = $scope.profileInformation.cover_letter[job].text
+      $scope.update()
+
+    }
+
 
 
 
