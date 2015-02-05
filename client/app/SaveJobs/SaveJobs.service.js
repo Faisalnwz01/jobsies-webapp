@@ -33,7 +33,8 @@ angular.module('jobsiesApp')
                 })
             },
             populateJobs: function() {
-                return $http.get('/api/users/me')
+                var user = Auth.getCurrentUser();
+                return $http.get('/api/users/'+user._id+'/jobPopulate')
             }
         }
     });

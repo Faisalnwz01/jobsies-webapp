@@ -54,8 +54,8 @@ angular.module('jobsiesApp')
         //fills in the right sidebar with jobs that a user has previously saved
         $scope.getSavedJobsies = function() {
             SaveJobs.populateJobs().then(function(jobs) {
-                console.log("get saved jobs", jobs)
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
+                console.log($scope.savedJobsFrontPage)
             })
         }
         $scope.getSavedJobsies();
