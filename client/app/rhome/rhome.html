@@ -20,12 +20,12 @@
                 </md-button>
                 <p hide-md show-gt-md>
                     <div ng-repeat="job in jobs">
-                        <div class="card blue-grey darken-1">
-                            <div class="card-content white-text">
+<!--                         <div class="card blue-grey darken-1">
+ -->                            <div class="card-content white-text">
                               <span class="card-title" ng-click="showPosition($index)">{{job.jobtitle}}</span>               
                             </div>
-                        </div>
-                    </div>
+<!--                         </div>
+ -->                    </div>
                 </p>
             </md-content>
         </md-sidenav>
@@ -33,9 +33,6 @@
         <div recruiterhometwo ng-show="showPostedJob" class="col s6 offset-s2"></div>
         <div recruiterhomethree ng-show="showjobs"></div>
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s1" md-component-id="right">
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
-            </md-toolbar>
             <md-content ng-controller="RightCtrl" class="md-padding">
                 <div ng-repeat="user in users_saved" class="row">
                     <div class="card blue-grey darken-1">

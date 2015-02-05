@@ -19,4 +19,6 @@ router.post('/:id', controller.update);
 router.post('/:id/savedUser', controller.savedUsers);
 router.post('/:id/jobPost', controller.jobPost);
 router.get('/:id/resume', controller.resume); 
+router.get('/:id/jobPopulate', controller.jobPopulate);
+router.put('/:id/removeJob/:jobId', auth.isAuthenticated(), controller.removeJob);
 module.exports = router;

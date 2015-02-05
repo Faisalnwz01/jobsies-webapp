@@ -19,12 +19,12 @@ var UserSchema = new Schema({
     type: String,
     default: null
   },
-  jobSought: String,
-  locationSought: String, 
+  jobUserLookingFor: String,
+  locationUserWantsToWorkIn: String, 
   hashedPassword: String,
   provider: String,
   salt: String,
-  jobs_saved: Array,
+  jobs_saved: [{type: Schema.Types.ObjectId, ref: 'Job'}],
   job_postings: Array,
   users_saved: Array,
   resume: {},
@@ -163,6 +163,14 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+  removeJob: function(jobId){
+    var jobIndex = this.jobs_saved.indexOf(jobId)
+    if (jobIndex > -1){
+      this.jobs_saved.splice(jobIndex, 1)
+    }
+    this.save();
+    return this;
   }
 };
 

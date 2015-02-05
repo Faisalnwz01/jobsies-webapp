@@ -62,15 +62,11 @@ exports.savedUsers = function(req, res) {
 };
 
 exports.jobPost = function(req, res) {
-  console.log('hit on backend')
   User.findById(req.params.id, function (err, user) {
-    console.log(user, 'user')
-    console.log(req.body, 'req.bodyyyyyy')
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
     user.job_postings.push(req.body.job_postings);
     user.save(function (err, user) {
-        console.log(user, 'updatedddddddd')
       if (err) { return handleError(res, err); }
       return res.json(200, user);
     });
@@ -82,10 +78,29 @@ exports.jobPost = function(req, res) {
  */
 exports.resume = function (req, res, next) {
   var userId = req.params.id;
-  console.log(req.params)
-
   User.findById(userId, function (err, user) {
-    console.log(user)
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
+//populate jobs
+exports.jobPopulate = function (req, res, next) {
+  var userId = req.params.id;
+  User.findById(userId)
+    .populate('jobs_saved')
+    .exec(function(err, user){
+       if (err) return next(err);
+       if (!user) return res.send(401);
+       res.json(user);
+    });
+};
+//remove a specific job from the user's saved jobs list
+exports.removeJob = function(req, res, next){
+  var userId = req.params.id;
+  var jobId = req.params.jobId;
+  User.findById(userId, function(err, user){
+    user.removeJob(jobId)
     if (err) return next(err);
     if (!user) return res.send(401);
     res.json(user);
@@ -96,7 +111,6 @@ exports.resume = function (req, res, next) {
  */
 exports.show = function (req, res, next) {
   var userId = req.params.id;
-
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
