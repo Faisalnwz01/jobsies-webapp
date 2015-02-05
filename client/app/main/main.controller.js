@@ -11,7 +11,7 @@ angular.module('jobsiesApp')
         $scope.totalResults;
         $scope.jobsSeen = 0;
 
-        // The user can changes the type of job they are looking for and/or location
+        // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
         $scope.updateJob = function(headline, location) {
             $scope.searchDone = false;
@@ -57,7 +57,6 @@ angular.module('jobsiesApp')
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             })
         }
-        $scope.getSavedJobsies();
 
 
         //save jobs to the database, also call indeed for more results
@@ -100,6 +99,7 @@ angular.module('jobsiesApp')
                 });
         };
         $scope.toggleRight = function() {
+            $scope.getSavedJobsies();
             $mdSidenav('right').toggle()
                 .then(function() {
                     $log.debug("toggle RIGHT is done");
