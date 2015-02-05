@@ -95,6 +95,17 @@ exports.jobPopulate = function (req, res, next) {
        res.json(user);
     });
 };
+//remove a specific job from the user's saved jobs list
+exports.removeJob = function(req, res, next){
+  var userId = req.params.id;
+  var jobId = req.params.jobId;
+  User.findById(userId, function(err, user){
+    user.removeJob(jobId)
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
 /**
  * Get a single user
  */
