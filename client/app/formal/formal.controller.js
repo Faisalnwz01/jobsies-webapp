@@ -5,8 +5,17 @@ angular.module('jobsiesApp')
   	console.log($stateParams.id)
   	$http.get('api/users/'+$stateParams.id+'/resume').success(function(user){
   		$scope.profileInformation = user
-  		console.log(user)
+
+    
+    
+
+
+
   	})
+
+
+
+  
     
 
      $scope.openModal = function() {
