@@ -77,7 +77,7 @@ angular.module('jobsiesApp')
     $scope.postJob = function(job) {
     console.log("step1")
     $scope.job = angular.copy(job);
-    $scope.job.recruiter_id = $scope.userID;
+    $scope.job.recruiter_id = Auth.getCurrentUser()._id;
     console.log($scope.job)
     // $scope.jobs.push($scope.job)
       $http.post('/api/jobs/', $scope.job).success(function(jobs){
@@ -114,6 +114,7 @@ $scope.discardForm = function() {
                       });
   };
   $scope.toggleRight = function() {
+    
     $mdSidenav('right').toggle()
                         .then(function(){
                           $log.debug("toggle RIGHT is done");
