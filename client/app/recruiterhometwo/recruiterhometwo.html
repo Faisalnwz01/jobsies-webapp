@@ -1,11 +1,11 @@
             <div class="card" ng-repeat="job in jobs" ng-show="$index===currentJob">
               <div class="card-image waves-effect waves-block waves-light">
                 <div class="user-information">
-                {{job.jobtitle}}<br>
-                {{job.company}}<br>
-                {{job.formattedLocation}}<br>
-                Requires:<br>
-                {{job.qualifications}}
+                <h1>Position Title: {{job.jobtitle}}</h1><br>
+                <h2>{{job.company}}</h2><br>
+                <h2>{{job.formattedLocation}}</h2><br><br>
+                <h2>Qualifications</h2>:<br>
+                <h3>{{job.qualifications}}
                 </div>
               </div>
               <div class="card-content">
