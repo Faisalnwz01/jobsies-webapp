@@ -62,8 +62,7 @@ angular.module('jobsiesApp')
 
         //save jobs to the database, also call indeed for more results
         // after a user has gone through 25 jobs
-        $scope.savedJob = function(job) {
-            toast('Job Saved!! :)', 4000)
+        $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
             $scope.jobsSeen += 1;
             if ($scope.jobsSeen == $scope.totalResults) {
@@ -76,14 +75,17 @@ angular.module('jobsiesApp')
                     indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25 * $scope.page);
                 }
             }
-            SaveJobs.postJobs(job)
-            setInterval(function(){
-                $scope.getSavedJobsies();
-            }, 1000)
+            if (status == 'save') {
+                toast('Job Saved!! :)', 3000)
+                SaveJobs.postJobs(job)
+                setInterval(function() {
+                    $scope.getSavedJobsies();
+                }, 1000)
+            }
+            if (status == 'pass'){
+                toast('Job Passed :(', 3000)
+            }
         }
-
-
-
 
         $scope.toggleLeft = function() {
             $mdSidenav('left').toggle()
