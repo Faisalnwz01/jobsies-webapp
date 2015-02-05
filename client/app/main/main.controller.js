@@ -87,6 +87,12 @@ angular.module('jobsiesApp')
             }
         }
 
+        $scope.removeJobFromUser = function(job){
+            SaveJobs.removeJobFromUser(job, $scope.user).then(function(){
+                $scope.getSavedJobsies();
+            })
+        }
+
         $scope.toggleLeft = function() {
             $mdSidenav('left').toggle()
                 .then(function() {
