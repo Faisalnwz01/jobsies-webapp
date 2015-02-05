@@ -7,9 +7,11 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/recruiterJobs/:id', controller.getRecruiterJobs);
 router.post('/', controller.create);
 router.post('/cheerio', controller.getCheerio);
 router.put('/:id', controller.update);
+router.put('/updateRecruiterJob/:id', controller.updateRecruiterJob);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
