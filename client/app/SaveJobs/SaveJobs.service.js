@@ -10,7 +10,6 @@ angular.module('jobsiesApp')
                     //if the job does not exist add the current users id to the job and post it to the database
                     if (job.data.length === 0) {
                         jobs['user_ids'] = [user._id]
-                        console.log(jobs)
                         $http.post('/api/jobs', jobs).then(function(new_job) {
                             // add the job id to the users schema
                             $http.put('/api/users/' + user._id, {

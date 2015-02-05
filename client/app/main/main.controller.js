@@ -55,7 +55,6 @@ angular.module('jobsiesApp')
         $scope.getSavedJobsies = function() {
             SaveJobs.populateJobs().then(function(jobs) {
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
-                console.log($scope.savedJobsFrontPage)
             })
         }
         $scope.getSavedJobsies();
@@ -78,8 +77,9 @@ angular.module('jobsiesApp')
                 }
             }
             SaveJobs.postJobs(job)
-
-            $scope.savedJobsFrontPage.push(job)
+            setInterval(function(){
+                $scope.getSavedJobsies();
+            }, 1000)
         }
 
 
