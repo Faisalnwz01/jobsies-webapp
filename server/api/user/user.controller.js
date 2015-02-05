@@ -158,6 +158,9 @@ exports.me = function(req, res, next) {
   }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
     if (err) return next(err);
     if (!user) return res.json(401);
+    console.log("pre", user)
+    user.populate('jobs_saved');
+    console.log("post", user)
     res.json(user);
   });
 };

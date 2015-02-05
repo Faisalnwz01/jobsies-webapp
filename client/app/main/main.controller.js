@@ -32,7 +32,7 @@ angular.module('jobsiesApp')
             country: 'us',
             types: '(cities)'
         }
-        // automatically fills in the job the user is searching for and where
+        // automatically fills in the job the user is searching for and location
         //based on linkedin profile or updated preferences.
         $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title;
         $scope.locationCutter = function() {
@@ -51,9 +51,10 @@ angular.module('jobsiesApp')
             $scope.totalResults = jobs.totalResults;
         })
 
-        //fills in the right sidebar with jobs that a user has saved
+        //fills in the right sidebar with jobs that a user has previously saved
         $scope.getSavedJobsies = function() {
             SaveJobs.populateJobs().then(function(jobs) {
+                console.log("get saved jobs", jobs)
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             })
         }

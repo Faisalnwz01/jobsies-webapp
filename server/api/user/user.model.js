@@ -24,7 +24,7 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  jobs_saved: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  jobs_saved: [{type: Schema.Types.ObjectId, ref: 'Job'}],
   job_postings: Array,
   users_saved: Array,
   resume: {},
