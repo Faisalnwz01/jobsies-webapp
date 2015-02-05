@@ -8,7 +8,10 @@ var JobSchema = new Schema({
   jobkey: String,
   jobtitle: String,
   snippet: String, 
-  formattedLocation: String, 
+  summary: String,
+  logo: String,
+  formattedLocationFull: String, 
+  date: String,
   company: String, 
   expired: Boolean, 
   url: String, 
@@ -17,7 +20,7 @@ var JobSchema = new Schema({
   job_picture: String,
   salary: String, 
   contact_information: String,
-  user_ids: Array, 
+  user_ids: [{type: Schema.Types.ObjectId, ref: 'User'}], 
   recruiter_id: String
 });
 
