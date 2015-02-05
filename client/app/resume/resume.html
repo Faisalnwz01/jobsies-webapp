@@ -1,10 +1,11 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
+
 <div class="container nopadding welcome">
   <center>
-    <a href = '/{{profileInformation.linkedin.template}}/{{profileInformation._id}}'><md-button class='md-primary md-raised' >
-    Share Your Resume
-  </md-button></a>
+   
+
+
   <div class="row">
     <h2>Step 1</h2>
     <h3>Choose A template</h3>
@@ -22,15 +23,17 @@
     </div>
   </div>
 
-<md-button class='md-primary md-raised' ng-click="filter()">
-    {{profileInformation.linkedin.ShowCoverLetter}}
-  </md-button>
+
   </center>
+</div>
+
+<div class="container">
+
+<a class="waves-effect waves-light btn" ng-click="goToStep2()" style='float: right'><i class="mdi-content-send left"></i>Step 2</a>
 </div>
 
 
 
-<cover ng-show="profileInformation.linkedin.ShowCoverLetter"></cover>
 
 <formal-template class = 'formal' ng-hide='image.fancy'></formal-template>
 <fancy-template class='fancy' ng-hide='image.formal'></fancy-template>

@@ -1,6 +1,46 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container nopadding welcome">
+  <center>
+   
+
+
+  <div class="row">
+    <h2>Step 2</h2>
+    <h3>Would you like us to Generate a Cover Letter For you? </h3>
+    <div class="col-lg-12">
+      <ul class="list-inline intro-social-buttons">
+        <li>
+          <a href="" ng-click="show('formal')"><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
+        <md-button class='md-primary md-raised' ng-click="coverLetterYesOrNo('yes')">
+    Yes
+  </md-button>
+        </li>
+        <li>
+          <a href="" ><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
+          <md-button class='md-primary md-raised' ng-click="coverLetterYesOrNo('no')">
+    No
+  </md-button>
+        </li>
+ 
+      </ul>
+    </div>
+  </div>
+
+
+  </center>
+</div>
+
+
+
+<div class="container">
+
+<a class="waves-effect waves-light btn" ng-click="goToStep1()"><i class="mdi-content-send left"></i>Step 1</a>
+<a class="waves-effect waves-light btn" ng-click="goToStep3()" style='float: right'><i class="mdi-content-send right"></i>Step 3</a>
 <div layout="column" layout-fill class='resumeFormal container nopadding'>
 
-<md-whiteframe class="md-whiteframe-z1">
+
+
+<md-whiteframe class="md-whiteframe-z1" ng-show="profileInformation.linkedin.ShowCoverLetter">
 
 <h1>Cover Letter</h1>
 
@@ -8,4 +48,6 @@
 <pre ng-bind-html="profileInformation.cover_letter"></pre>
 
 </md-whiteframe>
+
+</div>
 </div>
