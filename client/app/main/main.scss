@@ -39,14 +39,15 @@
     border-top: 1px solid #E5E5E5;
 }
 
-md-card {
+/*md-card {
     height: 600px;
     width: 100%;
     position: relative;
     background-color: #fff;
-}
+}*/
 .buttons {
-    bottom: 0;
+  bottom: 48px;
+  padding-bottom: 40px;
 }
 .save{
     position: relative;
@@ -103,15 +104,16 @@ li.a.active {
 }
 
 .md-sidenav-left {
-    height: 920px;
+    height: 680px;
     float: left;
 }
 
-.cards {
-    top: 30px;
+.card-image{
+    height: 470px;
     float: right;
-    left: -12%;
-    margin-left: 5%;
+}
+#buttonsDiv{
+  height: 570px;
 }
 
 
