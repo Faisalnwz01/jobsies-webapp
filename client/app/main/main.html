@@ -29,14 +29,15 @@
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
                         <h2>{{job.jobtitle}}</h2>
-                          <div class="date-posted">Job Posted: {{job.formattedRelativeTime}}</div>
+                        <div class="date-posted">Job Posted: {{job.formattedRelativeTime}}</div>
                         <div class="card-city">In {{job.formattedLocationFull}}</div>
                         <br>
                         <div class="card-details">{{job.snippet}}</div>
-                        <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://www.talentsquare.com/wp-content/uploads/2013/12/Find_Jobs.jpg"' ></center>
+                        <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://www.talentsquare.com/wp-content/uploads/2013/12/Find_Jobs.jpg"'>
+                        </center>
 
                     </div>
-                    <div id="buttonsDiv" class= "card-content">
+                    <div id="buttonsDiv" class="card-content">
                         <span class="card-title activator grey-text text-darken-4">Click here for more details!<i class="mdi-navigation-more-vert right"></i></span>
 
                         <div>
@@ -58,35 +59,38 @@
                         <br>
                         <br>
 
-                           <a target="_blank" href="{{job.url}}"> <md-button class="md-raised apply">Read More...</md-button></a>
+                        <a target="_blank" href="{{job.url}}">
+                            <md-button class="md-raised apply">Read More...</md-button>
                         </a>
-
-                    </div>
-                </div>
-
-
-    <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
-        <md-toolbar class="md-theme-light">
-            <h1 class="md-toolbar-tools">Sidenav Right</h1>
-        </md-toolbar>
-        <md-content ng-controller="RightCtrl" class="md-padding">
-            <div ng-repeat="job in savedJobsFrontPage" class="row">
-                <div class="card blue-grey darken-1">
-                    <div class="card-content white-text">
-                        <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
-                        <p>{{job.formattedLocationFull}}
-                            <br> {{job.date | date}}
-                        </p>
-                    </div>
-                    <div class="card-action">
-                        <a href="{{job.url}}" target="_blank">More Info </a>
-                        <button ng-click="removeJobFromUser(job)">Remove job</button>
+                        </a>
                     </div>
                 </div>
             </div>
-            <md-button ng-click="close()" class="md-primary">
-            </md-button>
-        </md-content>
-    </md-sidenav>
-</div>
+        </div>
+
+
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
+            <md-toolbar class="md-theme-light">
+                <h1 class="md-toolbar-tools">Sidenav Right</h1>
+            </md-toolbar>
+            <md-content ng-controller="RightCtrl" class="md-padding">
+                <div ng-repeat="job in savedJobsFrontPage" class="row">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
+                            <p>{{job.formattedLocationFull}}
+                                <br> {{job.date | date}}
+                            </p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{{job.url}}" target="_blank">More Info </a>
+                            <button ng-click="removeJobFromUser(job)">Remove job</button>
+                        </div>
+                    </div>
+                </div>
+                <md-button ng-click="close()" class="md-primary">
+                </md-button>
+            </md-content>
+        </md-sidenav>
+    </div>
 </div>
