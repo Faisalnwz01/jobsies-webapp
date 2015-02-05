@@ -18,3 +18,19 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+
+.login-background {
+	    min-height: 1000px;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        background-image: url(../assets/images/beach.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+}
+.filler-div {
+	height: 400px;
+}
+.linked-in:hover {
+	opacity: .5;
+}

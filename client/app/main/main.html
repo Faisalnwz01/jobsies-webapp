@@ -40,8 +40,8 @@
                         <span class="card-title activator grey-text text-darken-4">Click here for more details!<i class="mdi-navigation-more-vert right"></i></span>
 
                         <div>
-                            <md-button class="md-raised md-warn pass">Pass</md-button>
-                            <md-button class="md-raised md-primary save" ng-click="savedJob(job)">Save</md-button>
+                            <md-button class="md-raised md-warn pass" ng-click="saveOrPass('pass')">Pass</md-button>
+                            <md-button class="md-raised md-primary save" ng-click="saveOrPass('save', job)">Save</md-button>
                         </div>
                     </div>
                     <div class="card-reveal">
@@ -64,17 +64,7 @@
                     </div>
                 </div>
 
-            </div>
-            <div ng-show="searchDone">
-                <p>Change your preferences to look for more jobs</p>
-            </div>
-            <div class="fillerdiv">
-            </div>
-        </div>
-    </div>
 
-
-    <!-- start of right side navbar -->
     <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
         <md-toolbar class="md-theme-light">
             <h1 class="md-toolbar-tools">Sidenav Right</h1>
@@ -90,7 +80,7 @@
                     </div>
                     <div class="card-action">
                         <a href="{{job.url}}" target="_blank">More Info </a>
-                        <a href='#'>main page</a>
+                        <button ng-click="removeJobFromUser(job)">Remove job</button>
                     </div>
                 </div>
             </div>

@@ -34,6 +34,9 @@ angular.module('jobsiesApp')
             populateJobs: function() {
                 var user = Auth.getCurrentUser();
                 return $http.get('/api/users/'+user._id+'/jobPopulate')
+            },
+            removeJobFromUser: function(job, user){
+                return $http.put('/api/users/'+user._id+'/removeJob/'+job._id)
             }
         }
     });
