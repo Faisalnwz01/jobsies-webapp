@@ -3,10 +3,9 @@
 <div class="background">
     <div class="row">
         <md-sidenav class="md-sidenav-left md-whiteframe-z2 col s1" md-component-id="left" md-is-locked-open="$media('gt-md')">
-            <md-toolbar class="md-theme-indigo">
 
-            </md-toolbar>
             <md-content class="md-padding" ng-controller="LeftCtrl">
+                <div>
                 <md-button ng-click="showJobPost();" class="md-primary">
                     Post a Job
                 </md-button>
@@ -15,23 +14,26 @@
                     See Some Candidates
                 </md-button>
                 <br>
-                <md-button class="apply" ng-click="toggleRight()" class="md-primary">
+                <md-button ng-click="toggleRight()" class="md-primary">
                     Saved Candidates
                 </md-button>
-                <p hide-md show-gt-md>
-                    <div ng-repeat="job in jobs">
-<!--                         <div class="card blue-grey darken-1">
- -->                            <div class="card-content white-text">
-                              <span class="card-title" ng-click="showPosition($index)">{{job.jobtitle}}</span>               
-                            </div>
-<!--                         </div>
- -->                    </div>
-                </p>
+                </div>
+
+                <ul class="collapsible" data-collapsible="accordion">
+                   <li ng-repeat="job in jobs">
+                       <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.jobtitle}}</div>
+                       <div class="collapsible-body">
+                        <p> 
+                         Date Posted: {{job.date | date}}
+                         </p>
+                       </div>
+                   </li>
+               </ul>
             </md-content>
         </md-sidenav>
-        <div recruiterhome ng-show="showusers" class="col s6 offset-s2"></div>
-        <div recruiterhometwo ng-show="showPostedJob" class="col s6 offset-s2"></div>
-        <div recruiterhomethree ng-show="showjobs"></div>
+        <div rusercard ng-show="showusers" class="col s6 offset-s2"></div>
+        <div rpostedjobs ng-show="showPostedJob" class="col s6 offset-s2"></div>
+        <div rpostjobs ng-show="showjobs"></div>
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s1" md-component-id="right">
             <md-content ng-controller="RightCtrl" class="md-padding">
                 <div ng-repeat="user in users_saved" class="row">

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .directive('recruiterhomethree', function () {
+  .directive('rjobpostedjobs', function () {
     return {
-      templateUrl: 'app/recruiterhomethree/recruiterhomethree.html',
+      templateUrl: 'app/rhome/rjobpostedjobs/rjobpostedjobs.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }

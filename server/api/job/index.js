@@ -14,5 +14,6 @@ router.put('/:id', controller.update);
 router.put('/updateRecruiterJob/:id', controller.updateRecruiterJob);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
+router.get('/:id/showJobs', controller.jobShow);
 
 module.exports = router;
