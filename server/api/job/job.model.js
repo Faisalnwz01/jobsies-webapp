@@ -11,6 +11,7 @@ var JobSchema = new Schema({
   summary: String,
   logo: String,
   formattedLocationFull: String, 
+  formattedRelativeTime: String,
   date: String,
   company: String, 
   expired: Boolean, 

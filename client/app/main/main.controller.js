@@ -65,8 +65,9 @@ angular.module('jobsiesApp')
             SaveJobs.getRecruiterJobs().then(function(jobs) {
                 var allJobsies = jobs.data;
                 var jobsies = allJobsies.filter(function(element) {
-                    console.log("test stuff", element.snippet)
-                    if (element.recruiter_id && jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && element.snippet.toLowerCase().search(userHeadline.toLowerCase()) > -1) {
+                    if (element.recruiter_id && 
+                        jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && 
+                        (element.summary.toLowerCase().search(userHeadline.toLowerCase()) > -1 || element.jobtitle.toLowerCase().search(userHeadline.toLowerCase()) > -1)) {
                         return element
                     }
                 })
@@ -82,6 +83,7 @@ angular.module('jobsiesApp')
 
         //fills in the right sidebar with jobs that a user has previously saved
         $scope.getSavedJobsies = function() {
+            $scope.savedJobsFrontPage = []
             SaveJobs.populateJobs().then(function(jobs) {
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             })
@@ -153,7 +155,7 @@ $scope.encodedEmail =  encodeURIComponent($scope.autoApplyEmail)
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25 * $scope.page);
+                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn, 25 * $scope.page);
                     }
                 }
                 if (status == 'save') {

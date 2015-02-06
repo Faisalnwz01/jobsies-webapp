@@ -24,8 +24,8 @@
         </md-sidenav>
         <!-- this is the end of right sidebar -->
 
-        <div class="col s8 offset-s1 jobsCard">
-            <div class=" card col s7 " ng-hide="searchDone">
+        <div class="col s8 offset-s1 jobsCard ">
+            <div class=" card col s7 z-depth-5" ng-hide="searchDone">
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
                         <h2>{{job.jobtitle}}</h2>
@@ -94,15 +94,27 @@
                         </div>
                     </div>
                 </div> -->
+<!-- <<<<<<< HEAD
                 
                 <ul class="collapsible" data-collapsible="accordion">
-                    <li ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
+                    <li ng-repeat="job in savedJobsFrontPage">
                         <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.company}}</div>
+======= -->
+                <div class="collapsible" data-collapsible="accordion">
+                  <ul ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
+                    <li>
+                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>  {{job.company.substring(0,24)}}
+                        </div>
+<!-- >>>>>>> master -->
                         <div class="collapsible-body">
                             <p> <strong>Job Title:</strong> {{job.jobtitle}}
                                 <br> <strong>Location:</strong> {{job.formattedLocationFull}}
                                 <br> <strong>Date Posted:</strong> {{job.date | date}}
                                 <br> {{job.snippet}}
+                                <br> <strong>{{job.user_ids.length}}<strong> users saved this job
+                                <br>
+                                <strong ng-show="{{job.user_ids.length}}>50" style="color: red;">Competitive</strong>
+                               <strong  ng-show="{{job.user_ids.length}}<50" style="color: green;">Not Competitive</strong>
                                 <br>
                                 <a href="{{job.url}}" target="_blank">More Info </a>
                                 <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
@@ -110,7 +122,8 @@
                             </p>
                         </div>
                     </li>
-                </ul>
+                  </ul>
+                </div>
                 <md-button ng-click="close()" class="md-primary">
                 </md-button>
             </md-content>
