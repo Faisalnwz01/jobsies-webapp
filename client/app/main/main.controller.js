@@ -54,6 +54,7 @@ angular.module('jobsiesApp')
             indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
                 $scope.currentJob = 0;
                 $scope.jobArray = jobs.jobArray;
+                console.log("indeed jobs", $scope.jobArray)
                 $scope.totalResults = jobs.totalResults;
             })
         };
@@ -71,6 +72,7 @@ angular.module('jobsiesApp')
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
+                console.log("recruiter jobs", $scope.jobArray);
                 if ($scope.jobArray.length == 0) {
                     $scope.getJobs(userHeadline, jobLocation)
                 }
@@ -81,6 +83,7 @@ angular.module('jobsiesApp')
 
         //fills in the right sidebar with jobs that a user has previously saved
         $scope.getSavedJobsies = function() {
+            $scope.savedJobsFrontPage = []
             SaveJobs.populateJobs().then(function(jobs) {
                 $scope.savedJobsFrontPage = jobs.data.jobs_saved || [];
             })
