@@ -25,7 +25,7 @@
                        <div class="collapsible-body">
                         <p> Date Posted: {{job.date | date}}
                           <div class="users-for-jobs" ng-repeat="userj in job.user_ids">
-                         {{userj}}
+                         {{userj.name}}
                         </div>
                          </p>
                        </div>
