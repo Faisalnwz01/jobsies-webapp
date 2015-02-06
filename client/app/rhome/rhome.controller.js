@@ -11,7 +11,8 @@ angular.module('jobsiesApp')
             for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
                 $scope.jobs = [];
                 $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
-                    $scope.jobs.push(data[0]);
+                    console.log(data)
+                    $scope.jobs.push(data)
                     console.log($scope.jobs);
                 });
             }
