@@ -25,7 +25,7 @@ exports.show = function(req, res) {
 };
 
 exports.jobShow = function(req, res) {
-  Job.findOne({_id: req.params.id})
+  Job.find({_id: req.params.id})
     .populate('user_ids')
     .exec(function (err, job) {
       console.log(job)

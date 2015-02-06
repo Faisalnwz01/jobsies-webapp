@@ -12,7 +12,7 @@ angular.module('jobsiesApp')
                 $scope.jobs = [];
                 $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
                     console.log(data)
-                    $scope.jobs.push(data)
+                    $scope.jobs.push(data[0])
                     console.log($scope.jobs);
                 });
             }
