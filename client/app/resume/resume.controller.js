@@ -46,11 +46,14 @@ angular.module('jobsiesApp')
      //    if( $scope.profileInformation.cover_letter[i])
      // }
      $scope.profileInformation.cover_letter.push(cL)
+
      User.save($scope.profileInformation)
      toast('Cover Letter Saved!! :)', 4000 )
 
 
     }
+
+    // $scope.mailCover = encodeURIComponent($scope.profileInformation.cover_letter[0].text)
 
 $scope.date = new Date().getFullYear()
 
