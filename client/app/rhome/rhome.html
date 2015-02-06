@@ -23,8 +23,10 @@
                    <li ng-repeat="job in jobs">
                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.jobtitle}}</div>
                        <div class="collapsible-body">
-                        <p> 
-                         Date Posted: {{job.date | date}}
+                        <p> Date Posted: {{job.date | date}}
+                          <div class="users-for-jobs" ng-repeat="userj in job.user_ids">
+                         {{userj}}
+                        </div>
                          </p>
                        </div>
                    </li>
