@@ -31,6 +31,7 @@ angular.module('jobsiesApp')
         }
 
         $scope.user = Auth.getCurrentUser();
+       
 
         //this autocompletes the location search input with US cities
         $scope.options = {
@@ -86,10 +87,45 @@ angular.module('jobsiesApp')
             })
         }
 
+//generating cover letter for auto reply to jobs
+      $scope.generateCoverLetter = function(index){
+        if($scope.user.jobsought === undefined){
+            var field = $scope.user.linkedin.positions.values[0].title
+        }
+        console.log($scope.savedJobsFrontPage[index].jobtitle)
+        var today = new Date().getFullYear();
+        console.log(today)
+console.log(index, 'indexxxxxxxxxxxxxxxxxxxx')
+
+
+        $scope.autoApplyEmail = "To Whom it may Concern, \n\nI read with interest your posting for "+ $scope.savedJobsFrontPage[index].jobtitle+" on indeed.com.\n\nI believe I possess the necessary skills and experience you are seeking\nand would make a valuable addition to " + $scope.savedJobsFrontPage[index].company + "\n\nAs my resume indicates, I possess more than " + (today - $scope.user.linkedin.positions.values[0].startDate.year) + " years of progressive\nexperience in the " + field + " field. \n\n" + "My professional history includes positions such as " + $scope.user.linkedin.positions.values[1].title + " at " + $scope.user.linkedin.positions.values[1].company.name + ",\nas well as" + $scope.user.linkedin.positions.values[2].title + " at " + $scope.user.linkedin.positions.values[2].company.name + "." + "\n\nMost recently, my responsibilities as " + $scope.user.linkedin.positions.values[0].title + " at " + $scope.user.linkedin.positions.values[0].company.name + " match the qualifications you are seeking.\n\nAs the" + $scope.user.linkedin.positions.values[0].title + ", my responsibilities included " + $scope.user.linkedin.positions.values[0].summary + "\n\nMy colleagues also relied on my skills in " + $scope.user.linkedin.skills.values[0].skill.name + ", " + $scope.user.linkedin.skills.values[1].skill.name + ", and " + $scope.user.linkedin.skills.values[2].skill.name + ". \n\nHere is a link to my online resume for your review\n" + "localhost:9000/" + $scope.user.linkedin.template + "/" + $scope.user._id + "\n\nI look forward to speaking with you further regarding your available position\nand am excited to learn more about " + $scope.savedJobsFrontPage[index].company + "." + "\n\nSincerely, \n" + $scope.user.name; 
+
+// As my resume indicates, I possess more than {{profileInformation.linkedin.positions.values[0].startDate.year}} years of progressive experience in the {{profileInformation.jobSought}} field. 
+
+// My professional history includes positions such as {{profileInformation.linkedin.positions.values[1].title}} at {{profileInformation.linkedin.positions.values[1].company.name}}, as well as {{profileInformation.linkedin.positions.values[2].title}} at {{profileInformation.linkedin.positions.values[2].company.name}}. 
+
+// Most recently, my responsibilities as {{profileInformation.linkedin.positions.values[0].title}} at {{profileInformation.linkedin.positions.values[0].company.name}} match the qualifications you are seeking.  As the {{profileInformation.linkedin.positions.values[0].title}}, my responsibilities included {{profileInformation.linkedin.positions.values[0].summary}} 
+
+// My colleagues also relied on my skills in {{profileInformation.linkedin.skills.values[0].skill.name}}, {{profileInformation.linkedin.skills.values[1].skill.name}}, and {{profileInformation.linkedin.skills.values[2].skill.name}}.
+
+// Here is a link to my online resume for your review 
+// localhost:9000/{{profileInformation.linkedin.template}}/{{profileInformation._id}}
+
+// I look forward to speaking with you further regarding your available position and am excited to learn more about {{jobs_saved[coverLetterJob].company}}. 
+ 
+// Sincerely,
+// {{profileInformation.name}}"
+console.log($scope.encodedEmail)
+$scope.encodedEmail =  encodeURIComponent($scope.autoApplyEmail)
+        // encodeURIComponent($scope.profileInformation.cover_letter[0].text)
+
+      }
+
 
         //save jobs to the database, also call indeed for more results
         // after a user has gone through 25 jobs
         $scope.saveOrPass = function(status, job) {
+            console.log(job.contact_information)
             $scope.currentJob += 1;
             if (job.recruiter_id != undefined) {
                 if ($scope.numberOfRecruiterJobs >= 1) {
