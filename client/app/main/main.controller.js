@@ -54,7 +54,6 @@ angular.module('jobsiesApp')
             indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
                 $scope.currentJob = 0;
                 $scope.jobArray = jobs.jobArray;
-                console.log("indeed jobs", $scope.jobArray)
                 $scope.totalResults = jobs.totalResults;
             })
         };
@@ -65,14 +64,14 @@ angular.module('jobsiesApp')
             SaveJobs.getRecruiterJobs().then(function(jobs) {
                 var allJobsies = jobs.data;
                 var jobsies = allJobsies.filter(function(element) {
-                    console.log("test stuff", element.snippet)
-                    if (element.recruiter_id && jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && element.snippet.toLowerCase().search(userHeadline.toLowerCase()) > -1) {
+                    if (element.recruiter_id && 
+                        jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && 
+                        (element.summary.toLowerCase().search(userHeadline.toLowerCase()) > -1 || element.jobtitle.toLowerCase().search(userHeadline.toLowerCase()) > -1)) {
                         return element
                     }
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-                console.log("recruiter jobs", $scope.jobArray);
                 if ($scope.jobArray.length == 0) {
                     $scope.getJobs(userHeadline, jobLocation)
                 }
@@ -120,7 +119,7 @@ angular.module('jobsiesApp')
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25 * $scope.page);
+                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn, 25 * $scope.page);
                     }
                 }
                 if (status == 'save') {
