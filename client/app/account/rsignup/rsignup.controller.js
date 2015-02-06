@@ -54,4 +54,28 @@ angular.module('jobsiesApp')
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
+
+    $scope.rsignup = false;
+
+    $scope.rsignupfunk = function() {
+      if ($scope.rsignup === false) {
+      $scope.rlogin = false;
+      $scope.rsignup = true;
+      }
+      else {
+      $scope.rsignup = false;
+      }
+    }
+
+    $scope.rlogin = false;
+
+    $scope.rloginfunk = function() {
+      if ($scope.rlogin === false) {
+      $scope.rsignup = false;
+      $scope.rlogin = true;
+      }
+      else {
+      $scope.rlogin = false;
+      }
+    }
   });

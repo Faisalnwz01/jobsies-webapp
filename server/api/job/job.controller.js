@@ -24,6 +24,15 @@ exports.show = function(req, res) {
   });
 };
 
+exports.jobShow = function(req, res) {
+  Job.find({_id: req.params.id}, function (err, job) {
+    if(err) { return handleError(res, err); }
+    if(!job) { return res.send(404); }
+    return res.json(job);
+  });
+};
+
+
 // Creates a new job in the DB.
 exports.create = function(req, res) {
   Job.create(req.body, function(err, job) {

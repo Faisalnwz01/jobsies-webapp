@@ -12,5 +12,6 @@ router.post('/cheerio', controller.getCheerio);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
+router.get('/:id/showJobs', controller.jobShow);
 
 module.exports = router;
