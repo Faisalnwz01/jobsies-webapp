@@ -1,14 +1,114 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="login-background">
-    <div class="row filler-div">
-      <img src="../assets/images/jobsies.png" class="col s4 offset-s4 jobsies">
-    </div>
-      <div class="row">
-          <a class="btn btn col s2 offset-s5 linked-in" href="" ng-click="loginOauth('linkedin')" layout="column" layout-align="center">
-             Connect with Linkedin
-          </a>
-    </div>
-</div>
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+        <br><br>
+        <img src="../assets/images/jobsies.png">
+            <div class="row">
+                <div class="col s12">
+                    <div class="intro-message">
+                    <h1>Welcome to Jobsies. </h1>
+                    <h2>Read <a href="login#about">more</a> or just log in with LinkedIn.<h2>
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                                <a href="#" class="waves-effect waves-light btn-large linked-in" ng-click="loginOauth('linkedin')"><i class="fa fa-linkedin fa-fw"></i> </a>
+                            </li>
+                        </ul>
+                     Don't have a LinkedIn account? Make one <a href="http://www.linkedin.com">here.</a>
+                     <br>
+                     <br>
+                     *Recruiters, please make an account or log-in the upper right corner. 
+                    </div>
+                </div>
+            </div>
 
+        </div>
+        <!-- /.container -->
 
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+	<a  name="services"></a>
+    <div class="content-section-a" id="about">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <div class="clearfix"></div>
+                    <h1 class="section-heading">Tinder-style job search </h1>
+                    <ul>
+                    <li><p class="lead">Powered by Indeed.com.</p></li>
+                    <li><p class="lead">Just swipe right to save your favorite jobs.</p></li>
+                    <li><p class="lead">Automatically apply through our site.</p></li>
+                    </ul></p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="../assets/images/indeed.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading"> Cover Letter and Resume Generator</h2>
+					<p class="lead">Using your LinkedIn profile, Jobsies will generate both a unique resume and a tailored cover
+					applicable to any job you select from our offerings. The resume includes optional templates and can be shared through
+					a unique web page. </p>
+				</div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="../assets/images/resume.jpg" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+	<a  name="contact"></a>
+    <div class="banner">
+
+    </div>
+    <!-- /.banner -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Jobsies 2015. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
