@@ -1,8 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container nopadding welcome">
   <center>
-   
-
 
   <div class="row">
     <h2>Step 2</h2>
@@ -10,13 +8,13 @@
     <div class="col-lg-12">
       <ul class="list-inline intro-social-buttons">
         <li>
-          <a href="" ng-click="show('formal')"><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
+          <a href="" ng-click="show('formal')"><center><img src = '../../assets/images/pen_paper_icon.jpg' class='ngdialog-content' width='200px'></center></a>
         <md-button class='md-primary md-raised' ng-click="coverLetterYesOrNo('yes')">
     Yes
   </md-button>
         </li>
         <li>
-          <a href="" ><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
+          <a href="" ><center><img src = '../../assets/images/no_cl.jpeg' class='ngdialog-content' width='200px'></center></a>
           <md-button class='md-primary md-raised' ng-click="coverLetterYesOrNo('no')">
     No
   </md-button>
@@ -26,28 +24,76 @@
     </div>
   </div>
 
-
   </center>
 </div>
-
-
 
 <div class="container">
 
 <a class="waves-effect waves-light btn" ng-click="goToStep1()"><i class="mdi-content-send left"></i>Step 1</a>
-<a class="waves-effect waves-light btn" ng-click="goToStep3()" style='float: right'><i class="mdi-content-send right"></i>Step 3</a>
+<a class="waves-effect waves-light btn" ng-click="goToStep3()" style='float: right'><i class="mdi-content-send right"></i>Step 3</a><br>
+
 <div layout="column" layout-fill class='resumeFormal container nopadding'>
 
 
 
+
 <md-whiteframe class="md-whiteframe-z1" ng-show="profileInformation.linkedin.ShowCoverLetter">
+  <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    {{jobs_saved[coverLetterJob].jobtitle || 'Choose a Job'}}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li ng-repeat="jobs in jobs_saved" role="presentation"><a role="menuitem" tabindex="-1" ng-click="getCoverLetterJob($index)">{{jobs.jobtitle}} At {{jobs.company}}</a></li>
+  </ul>
+</div>
 
 <h1>Cover Letter</h1>
 
+  <div class="input-group input-group-lg col-md-12" >
+    <textarea name='textarea' id='mytextarea' type='text' class="form-control text" rows='10' aria-describedby="basic-addon1">To Whom it may Concern, 
 
-<pre ng-bind-html="profileInformation.cover_letter"></pre>
+I read with interest your posting for {{jobs_saved[coverLetterJob].jobtitle}} on indeed.com. 
+
+I believe I possess the necessary skills and experience you are seeking and would make a valuable addition to your company.
+
+As my resume indicates, I possess more than {{date - profileInformation.linkedin.positions.values[0].startDate.year}} years of progressive experience in the {{profileInformation.jobSought}} field. 
+
+My professional history includes positions such as {{profileInformation.linkedin.positions.values[1].title}} at {{profileInformation.linkedin.positions.values[1].company.name}}, as well as {{profileInformation.linkedin.positions.values[2].title}} at {{profileInformation.linkedin.positions.values[2].company.name}}. 
+
+Most recently, my responsibilities as {{profileInformation.linkedin.positions.values[0].title}} at {{profileInformation.linkedin.positions.values[0].company.name}} match the qualifications you are seeking.  As the {{profileInformation.linkedin.positions.values[0].title}}, my responsibilities included {{profileInformation.linkedin.positions.values[0].summary}} 
+
+My colleagues also relied on my skills in {{profileInformation.linkedin.skills.values[0].skill.name}}, {{profileInformation.linkedin.skills.values[1].skill.name}}, and {{profileInformation.linkedin.skills.values[2].skill.name}}.
+
+Here is a link to my online resume for your review 
+localhost:9000/{{profileInformation.linkedin.template}}/{{profileInformation._id}}
+
+I look forward to speaking with you further regarding your available position and am excited to learn more about {{jobs_saved[coverLetterJob].company}}. 
+ 
+Sincerely,
+{{profileInformation.name}}</textarea>
+  </div>
+ 
+ <md-button style="float: right" id="mybutton" class="md-primary md-raised" type='input' ng-click="saveCoverLetter(jobs_saved[coverLetterJob].jobtitle)">Save Cover Letter</md-button>
+
+
+
 
 </md-whiteframe>
+<center>
+   <md-button class='md-primary md-raised' ng-click="viewCoverLetters()"><span ng-show="!viewLetters">View </span>
+  <span ng-show="viewLetters">Hide </span>Saved Cover Letters
+  </md-button>
+</center>
+
+<h1 ng-show="viewLetters">Saved Cover Letters</h1>
+
+<md-whiteframe class="md-whiteframe-z1" ng-repeat="cover in profileInformation.cover_letter" ng-show="viewLetters">
+<h2>{{cover.title}}</h2>
+<pre>{{cover.text}}</pre>
+
+</md-whiteframe>
+
 
 </div>
 </div>

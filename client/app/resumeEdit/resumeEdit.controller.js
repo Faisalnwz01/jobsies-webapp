@@ -1,12 +1,10 @@
 'use strict';
 
 angular.module('jobsiesApp')
-    .controller('ResumeEditCtrl', function($scope, User) {
+    .controller('ResumeEditCtrl', function($scope, User, SaveJobs) {
         $scope.profileInformation; 
             $scope.user = User.get().$promise.then(function(user) {
                 $scope.profileInformation = user
-                console.log(user)
-                $scope.profileInformation
             if(!$scope.profileInformation.linkedin.phone){
                 $scope.profileInformation.linkedin.phone = ''
             }
@@ -15,14 +13,24 @@ angular.module('jobsiesApp')
             }
           
                 
-                console.log($scope.profileInformation)
+                $scope.coverLetterJob= $scope.profileInformation.cover_letter.length -1
+
+if(!$scope.profileInformation.linkedin.currentCoverLetter){
+
+  $scope.profileInformation.linkedin.currentCoverLetter = $scope.profileInformation.cover_letter[$scope.coverLetterJob]
+}
+console.log($scope.profileInformation.linkedin.currentCoverLetter)
+
+
+
+$scope.update()
+                 
+  
 
             })
             $scope.update = function() {
-                console.log($scope.profileInformation, 'this is profileInformation')
-                console.log(User.save($scope.profileInformation))
+               
             }
-
 
 
  $scope.filter= function(){
@@ -34,6 +42,16 @@ angular.module('jobsiesApp')
 }
 $scope.update(); 
  } 
+
+
+  $scope.getCoverLetterJob = function(job){
+      $scope.coverLetterJob = job 
+      $scope.profileInformation.linkedin.currentCoverLetter = $scope.profileInformation.cover_letter[job].text
+      console.log($scope.profileInformation.linkedin.currentCoverLetter)
+      User.save($scope.profileInformation)
+
+    }
+
 
 
 
