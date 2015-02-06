@@ -93,7 +93,7 @@ exports.destroy = function(req, res) {
 var qualReg = /[Q][uU][aA][lL][iI][fF][iI][cC][aA][tT][iI][oO][nN]/g;
 var reqReg = /[R][Ee][Qq][Uu][Ii][Rr][Ee][Mm][Ee][Nn][Tt]/g;
 var skillReg = /[S][Kk][Ii][lL][Ll][Ss]/g;
-var contactReg = /^(([^<>()[\]\\.,;:\s@\]+(\.[^<>()[\]\\.,;:\s@\]+)*)|(\.+\))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
+var contactReg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g
 exports.getCheerio = function(req, res) {
     var cheerioStuff = function(item, cb) {
         var url = item.url;
@@ -108,14 +108,15 @@ exports.getCheerio = function(req, res) {
             var summaryIndex = summary_text.search(qualReg);
             var requirementIndex = summary_text.search(reqReg);
             var skillsIndex = summary_text.search(skillReg);
-            var contact = summary_text.search(contactReg);
+            var contact_information = summary_text.match(contactReg);
             var summary = summary_text.slice(summaryIndex, summaryIndex + 500) ||
                 summary_text.slice(requirementIndex, requirementIndex + 500) ||
                 summary_text.slice(skillsIndex, skillsIndex + 500) ||
                 "NA";
             var new_stuff = {
                 logo: logo,
-                summary: summary
+                summary: summary, 
+                contact_information: contact_information
             };
             var updated = _.merge(item, new_stuff);
             cb(err, updated);
