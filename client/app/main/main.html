@@ -118,7 +118,7 @@
                                 <br>
                                 <a href="{{job.url}}" target="_blank">More Info </a>
                                 <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
-                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank">Auto Apply</a>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank" ng-show="contact_info_for_job">Auto Apply</a>
                             </p>
                         </div>
                     </li>
@@ -130,4 +130,3 @@
         </md-sidenav>
     </div>
 </div>
-<button ng-click ="generateCoverLetter()">Gen</button>
