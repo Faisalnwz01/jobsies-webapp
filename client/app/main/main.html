@@ -74,7 +74,7 @@
             <img src="../../assets/images/placeHolder.png">
         </div>
 
-
+ 
         <md-sidenav id='rightsidebar' class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
             <md-toolbar class="md-theme-light">
                 <h1 class="md-toolbar-tools">Sidenav Right</h1>
@@ -94,11 +94,18 @@
                         </div>
                     </div>
                 </div> -->
+<!-- <<<<<<< HEAD
+                
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li ng-repeat="job in savedJobsFrontPage">
+                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.company}}</div>
+======= -->
                 <div class="collapsible" data-collapsible="accordion">
-                  <ul ng-repeat="job in savedJobsFrontPage">
+                  <ul ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
                     <li>
                         <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>  {{job.company.substring(0,24)}}
                         </div>
+<!-- >>>>>>> master -->
                         <div class="collapsible-body">
                             <p> <strong>Job Title:</strong> {{job.jobtitle}}
                                 <br> <strong>Location:</strong> {{job.formattedLocationFull}}
@@ -111,6 +118,7 @@
                                 <br>
                                 <a href="{{job.url}}" target="_blank">More Info </a>
                                 <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
+                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank">Auto Apply</a>
                             </p>
                         </div>
                     </li>
@@ -122,3 +130,4 @@
         </md-sidenav>
     </div>
 </div>
+<button ng-click ="generateCoverLetter()">Gen</button>

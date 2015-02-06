@@ -54,6 +54,7 @@ exports.create = function(req, res) {
 
 // Updates an existing job in the DB.
 exports.update = function(req, res) {
+  console.log(req.body)
   if(req.body._id) { delete req.body._id; }
   Job.findOne({jobkey:req.params.id}, function (err, job) {
     if (err) { return handleError(res, err); }
@@ -116,6 +117,7 @@ exports.getCheerio = function(req, res) {
                 summary_text.slice(requirementIndex, requirementIndex + 500) ||
                 summary_text.slice(skillsIndex, skillsIndex + 500) ||
                 "NA";
+                console.log(contact_information)
             var new_stuff = {
                 logo: logo,
                 summary: summary, 

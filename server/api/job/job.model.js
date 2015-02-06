@@ -20,7 +20,7 @@ var JobSchema = new Schema({
   qualifications: String, 
   job_picture: String,
   salary: String, 
-  contact_information: String,
+  contact_information: Array,
   user_ids: [{type: Schema.Types.ObjectId, ref: 'User'}], 
   recruiter_id: String
 });
