@@ -1,8 +1,13 @@
 'use strict';
 
 angular.module('jobsiesApp')
-  .controller('ResumeCtrl', function($scope, User,  $q, $interpolate, user, $state) {
+  .controller('ResumeCtrl', function($scope, User,  $q, $interpolate, user, $state, SaveJobs) {
     $scope.profileInformation = user
+ SaveJobs.populateJobs().then(function(jobs) {
+                $scope.jobs_saved = jobs.data.jobs_saved;
+                console.log($scope.jobs_saved)
+            })
+
 
 
 
@@ -22,19 +27,21 @@ angular.module('jobsiesApp')
     $scope.getCoverLetterJob = function(job){
     
       $scope.coverLetterJob = job 
-      console.log($scope.coverLetterJob, 'jobbbbbbbbbbb')
 
     }
 
     $scope.saveCoverLetter = function(title){
+
+      console.log(title, 'title')
      var text = $('textarea#mytextarea').val()
+     console.log(text, 'text')
 
       var cL = { 
                 title: title, 
                 text: text
                   }
     
-     console.log(cL)
+     
      // for(var i=0; i<$scope.profileInformation.cover_letter; i++){
      //    if( $scope.profileInformation.cover_letter[i])
      // }
@@ -57,7 +64,7 @@ $scope.date = new Date().getFullYear()
       //     }
       // }
 
-    console.log($scope.profileInformation)
+  
 
 
     // if (!$scope.profileInformation.cover_letter) {
@@ -106,7 +113,7 @@ $scope.coverLetterYesOrNo = function(answer){
   else{
     $scope.profileInformation.linkedin.ShowCoverLetter = false; 
   }
-User.save($scope.profileInformation)
+  User.save($scope.profileInformation)
 }
 
     $scope.image = {
