@@ -20,7 +20,7 @@ angular.module('jobsiesApp')
             userPreferences.savePreferences($scope.user);
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
 
-            
+
 
             // var getJobs = indeedapi.getIndeedJobs(headline, location, 0)
             // getJobs.then(function(jobs) {
@@ -50,28 +50,33 @@ angular.module('jobsiesApp')
         $scope.locationCutter();
 
         //gets  jobs from the indeed api to display on the home page.
-        var getJobs = indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation, 0)
+        $scope.getJobs = function(headline, location) {
+            indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
+                $scope.currentJob = 0;
+                $scope.jobArray = jobs.jobArray;
+                $scope.totalResults = jobs.totalResults;
+            })
+        };
 
+        ///find the recruiter jobs in the database that match the user search criteria
+        /// if there are none, get the jobs from the indeed api.
         $scope.getRecruiterJobs = function(userHeadline, jobLocation) {
             SaveJobs.getRecruiterJobs().then(function(jobs) {
                 var allJobsies = jobs.data;
                 var jobsies = allJobsies.filter(function(element) {
-                    if (element.recruiter_id && element.formattedLocationFull == jobLocation && element.snippet.search(userHeadline)>-1) {
+                    console.log("test stuff", element.snippet)
+                    if (element.recruiter_id && jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && element.snippet.toLowerCase().search(userHeadline.toLowerCase()) > -1) {
                         return element
                     }
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-                if($scope.jobArray.length == 0){
-                     getJobs.then(function(jobs) {
-                            $scope.currentJob = 0;
-                            console.log("hit indded api", jobs);
-                            $scope.jobArray = jobs.jobArray;
-                            $scope.totalResults = jobs.totalResults;
-                        })
+                if ($scope.jobArray.length == 0) {
+                    $scope.getJobs(userHeadline, jobLocation)
                 }
             })
-        }
+        };
+
         $scope.getRecruiterJobs($scope.userHeadline, $scope.jobLocation);
 
         //fills in the right sidebar with jobs that a user has previously saved
@@ -98,12 +103,7 @@ angular.module('jobsiesApp')
                         toast('Job Passed :(', 3000)
                     }
                     if ($scope.numberOfRecruiterJobs == 1) {
-                        getJobs.then(function(jobs) {
-                            $scope.currentJob = 0;
-                            console.log("hit indded api", jobs);
-                            $scope.jobArray = jobs.jobArray;
-                            $scope.totalResults = jobs.totalResults;
-                        })
+                        $scope.getJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
                     }
                     $scope.numberOfRecruiterJobs -= 1;
                 }
