@@ -14,8 +14,28 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     color: #000;
     padding: 0.2em 0;
 }
-.navbar-static-top{
-	background-color: #26c6da;
+nav{
+	background-color: #1B86BC;
+	opacity: .8;
+}
+
+nav a:hover{
+	color: #000;
+}
+
+nav li {
+	font-size: 20px;
+}
+
+nav li a {
+	font-size: 20px;
+	text-decoration: none;
+}
+
+nav li a:hover {
+	text-decoration: none;
+	color: #000;
+	opacity: 1;
 }
 // Component styles are injected through grunt
 // injector
