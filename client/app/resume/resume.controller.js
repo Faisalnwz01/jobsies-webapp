@@ -53,7 +53,7 @@ angular.module('jobsiesApp')
 
     }
 
-    $scope.mailCover = encodeURIComponent($scope.profileInformation.cover_letter[0].text)
+    // $scope.mailCover = encodeURIComponent($scope.profileInformation.cover_letter[0].text)
 
 $scope.date = new Date().getFullYear()
 
