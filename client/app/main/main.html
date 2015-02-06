@@ -24,8 +24,8 @@
         </md-sidenav>
         <!-- this is the end of right sidebar -->
 
-        <div class="col s8 offset-s1 jobsCard">
-            <div class=" card col s7 " ng-hide="searchDone">
+        <div class="col s8 offset-s1 jobsCard ">
+            <div class=" card col s7 z-depth-5" ng-hide="searchDone">
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
                         <h2>{{job.jobtitle}}</h2>
@@ -108,7 +108,7 @@
                                 <br>
                                 <strong ng-show="{{job.user_ids.length}}>50" style="color: red;">Competitive</strong>
                                <strong  ng-show="{{job.user_ids.length}}<50" style="color: green;">Not Competitive</strong>
-                                <br> 
+                                <br>
                                 <a href="{{job.url}}" target="_blank">More Info </a>
                                 <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
                             </p>
