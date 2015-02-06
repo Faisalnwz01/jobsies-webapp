@@ -91,7 +91,7 @@ angular.module('jobsiesApp')
      }
 $scope.formReset = function() {
     $scope.job.jobtitle = '';
-    $scope.job.formattedLocation = '';
+    $scope.job.formattedLocationFull = '';
     $scope.job.company = '';
     $scope.job.snippet = '';
     $scope.job.qualifications = '';
@@ -100,7 +100,7 @@ $scope.formReset = function() {
 
 $scope.discardForm = function() {
   $scope.job.jobtitle = '';
-    $scope.job.formattedLocation = '';
+    $scope.job.formattedLocationFull = '';
     $scope.job.company = '';
     $scope.job.snippet = '';
     $scope.job.qualifications = '';

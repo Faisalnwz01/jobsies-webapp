@@ -43,7 +43,7 @@
                         <span class="card-title activator grey-text text-darken-4">Click here for more details!<i class="mdi-navigation-more-vert right"></i></span>
 
                         <div>
-                            <md-button class="md-raised md-warn pass" ng-click="saveOrPass('pass')">Pass</md-button>
+                            <md-button class="md-raised md-warn pass" ng-click="saveOrPass('pass', job)">Pass</md-button>
                             <md-button class="md-raised md-primary save" ng-click="saveOrPass('save', job)">Save</md-button>
                         </div>
                     </div>
@@ -70,17 +70,17 @@
             </div>
         </div>
 
-           <div ng-show="searchDone" class="col s8 offset-s1">
-          <img src="../../assets/images/placeHolder.png">
-          </div>
+        <div ng-show="searchDone" class="col s8 offset-s1">
+            <img src="../../assets/images/placeHolder.png">
+        </div>
 
 
-        <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
+        <md-sidenav id='rightsidebar' class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
             <md-toolbar class="md-theme-light">
                 <h1 class="md-toolbar-tools">Sidenav Right</h1>
             </md-toolbar>
             <md-content ng-controller="RightCtrl" class="md-padding">
-                <div ng-repeat="job in savedJobsFrontPage" class="row">
+                <!--   <div ng-repeat="job in savedJobsFrontPage" class="row">
                     <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
                             <span class="card-title">{{job.jobtitle}} At {{job.company}}</span>
@@ -93,7 +93,22 @@
                             <button ng-click="removeJobFromUser(job)">Remove job</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li ng-repeat="job in savedJobsFrontPage">
+                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.company}}</div>
+                        <div class="collapsible-body">
+                            <p> <strong>Job Title:</strong> {{job.jobtitle}}
+                                <br> <strong>Location:</strong> {{job.formattedLocationFull}}
+                                <br> <strong>Date Posted:</strong> {{job.date | date}}
+                                <br> {{job.snippet}}
+                                <br>
+                                <a href="{{job.url}}" target="_blank">More Info </a>
+                                <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
                 <md-button ng-click="close()" class="md-primary">
                 </md-button>
             </md-content>
