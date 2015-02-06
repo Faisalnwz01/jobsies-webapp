@@ -33,7 +33,9 @@
                         <div class="card-city">In {{job.formattedLocationFull}}</div>
                         <br>
                         <div class="card-details">{{job.snippet}}</div>
-                        <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://www.talentsquare.com/wp-content/uploads/2013/12/Find_Jobs.jpg"'>
+                        <br>
+                        <br>
+                        <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://i.imgur.com/TdzE0yr.jpg"'>
                         </center>
 
                     </div>
@@ -67,6 +69,10 @@
                 </div>
             </div>
         </div>
+
+           <div ng-show="searchDone" class="col s8 offset-s1">
+          <img src="../../assets/images/placeHolder.png">
+          </div>
 
 
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
