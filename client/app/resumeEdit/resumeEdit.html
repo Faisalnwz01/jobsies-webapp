@@ -63,16 +63,25 @@
   <h2 class=''>Cover Letter <span><md-button ng-click="filter()">
     {{profileInformation.linkedin.ShowCoverLetter}}
   </md-button></span></h2>
+    <div class="dropdown" ng-show="profileInformation.linkedin.ShowCoverLetter">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+    {{profileInformation.cover_letter[coverLetterJob].title}}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li ng-repeat="letter in profileInformation.cover_letter" role="presentation"><a role="menuitem" tabindex="-1" ng-click="getCoverLetterJob($index)">{{letter.title}}</a></li>
+  </ul>
+</div>
   <form editable-form name="coverForm" onaftersave="update()">
   <hr />
   <div class="row education" ng-show="profileInformation.linkedin.ShowCoverLetter">
  
-      <div class = "col-md-9">
+      <div class="input-field col s12">
       <strong class ='editTitles'>Cover Letter <md-button aria-label="Cover Edit" type="button" class="md-raised md-primary glyphicon glyphicon-pencil" ng-click="coverForm.$show()" ng-show="!coverForm.$visible" ng-hide="coverForm.$visible">
       </md-button></strong><br />
-      <p class ="cover" editable-textarea="profileInformation.cover_letter">
-        {{ profileInformation.cover_letter }}
-      </p>
+      
+        <pre class="materialize-textarea col s6 coverLetterInput " e-cols='100' editable-textarea="profileInformation.cover_letter[coverLetterJob].text">{{profileInformation.cover_letter[coverLetterJob].text}}</pre>
+      
     </div>
     
     <div class="col-md-3 education">
