@@ -32,6 +32,14 @@ exports.jobShow = function(req, res) {
   });
 };
 
+//get single recruiter job
+exports.getRecruiterJobs = function(req, res){
+  Job.find({_id: req.params.id}, function (err, job) {
+    if(err) { return handleError(res, err); }
+    if(!job) { return res.send(404); }
+    return res.json(job);
+  });
+};
 
 // Creates a new job in the DB.
 exports.create = function(req, res) {
@@ -54,7 +62,19 @@ exports.update = function(req, res) {
     });
   });
 };
-
+//update recruiter jobs
+exports.updateRecruiterJob = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  Job.findOne({_id:req.params.id}, function (err, job) {
+    if (err) { return handleError(res, err); }
+    if(!job) { return res.send(404); }
+    var updated = underscore.extend(job, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, job);
+    });
+  });
+};
 
 
 
