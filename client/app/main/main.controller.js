@@ -34,11 +34,11 @@ angular.module('jobsiesApp')
 
         //this autocompletes the location search input with US cities
         $scope.options = {
-            country: 'us',
-            types: '(cities)'
-        }
-        // automatically fills in the job the user is searching for and location
-        //based on linkedin profile or updated preferences.
+                country: 'us',
+                types: '(cities)'
+            }
+            // automatically fills in the job the user is searching for and location
+            //based on linkedin profile or updated preferences.
         $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title;
         $scope.locationCutter = function() {
             $scope.jobLocation = $scope.user.locationUserWantsToWorkIn || $scope.user.linkedin.location.name
@@ -153,6 +153,11 @@ angular.module('jobsiesApp')
                 });
         };
 
+        $(document).ready(function() {
+            $('.collapsible').collapsible({
+                accordion: false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+            });
+        });
 
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
