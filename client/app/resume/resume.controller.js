@@ -9,7 +9,6 @@ angular.module('jobsiesApp')
             })
 
 
- $scope.clicked = false; 
 
 
 
@@ -97,13 +96,14 @@ $scope.coverLetterYesOrNo = function(answer){
 }
 
     $scope.image = {
-      formal: true,
+      none: true, 
+      formal: false,
       fancy: false
     };
 
 
     $scope.show = function(type) {
-      $scope.clicked = true; 
+   
 
       for (var property in $scope.image) {
         $scope.image[property] = false;
