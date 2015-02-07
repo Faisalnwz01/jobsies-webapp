@@ -11,7 +11,8 @@ angular.module('jobsiesApp')
             for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
                 $scope.jobs = [];
                 $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
-                    $scope.jobs.push(data[0]);
+                    console.log(data)
+                    $scope.jobs.push(data[0])
                     console.log($scope.jobs);
                 });
             }
@@ -122,6 +123,21 @@ angular.module('jobsiesApp')
                     $log.debug("toggle RIGHT is done");
                 });
         };
+
+        $scope.showCard = false;
+
+        $scope.checkOutUser = function(user, job) {
+            $scope.cardUser = user;
+            $scope.cardJob = job;
+            $scope.showCard = true;
+        }
+
+        $scope.saveCandidate = function(cardUser, cardJob) {
+            cardJob.users_saved.push(cardUser._id)
+            $http.put('api/jobs/' + cardJob._id).success(function(data) {
+                console.log(data)
+            });
+        }
 
 
     })

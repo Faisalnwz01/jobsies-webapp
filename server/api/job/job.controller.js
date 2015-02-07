@@ -25,7 +25,10 @@ exports.show = function(req, res) {
 };
 
 exports.jobShow = function(req, res) {
-  Job.find({_id: req.params.id}, function (err, job) {
+  Job.find({_id: req.params.id})
+    .populate('user_ids')
+    .exec(function (err, job) {
+      console.log(job)
     if(err) { return handleError(res, err); }
     if(!job) { return res.send(404); }
     return res.json(job);
@@ -51,6 +54,7 @@ exports.create = function(req, res) {
 
 // Updates an existing job in the DB.
 exports.update = function(req, res) {
+  console.log(req.body)
   if(req.body._id) { delete req.body._id; }
   Job.findOne({jobkey:req.params.id}, function (err, job) {
     if (err) { return handleError(res, err); }
@@ -113,6 +117,7 @@ exports.getCheerio = function(req, res) {
                 summary_text.slice(requirementIndex, requirementIndex + 500) ||
                 summary_text.slice(skillsIndex, skillsIndex + 500) ||
                 "NA";
+                console.log(contact_information)
             var new_stuff = {
                 logo: logo,
                 summary: summary, 

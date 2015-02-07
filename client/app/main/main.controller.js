@@ -31,6 +31,7 @@ angular.module('jobsiesApp')
         }
 
         $scope.user = Auth.getCurrentUser();
+       
 
         //this autocompletes the location search input with US cities
         $scope.options = {
@@ -54,7 +55,6 @@ angular.module('jobsiesApp')
             indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
                 $scope.currentJob = 0;
                 $scope.jobArray = jobs.jobArray;
-                console.log("indeed jobs", $scope.jobArray)
                 $scope.totalResults = jobs.totalResults;
             })
         };
@@ -65,14 +65,14 @@ angular.module('jobsiesApp')
             SaveJobs.getRecruiterJobs().then(function(jobs) {
                 var allJobsies = jobs.data;
                 var jobsies = allJobsies.filter(function(element) {
-                    console.log("test stuff", element.snippet)
-                    if (element.recruiter_id && jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && element.snippet.toLowerCase().search(userHeadline.toLowerCase()) > -1) {
+                    if (element.recruiter_id && 
+                        jobLocation.toLowerCase().search(element.formattedLocationFull.toLowerCase()) > -1 && 
+                        (element.summary.toLowerCase().search(userHeadline.toLowerCase()) > -1 || element.jobtitle.toLowerCase().search(userHeadline.toLowerCase()) > -1)) {
                         return element
                     }
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
-                console.log("recruiter jobs", $scope.jobArray);
                 if ($scope.jobArray.length == 0) {
                     $scope.getJobs(userHeadline, jobLocation)
                 }
@@ -89,10 +89,33 @@ angular.module('jobsiesApp')
             })
         }
 
+//generating cover letter for auto reply to jobs
+      $scope.generateCoverLetter = function(index){
+        var today = new Date().getFullYear();
+        $scope.contact_info_for_job = false; 
+
+        console.log($scope.savedJobsFrontPage[index].contact_information)
+
+            if($scope.savedJobsFrontPage[index].contact_information){
+                $scope.contact_info_for_job = true; 
+            }
+
+            console.log($scope.contact_info_for_job)
+            if($scope.user.jobsought === undefined){
+                var field = $scope.user.linkedin.positions.values[0].title
+            }
+        
+
+        $scope.autoApplyEmail = "To Whom it may Concern, \n\nI read with interest your posting for "+ $scope.savedJobsFrontPage[index].jobtitle+" on indeed.com.\n\nI believe I possess the necessary skills and experience you are seeking\nand would make a valuable addition to " + $scope.savedJobsFrontPage[index].company + "\n\nAs my resume indicates, I possess more than " + (today - $scope.user.linkedin.positions.values[0].startDate.year) + " years of progressive\nexperience in the " + field + " field. \n\n" + "My professional history includes positions such as " + $scope.user.linkedin.positions.values[1].title + " at " + $scope.user.linkedin.positions.values[1].company.name + ",\nas well as" + $scope.user.linkedin.positions.values[2].title + " at " + $scope.user.linkedin.positions.values[2].company.name + "." + "\n\nMost recently, my responsibilities as " + $scope.user.linkedin.positions.values[0].title + " at " + $scope.user.linkedin.positions.values[0].company.name + " match the qualifications you are seeking.\n\nAs the" + $scope.user.linkedin.positions.values[0].title + ", my responsibilities included " + $scope.user.linkedin.positions.values[0].summary + "\n\nMy colleagues also relied on my skills in " + $scope.user.linkedin.skills.values[0].skill.name + ", " + $scope.user.linkedin.skills.values[1].skill.name + ", and " + $scope.user.linkedin.skills.values[2].skill.name + ". \n\nHere is a link to my online resume for your review\n" + "localhost:9000/formal/" + $scope.user._id + "\n\nI look forward to speaking with you further regarding your available position\nand am excited to learn more about " + $scope.savedJobsFrontPage[index].company + "." + "\n\nSincerely, \n" + $scope.user.name; 
+        $scope.encodedEmail =  encodeURIComponent($scope.autoApplyEmail)
+
+      }
+
 
         //save jobs to the database, also call indeed for more results
         // after a user has gone through 25 jobs
         $scope.saveOrPass = function(status, job) {
+            console.log(job.contact_information)
             $scope.currentJob += 1;
             if (job.recruiter_id != undefined) {
                 if ($scope.numberOfRecruiterJobs >= 1) {
@@ -120,7 +143,7 @@ angular.module('jobsiesApp')
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.jobTitle, $scope.city, 25 * $scope.page);
+                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn, 25 * $scope.page);
                     }
                 }
                 if (status == 'save') {
