@@ -43,6 +43,7 @@ angular.module('jobsiesApp')
         })
         .then( function() {
           // Logged in, redirect to home
+          console.log("hmm")
           $location.path('/rhome');
         })
         .catch( function(err) {

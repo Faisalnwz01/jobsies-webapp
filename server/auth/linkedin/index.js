@@ -8,7 +8,7 @@ var router = express.Router();
 
 router
   .get('/', passport.authenticate('linkedin', {
-    failureRedirect: '/signup',
+    failureRedirect: '/login',
     scope: [
       'r_basicprofile',
       'r_emailaddress',
@@ -19,7 +19,7 @@ router
   }))
 
   .get('/callback', passport.authenticate('linkedin', {
-    failureRedirect: '/signup',
+    failureRedirect: '/login',
     session: false
   }), auth.setTokenCookie);
 
