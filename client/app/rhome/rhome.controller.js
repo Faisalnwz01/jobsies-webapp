@@ -1,27 +1,32 @@
 'use strict';
 
 angular.module('jobsiesApp')
-    .controller('RhomeCtrl', function($scope, User, $http, Auth, $mdSidenav, $log) {
+    .controller('RhomeCtrl', function($scope, User, $http, Auth, $mdSidenav, $log, recruiterJobs) {
         $scope.recruiter = {};
 
-        $scope.user = User.get().$promise.then(function(user) {
-            $scope.profileInformation = user
-            $scope.recruiter.job_postings = $scope.profileInformation.job_postings
-            console.log($scope.recruiter.job_postings)
-            if ($scope.recruiter.job_postings.length>0) {
-                for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
+
+        $scope.user = function() {
+            User.get().$promise.then(function(user) {
+                $scope.profileInformation = user
+                $scope.recruiter.job_postings = $scope.profileInformation.job_postings
+                console.log($scope.recruiter.job_postings)
+                if ($scope.recruiter.job_postings.length > 0) {
+                    for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
+                        $scope.jobs = [];
+                        $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
+                            console.log(data)
+                            $scope.jobs.push(data[0])
+                            console.log($scope.jobs);
+                        });
+                    }
+                } 
+                else {
                     $scope.jobs = [];
-                    $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
-                        console.log(data)
-                        $scope.jobs.push(data[0])
-                        console.log($scope.jobs);
-                    });
-                }
-            }
-            else {
-                $scope.jobs = [];
-            }
-        });
+                    }
+            });
+        };
+        $scope.user();
+
 
         $scope.currentUser = 0;
         $scope.userSeen = 0;
@@ -146,7 +151,12 @@ angular.module('jobsiesApp')
             cardJob.users_saved.push(cardUserId)
             $http.put('api/jobs/updateRecruiterJob/' + cardJob._id, {users_saved: cardUserId});
         }
-
+        $scope.removeUser = function(user, job){
+            recruiterJobs.removeUser(user, job).then(function(){
+                $scope.showCard = false;
+                $scope.user();
+            })
+        }
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
         $scope.close = function() {

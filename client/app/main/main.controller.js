@@ -115,7 +115,6 @@ angular.module('jobsiesApp')
         //save jobs to the database, also call indeed for more results
         // after a user has gone through 25 jobs
         $scope.saveOrPass = function(status, job) {
-            console.log(job.contact_information)
             $scope.currentJob += 1;
             if (job.recruiter_id != undefined) {
                 if ($scope.numberOfRecruiterJobs >= 1) {
@@ -148,6 +147,10 @@ angular.module('jobsiesApp')
                 }
                 if (status == 'save') {
                     toast('Job Saved!! :)', 3000)
+                    if(job.numLikes){
+                        job.numLikes +=1;
+                    }
+                    else{job.numLikes =1}
                     SaveJobs.postJobs(job)
                     setTimeout(function() {
                         $scope.getSavedJobsies();

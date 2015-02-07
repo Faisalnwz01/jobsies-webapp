@@ -50,6 +50,11 @@ angular.module('jobsiesApp')
                     console.log(recruiterJob, "recruiter job")
                     if (recruiterJob.user_ids.indexOf(user._id) === -1) {
                         recruiterJob.user_ids.push(user._id);
+                        if (recruiterJob.numLikes) {
+                            recruiterJob.numLikes += 1;
+                        } else {
+                            recruiterJob.numLikes = 1
+                        }
                         $http.put('/api/jobs/updateRecruiterJob/' + recruiterJob._id, recruiterJob)
                     }
                     //if the job is not in the user's jobs_saved add it.

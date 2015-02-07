@@ -16,6 +16,7 @@ var JobSchema = new Schema({
   company: String, 
   expired: Boolean, 
   url: String, 
+  numLikes: Number,
 //cheerio
   qualifications: String, 
   job_picture: String,
@@ -26,4 +27,12 @@ var JobSchema = new Schema({
   recruiter_id: String
 });
 
+JobSchema.methods.removeUser = function(userId){
+  var userIndex = this.user_ids.indexOf(userId)
+    if (userIndex > -1){
+      this.user_ids.splice(userIndex, 1)
+    }
+    this.save();
+    return this;
+}
 module.exports = mongoose.model('Job', JobSchema);
