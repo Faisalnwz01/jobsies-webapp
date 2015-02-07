@@ -22,6 +22,7 @@ var JobSchema = new Schema({
   salary: String, 
   contact_information: Array,
   user_ids: [{type: Schema.Types.ObjectId, ref: 'User'}], 
+  users_saved: [{type: Schema.Types.ObjectId, ref: 'User'}],
   recruiter_id: String
 });
 
