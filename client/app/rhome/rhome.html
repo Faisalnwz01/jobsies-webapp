@@ -26,7 +26,8 @@
                         Date Posted: {{job.date | date}}
                         <p> 
                             <div class="users-for-jobs" ng-repeat="userj in job.user_ids">
-                           <p ng-click="checkOutUser(userj, job)"> {{userj.name}}</p>
+                           <p ng-click="checkOutUser(userj, job)"> {{userj.name}}  <i ng-click="removeUser(userj, job)" class="mdi-navigation-cancel"></i></p>
+
                           </div>
                          </p>
                        </div>

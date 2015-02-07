@@ -34,7 +34,17 @@ exports.jobShow = function(req, res) {
     return res.json(job);
   });
 };
-
+//remove a specific user from the recruiters job 
+exports.removeUser = function(req, res, next){
+  var userId = req.params.userId;
+  var jobId = req.params.id;
+  Job.findById(jobId, function(err, job){
+    job.removeUser(userId)
+    if (err) return next(err);
+    if (!job) return res.send(401);
+    res.json(job);
+  });
+};
 //get single recruiter job
 exports.getRecruiterJobs = function(req, res){
   Job.find({_id: req.params.id}, function (err, job) {
