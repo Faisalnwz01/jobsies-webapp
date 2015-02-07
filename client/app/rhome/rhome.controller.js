@@ -8,13 +8,18 @@ angular.module('jobsiesApp')
             $scope.profileInformation = user
             $scope.recruiter.job_postings = $scope.profileInformation.job_postings
             console.log($scope.recruiter.job_postings)
-            for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
+            if ($scope.recruiter.job_postings.length>0) {
+                for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
+                    $scope.jobs = [];
+                    $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
+                        console.log(data)
+                        $scope.jobs.push(data[0])
+                        console.log($scope.jobs);
+                    });
+                }
+            }
+            else {
                 $scope.jobs = [];
-                $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
-                    console.log(data)
-                    $scope.jobs.push(data[0])
-                    console.log($scope.jobs);
-                });
             }
         });
 
@@ -80,10 +85,10 @@ angular.module('jobsiesApp')
             $scope.job.recruiter_id = Auth.getCurrentUser()._id;
             $scope.job.date = new Date();
             console.log($scope.job)
-                // $scope.jobs.push($scope.job)
             $http.post('/api/jobs/', $scope.job).success(function(jobs) {
                 console.log("JOB DONE", jobs);
                 var jobs_id = jobs._id
+            $scope.jobs.push(jobs)
                 $http.post('/api/users/' + Auth.getCurrentUser()._id + '/jobPost', {
                     job_postings: jobs_id
                 }).success(function(data) {
@@ -91,11 +96,13 @@ angular.module('jobsiesApp')
                     $scope.formReset();
                 });
             });
+
         }
         $scope.formReset = function() {
             $scope.job.jobtitle = '';
-            $scope.job.formattedLocation = '';
+            $scope.job.formattedLocationFull = '';
             $scope.job.company = '';
+            $scope.job.summary ='';
             $scope.job.snippet = '';
             $scope.job.qualifications = '';
             $scope.showjobs = false;
@@ -103,9 +110,10 @@ angular.module('jobsiesApp')
 
         $scope.discardForm = function() {
             $scope.job.jobtitle = '';
-            $scope.job.formattedLocation = '';
+            $scope.job.formattedLocationFull = '';
             $scope.job.company = '';
             $scope.job.snippet = '';
+            $scope.job.summary ='';
             $scope.job.qualifications = '';
             $scope.showjobs = false;
         }
@@ -138,7 +146,6 @@ angular.module('jobsiesApp')
             cardJob.users_saved.push(cardUserId)
             $http.put('api/jobs/updateRecruiterJob/' + cardJob._id, {users_saved: cardUserId});
         }
-
 
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
