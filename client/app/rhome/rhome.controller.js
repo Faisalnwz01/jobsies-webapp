@@ -133,10 +133,10 @@ angular.module('jobsiesApp')
         }
 
         $scope.saveCandidate = function(cardUser, cardJob) {
-            cardJob.users_saved.push(cardUser._id)
-            $http.put('api/jobs/' + cardJob._id).success(function(data) {
-                console.log(data)
-            });
+            //cardJob.users_saved.push(cardUser._id)
+            var cardUserId = cardUser._id;
+            cardJob.users_saved.push(cardUserId)
+            $http.put('api/jobs/updateRecruiterJob/' + cardJob._id, {users_saved: cardUserId});
         }
 
 
