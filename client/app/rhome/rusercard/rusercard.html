@@ -3,6 +3,7 @@
               <div class="card-image waves-effect waves-block waves-light">
                 <div class="user-information">
                 {{cardUser.linkedin.headline}} LinkedIn
+                {{cardJob.jobtitle}}
                 </div>
               </div>
               <div class="card-content">
@@ -13,4 +14,7 @@
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
                 <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <md-button ng-click="saveCandidate(cardUser, cardJob)" class="md-primary">
+                    Saved Candidates
+                </md-button>
               </div>

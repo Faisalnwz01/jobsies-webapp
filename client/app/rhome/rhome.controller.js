@@ -126,11 +126,19 @@ angular.module('jobsiesApp')
 
         $scope.showCard = false;
 
-        $scope.checkOutUser = function(user) {
+        $scope.checkOutUser = function(user, job) {
             $scope.cardUser = user;
+            $scope.cardJob = job;
             $scope.showCard = true;
-
         }
+
+        $scope.saveCandidate = function(cardUser, cardJob) {
+            cardJob.users_saved.push(cardUser._id)
+            $http.put('api/jobs/' + cardJob._id).success(function(data) {
+                console.log(data)
+            });
+        }
+
 
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
