@@ -1,12 +1,12 @@
           <!-- Pullup Card -->
-            <div class="card" ng-repeat="user in users" ng-show="$index===currentUser">
+            <div class="card">
               <div class="card-image waves-effect waves-block waves-light">
                 <div class="user-information">
-                {{user.linkedin.headline}} LinkedIn
+                {{cardUser.linkedin.headline}} LinkedIn
                 </div>
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{user.name}}<i class="mdi-navigation-more-vert right"></i></span>
+                <span class="card-title activator grey-text text-darken-4">{{cardUser.name}}<i class="mdi-navigation-more-vert right"></i></span>
                 <br>
                 <p><a href="#!">This is a link</a></p>
               </div>

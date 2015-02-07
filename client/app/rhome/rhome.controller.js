@@ -124,6 +124,13 @@ angular.module('jobsiesApp')
                 });
         };
 
+        $scope.showCard = false;
+
+        $scope.checkOutUser = function(user) {
+            $scope.cardUser = user;
+            $scope.showCard = true;
+
+        }
 
     })
     .controller('LeftCtrl', function($scope, $timeout, $mdSidenav, $log) {
