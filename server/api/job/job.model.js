@@ -16,6 +16,7 @@ var JobSchema = new Schema({
   company: String, 
   expired: Boolean, 
   url: String, 
+  numLikes: Number,
 //cheerio
   qualifications: String, 
   job_picture: String,

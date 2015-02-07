@@ -111,10 +111,10 @@
                                 <br> <strong>Location:</strong> {{job.formattedLocationFull}}
                                 <br> <strong>Date Posted:</strong> {{job.date | date}}
                                 <br> {{job.snippet}}
-                                <br> <strong>{{job.user_ids.length}}<strong> users saved this job
+                                <br> <strong>{{job.numLikes}}<strong> users saved this job
                                 <br>
-                                <strong ng-show="{{job.user_ids.length}}>50" style="color: red;">Competitive</strong>
-                               <strong  ng-show="{{job.user_ids.length}}<50" style="color: green;">Not Competitive</strong>
+                                <strong ng-show="{{job.numLikes}}>50" style="color: red;">Competitive</strong>
+                               <strong  ng-show="{{job.numLikes}}<50" style="color: green;">Not Competitive</strong>
                                 <br>
                                 <a href="{{job.url}}" target="_blank">More Info </a>
                                 <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
