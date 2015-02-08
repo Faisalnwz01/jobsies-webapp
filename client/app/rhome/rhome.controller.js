@@ -59,8 +59,17 @@ angular.module('jobsiesApp')
 
         $scope.showPostedJob = false;
         $scope.showPosition = function(index) {
-            $scope.showPostedJob = true;
-            $scope.currentJob = index;
+            if ($scope.showPostedJob === false) {
+                $scope.showusers = false;
+                $scope.showjobs = false;
+                $scope.showPostedJob = true;
+                $scope.showCard = false;
+                $scope.currentJob = index;
+            }
+            else {
+                $scope.showPostedJob = false;
+            }
+
         }
 
         $scope.showjobs = false;
@@ -68,6 +77,8 @@ angular.module('jobsiesApp')
         $scope.showJobPost = function() {
             if ($scope.showjobs === false) {
                 $scope.showusers = false;
+                $scope.showPostedJob = false;
+                $scope.showCard = false;
                 $scope.showjobs = true;
             } else {
                 $scope.showjobs = false;
@@ -79,6 +90,8 @@ angular.module('jobsiesApp')
         $scope.showUsers = function() {
             if ($scope.showusers === false) {
                 $scope.showjobs = false;
+                $scope.showPostedJob = false;
+                $scope.showCard = false;
                 $scope.showusers = true;
             } else {
                 $scope.showusers = false;
@@ -140,9 +153,18 @@ angular.module('jobsiesApp')
         $scope.showCard = false;
 
         $scope.checkOutUser = function(user, job) {
-            $scope.cardUser = user;
-            $scope.cardJob = job;
-            $scope.showCard = true;
+            if ($scope.showCard === false) {
+                $scope.showPostedJob = false;
+                $scope.showjobs = false;
+                $scope.cardUser = user;
+                $scope.cardJob = job;
+                $scope.showCard = true;  
+            }
+            else {
+                $scope.showCard = false;
+            }
+
+
         }
 
         $scope.saveCandidate = function(cardUser, cardJob) {
