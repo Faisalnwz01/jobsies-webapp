@@ -1,11 +1,12 @@
             <div class="card" ng-repeat="job in jobs" ng-show="$index===currentJob">
               <div class="card-image waves-effect waves-block waves-light">
                 <div class="user-information">
-                <h1>Position Title: {{job.jobtitle}}</h1><br>
-                <h2>{{job.company}}</h2><br>
-                <h2>{{job.formattedLocation}}</h2><br><br>
+                <button class="btn btn-lg-default" ng-click="textBtnForm.$show()">Edit</button>
+                <div editable-textarea="job.jobtitle" e-form="textBtnForm" onaftersave="edit(job)"><h1>Position Title: {{job.jobtitle}}</h1><br></div>
+                <div editable-textarea="job.company" e-form="textBtnForm" onaftersave="edit(job)"><h2>{{job.company}}</h2><br></div>
+                <div editable-textarea="job.formattedLocationFull" e-form="textBtnForm" onaftersave="edit(job)"><h2>{{job.formattedLocationFull}}</h2><br><br></div>
                 <h2>Qualifications</h2>:<br>
-                <h3>{{job.qualifications}}
+                <div editable-textarea="job.qualifications" e-form="textBtnForm" onaftersave="edit(job)"><h3>{{job.qualifications}}</h3>
                 </div>
               </div>
               <div class="card-content">
@@ -15,6 +16,7 @@
               </div>
               <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
-                {{job.snippet}}<br>
+                <div editable-textarea="job.snippet" e-form="textBtnForm" onaftersave="edit(job)">{{job.snippet}}<br></div>
+                <div editable-textarea="job.summary" e-form="textBtnForm" onaftersave="edit(job)">{{job.summary}}<br></div>
                 Number of users saving this job: {{job.user_ids.length}}
               </div>

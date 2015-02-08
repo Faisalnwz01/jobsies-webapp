@@ -163,9 +163,14 @@ angular.module('jobsiesApp')
             else {
                 $scope.showCard = false;
             }
-
-
         }
+
+      $scope.edit = function(job) {
+            console.log("wtf1");
+          $http.put('/api/jobs/editRecruiterJob/' + job._id, job).success(function(job) {
+            console.log("wtf",job)
+          });
+        };
 
         $scope.saveCandidate = function(cardUser, cardJob) {
             //cardJob.users_saved.push(cardUser._id)
@@ -195,6 +200,8 @@ angular.module('jobsiesApp')
                     $log.debug("close RIGHT is done");
                 });
         };
+
+
 
  $(document).ready(function(){
     $('.collapsible').collapsible({
