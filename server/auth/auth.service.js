@@ -14,6 +14,7 @@ var validateJwt = expressJwt({ secret: config.secrets.session });
  * Otherwise returns 403
  */
 function isAuthenticated() {
+
   return compose()
     // Validate jwt
     .use(function(req, res, next) {
@@ -67,7 +68,14 @@ function setTokenCookie(req, res) {
   if (!req.user) return res.json(404, { message: 'Something went wrong, please try again.'});
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));
-  res.redirect('/main');
+  res.cookie('user', req.user._id)
+  if(req.headers.referer === "http://localhost:9000/"){
+    res.redirect('/main')
+
+  }
+  if(req.headers.referer === "http://localhost:8100/" )
+  
+  res.redirect('http://localhost:8100/#/tab/dash' + req.user._id);
 }
 
 exports.isAuthenticated = isAuthenticated;

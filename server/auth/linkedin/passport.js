@@ -9,7 +9,6 @@ exports.setup = function (User, config) {
       profileFields: ["id","firstName", "lastName", "educations", "headline", "skills", "location:(name)", "positions", "picture-url", "email-address", "twitter-accounts", "public-profile-url"]
     },
     function(token, tokenSecret, profile, done) {
-      console.log(profile);
       User.findOne({
         'linkedin.id': profile.id
       }, function(err, user) {
