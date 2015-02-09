@@ -90,7 +90,19 @@ exports.updateRecruiterJob = function(req, res) {
   });
 };
 
-
+exports.editRecruiterJob = function(req, res) {
+  console.log(req.body)
+  if(req.body._id) { delete req.body._id; }
+  Job.findById(req.params.id, function (err, job) {
+    if (err) { return handleError(res, err); }
+    if(!job) { return res.send(404); }
+    var updated = _.merge(job, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, job);
+    });
+  });
+};
 
 // Deletes a job from the DB.
 exports.destroy = function(req, res) {

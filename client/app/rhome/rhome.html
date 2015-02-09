@@ -6,32 +6,29 @@
 
             <md-content class="md-padding" ng-controller="LeftCtrl">
                 <div>
-                <md-button ng-click="showJobPost();" class="md-primary">
+                <md-button ng-click="showJobPost();" style="width:257px;" class="md-primary">
                     Post a Job
                 </md-button>
-
-                <md-button ng-click="toggleRight()" class="md-primary">
-                    Saved Candidates
-                </md-button>
+                <h3>Posted Jobs</h3>
                 </div>
-
-                <ul class="collapsible" data-collapsible="accordion">
+                <ul class="collapsible raccordion" data-collapsible="accordion">
                    <li ng-repeat="job in jobs">
-                       <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>{{job.jobtitle}}</div>
+                       <div class="collapsible-header raccordion" ><i class="mdi-image-filter-drama"></i><p><b>{{job.jobtitle}}</b></p></div>
                        <div class="collapsible-body">
-                        Date Posted: {{job.date | date}}
-                        <p> 
+                       Posted: <i>{{job.date | date}}</i><br>
+                       <button ng-click="showPosition($index)"> Edit Job</button>
+                       <hr>
+                        <i>Prospective Candidates:</i><br>
                             <div class="users-for-jobs" ng-repeat="userj in job.user_ids">
-                           <p ng-click="checkOutUser(userj, job)"> {{userj.name}}  <i ng-click="removeUser(userj, job)" class="mdi-navigation-cancel"></i></p>
-
+                           <div ng-click="checkOutUser(userj, job)"> {{userj.name}}  <i ng-click="removeUser(userj, job)" class="mdi-navigation-cancel"></i></div>
                           </div>
-                         </p>
+
                        </div>
                    </li>
                </ul>
             </md-content>
         </md-sidenav>
-        <div rusercard ng-show="showCard" class="col s6 offset-s2"></div>
+        <div rusercard ng-show="showCard" class="col s4 offset-s2  ruser-card"></div>
         <div rpostedjobs ng-show="showPostedJob" class="col s6 offset-s2"></div>
         <div rpostjobs ng-show="showjobs"></div>
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s1" md-component-id="right">
