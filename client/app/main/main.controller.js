@@ -20,14 +20,6 @@ angular.module('jobsiesApp')
             userPreferences.savePreferences($scope.user);
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
 
-
-
-            // var getJobs = indeedapi.getIndeedJobs(headline, location, 0)
-            // getJobs.then(function(jobs) {
-            //     $scope.jobArray = jobs.jobArray;
-            //     $scope.totalResults = jobs.totalResults;
-            //     userPreferences.savePreferences($scope.user)
-            // })
         }
 
         $scope.user = Auth.getCurrentUser();
