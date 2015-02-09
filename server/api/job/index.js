@@ -6,6 +6,7 @@ var controller = require('./job.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.put('/getIndeedJobs/', controller.getIndeedJobs);
 router.get('/:id', controller.show);
 router.get('/recruiterJobs/:id', controller.getRecruiterJobs);
 router.post('/', controller.create);
