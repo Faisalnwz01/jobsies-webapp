@@ -69,10 +69,15 @@ function setTokenCookie(req, res) {
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));
   res.cookie('user', req.user._id)
+  console.log(req)
   if(req.headers.referer === "http://localhost:9000/"){
     res.redirect('/main')
 
   }
+  if(req.headers.referer === undefined){
+     res.redirect('http://localhost:8100/#/tab/dash' + req.user._id);
+  }
+
   if(req.headers.referer === "http://localhost:8100/" )
   
   res.redirect('http://localhost:8100/#/tab/dash' + req.user._id);
