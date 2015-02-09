@@ -43,21 +43,34 @@
     bottom: 48px;
     padding-bottom: 40px;
 }
-.save {
+.savetime {
     position: relative;
     bottom: 0%;
     width: 100px;
     height: 40px;
     float: right;
     right: 10%;
+    color: #fff;
 }
-.pass {
+
+.card a {
+    color: #fff;
+}
+.passtime {
     position: relative;
     bottom: 0%;
     width: 100px;
     height: 40px;
     float: left;
     left: 10%;
+    color: #fff;
+}
+.card a {
+    color: #fff;
+}
+
+.card a:hover{
+ color: #1B86BC;
 }
 .apply {
     left: 30%;
@@ -90,7 +103,7 @@ li.a.active {
     background-color: #fff;
 }
 .md-sidenav-left {
-    height: 680px;
+    height: 800px;
     float: left;
 }
 .card-image {
@@ -99,10 +112,64 @@ li.a.active {
 }
 #buttonsDiv {
     height: 570px;
+    margin-bottom: 100px;
 }
 .jobsCard {
     margin-top: 50px;
 }
 #rightsidebar {
-    margin-top: 63px;
+    margin-top: 75px;
+}
+
+.card-panel {
+    background-color: #fff;
+    opacity: .8;
+    text-align: center;
+    padding: 1px;
+}
+.btn{
+    background-color: #1B86BC;
+    color: #fff;
+    opacity: .8;
+}
+.btn:hover {
+    background-color: #FCFCFC;
+    color: #1B86BC;
+}
+
+.update {
+    float: left;
+}
+
+.savedJobs {
+    float: right;
+}
+
+.card .details {
+    color: #1B86BC;
+    margin-left: 300px;
+}
+.card .details:hover {
+
+}
+.apply-bottom {
+
+}
+
+.datelocation {
+    background-color: #FCFCFC;
+}
+
+.colorize {
+   color:#37474f;
+}
+
+.bluecolors {
+        color: #1B86BC;
+}
+
+.paddingdescription {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 0;
 }
