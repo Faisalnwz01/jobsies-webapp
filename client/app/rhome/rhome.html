@@ -6,7 +6,8 @@
 
             <md-content class="md-padding" ng-controller="LeftCtrl">
                 <div>
-                <div class="waves-effect  light-blue darken-4 btn" ng-click="showJobPost();">Post a Job</div>
+                Post a Job 
+                <a class="btn-floating btn-large waves-effect waves-light light-blue darken-4" ng-click="showJobPost();"><i class="mdi-content-add"></i></a>
                 <div class = "z-depth-2"><h2 class="postedJobsBanner"><center>Posted Jobs</center></h2> </div>
                 </div>
                 <ul class="collapsible raccordion" data-collapsible="accordion">
@@ -42,3 +43,4 @@
     </div>
 </div>
 
+<div ng-include="'components/footer/footer.html'"></div>
