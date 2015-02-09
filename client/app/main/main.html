@@ -2,37 +2,24 @@
 <div class="background">
     <div class="row">
         <!-- this is start of right side navbar -->
-        <md-sidenav class="md-sidenav-left md-whiteframe-z2 col s2" md-component-id="left" md-is-locked-open="$media('gt-md')">
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">ToolKit</h1>
-            </md-toolbar>
-            <md-button class="apply" ng-click="toggleRight()" class="md-primary">
-                Saved Jobs
-            </md-button>
+        <md-sidenav id="sidenav-left" class="md-sidenav-left md-whiteframe-z2 col s2" md-component-id="left" md-is-locked-open="$media('gt-md')">
             <md-content class="md-padding" ng-controller="LeftCtrl">
-                <md-button ng-click="close()" class="md-primary" hide-gt-md>
-                    Close Sidenav Left
-                </md-button>
-                <p>I want to work as a</p>
-                <input type="text" class="form-control" ng-model="userHeadline" />
-                <p>in</p>
-                <input type="text" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" />
-                <button ng-click="updateJob(userHeadline, jobLocation)" class="btn waves-effect waves-light" type="submit" name="action">Update
-                    <i class="mdi-content-send right"></i>
-                </button>
+             <div class="card-panel bluecolors"><h2>Job Title or Skill</h2></div><br>
+                <input type="text" placeholder="Job Title or Skill" class="form-control" ng-model="userHeadline" /><br>
+                <div class="card-panel bluecolors"><h2>Job Location</h2></div><br>
+                <input type="text" placeholder="City" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" /><br>
+                 <a class="btn update" ng-click="updateJob(userHeadline, jobLocation)" type="submit" name="action"><b>Update Search</b></a>
+                 <a class="btn savedjobs" ng-click="toggleRight()"><b>Saved Jobs</b></a>
             </md-content>
         </md-sidenav>
         <!-- this is the end of right sidebar -->
 
-        <div class="col s8 offset-s1 jobsCard ">
-            <div class=" card col s7 z-depth-5" ng-hide="searchDone">
+        <div class="col s8 offset-s2 jobsCard ">
+            <div class=" card col s6 z-depth-5" ng-hide="searchDone">
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
-                        <h2>{{job.jobtitle}}</h2>
-                        <div class="date-posted">Job Posted: {{job.formattedRelativeTime}}</div>
-                        <div class="card-city">In {{job.formattedLocationFull}}</div>
-                        <br>
-                        <div class="card-details">{{job.snippet}}</div>
+                         <div class="card-panel bluecolors"><h1>{{job.jobtitle}}</h1><h3 class="colorize">Job posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}}</h3></div><br>
+                        <div class="colorize"><p class="lead paddingdescription">{{job.snippet}}</p></div>
                         <br>
                         <br>
                         <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://i.imgur.com/TdzE0yr.jpg"'>
@@ -40,31 +27,22 @@
 
                     </div>
                     <div id="buttonsDiv" class="card-content">
-                        <span class="card-title activator grey-text text-darken-4">Click here for more details!<i class="mdi-navigation-more-vert right"></i></span>
-
                         <div>
-                            <md-button class="md-raised md-warn pass"ng-click="saveOrPass('pass', job)">Pass</md-button>
-                            <md-button class="md-raised md-primary save"ng-click="saveOrPass('save', job)">Save</md-button>
+                            <a class="btn passtime" ng-click="saveOrPass('pass', job)"><b>Pass Job</b></a>
+                            <a class="btn savetime" ng-click="saveOrPass('save', job)"><b>Save Job</b></a>
                         </div>
+                         <span class="card-title activator details">Click for more details!<i class="mdi-navigation-more-vert right"></i></span>
                     </div>
                     <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">{{job.jobtitle}} <i class="mdi-navigation-close right"></i></span>
-
-                        <div class="date-posted">{{job.formattedRelativeTime}}</div>
-                        <div class="card-city">{{job.formattedLocationFull}}</div>
+                        <div class="card-panel bluecolors"><h2>{{job.jobtitle}}</h2></div>
+                        <div class="card-panel"></h3>Job posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}}.</h3></div><br>
                         <br>
-                        <!-- <div class="card-company"><strong>{{job.company}}</strong>
-                            </div> -->
-                        <br>
-
                         <div class="card-details">{{job.summary}}</div>
-                        <br>
-                        <br>
+                        <div class="buttons">
+                            <a target="_blank" href="{{job.url}}"class="btn"><b>Read More...</b></a>
+                        </div>
+                        <span class="card-title details">Go back! <i class="mdi-navigation-close right"></i></span>
 
-                        <a target="_blank" href="{{job.url}}">
-                            <md-button class="md-raised apply">Read More...</md-button>
-                        </a>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -76,9 +54,7 @@
 
  
         <md-sidenav id='rightsidebar' class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Sidenav Right</h1>
-            </md-toolbar>
+                <div class="card-panel bluecolors"><h2>Saved Jobs</h2></div>
             <md-content ng-controller="RightCtrl" class="md-padding">
                 <!--   <div ng-repeat="job in savedJobsFrontPage" class="row">
                     <div class="card blue-grey darken-1">
@@ -130,3 +106,4 @@
         </md-sidenav>
     </div>
 </div>
+<div ng-include="'components/footer/footer.html'"></div>
