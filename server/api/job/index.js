@@ -14,6 +14,7 @@ router.post('/cheerio', controller.getCheerio);
 router.put('/:id', controller.update);
 router.put('/updateRecruiterJob/:id', controller.updateRecruiterJob);
 router.put('/:id/removeUser/:userId', controller.removeUser);
+router.put('/editRecruiterJob/:id', controller.editRecruiterJob);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.get('/:id/showJobs', controller.jobShow);

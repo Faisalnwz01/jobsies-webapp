@@ -119,6 +119,18 @@ exports.show = function (req, res, next) {
 };
 
 /**
+ * Get a mobile user
+ */
+exports.mobile = function (req, res, next) {
+  var userId = req.params.id;
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.send(401);
+    res.json(user);
+  });
+};
+
+/**
  * Deletes a user
  * restriction: 'admin'
  */
