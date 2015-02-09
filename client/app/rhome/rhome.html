@@ -6,10 +6,8 @@
 
             <md-content class="md-padding" ng-controller="LeftCtrl">
                 <div>
-                <md-button ng-click="showJobPost();" style="width:257px;" class="md-primary">
-                    Post a Job
-                </md-button>
-                <h3>Posted Jobs</h3>
+                <div class="waves-effect  light-blue darken-4 btn" ng-click="showJobPost();">Post a Job</div>
+                <div class = "z-depth-2"><h2 class="postedJobsBanner"><center>Posted Jobs</center></h2> </div>
                 </div>
                 <ul class="collapsible raccordion" data-collapsible="accordion">
                    <li ng-repeat="job in jobs">
