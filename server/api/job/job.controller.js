@@ -6,7 +6,7 @@ var cheerio = require('cheerio');
 var Job = require('./job.model');
 var async = require('async');
 var underscore = require('underscore');
-var Indeed = require('../../../client/app/main/indeed');
+var Indeed = require('indeed-api').getInstance('4024430501334376')
 
 
 // Get list of jobs
@@ -22,22 +22,26 @@ exports.index = function(req, res) {
 //get jobs from the indeed api
 exports.getIndeedJobs = function(req, res) {
     var query = req.body.query;
-    var location = req.body.location;
+    var city = req.body.city;
+    var state = req.body.state;
     var start = req.body.start;
-    var indeed_client = new Indeed("85923786885096");
-    indeed_client.search({
-            q: query,
-            l: location,
-            limit: '1000',
-            start: start,
-            allbit: '1',
-            highlight: 0,
-            userip: '1.2.3.4',
-            useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
-        }, function(search_response){
-          res.json(200, search_response)
-        } 
-      )
+    Indeed.JobSearch()
+        .Radius(20)
+        .WhereLocation({
+            city: city,
+            state: state
+        })
+        .Limit(1000)
+        .WhereKeywords([query])
+        .SortBy("date")
+        .UserIP('1.2.3.4')
+        .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
+        .Search(function(results){
+            res.json(200, results);
+        }, 
+        function(error){
+            console.log(error);
+        })
     }
 
     // Get a single job
@@ -61,7 +65,6 @@ exports.getIndeedJobs = function(req, res) {
         })
             .populate('user_ids')
             .exec(function(err, job) {
-                console.log(job)
                 if (err) {
                     return handleError(res, err);
                 }
@@ -109,7 +112,6 @@ exports.getIndeedJobs = function(req, res) {
 
     // Updates an existing job in the DB.
     exports.update = function(req, res) {
-        console.log(req.body)
         if (req.body._id) {
             delete req.body._id;
         }
@@ -198,7 +200,6 @@ exports.getIndeedJobs = function(req, res) {
                     summary_text.slice(requirementIndex, requirementIndex + 500) ||
                     summary_text.slice(skillsIndex, skillsIndex + 500) ||
                     "NA";
-                console.log(contact_information)
                 var new_stuff = {
                     logo: logo,
                     summary: summary,
