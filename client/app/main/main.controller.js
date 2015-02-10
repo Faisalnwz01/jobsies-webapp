@@ -47,7 +47,7 @@ angular.module('jobsiesApp')
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-                if(jobs.jobArray.length == 0){
+                if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
                     $scope.page +=1;
                     $scope.getJobs(headline, location, (start+25))
                 }
