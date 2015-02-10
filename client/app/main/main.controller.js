@@ -136,7 +136,7 @@ angular.module('jobsiesApp')
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
                 }
-                if ($scope.currentJob === 24) {
+                if ($scope.currentJob === 25) {
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.jobArray = [];
