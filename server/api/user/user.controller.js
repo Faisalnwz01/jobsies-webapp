@@ -200,10 +200,11 @@ exports.preferences = function(req, res, next){
   User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
-    var updated = underscore.extend(user, req.body);
-    updated.save(function (err) {
+    user.jobUserLookingFor = req.body.headline;
+    user.locationUserWantsToWorkIn = req.body.location;
+    user.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, updated);
+      return res.json(200, user);
     });
   });
 }

@@ -210,6 +210,7 @@ exports.getCheerio = function(req, res) {
         request.get({
             url: url
         }, function(err, response) {
+            if(err){console.log(err);}
             var htmlFromIndeed = response.body;
             var $ = cheerio.load(htmlFromIndeed);
             var logo = $('.cmp_logo').find('img').attr('src');
