@@ -45,11 +45,17 @@ angular.module('jobsiesApp')
         $scope.locationCutter();
 
         //gets  jobs from the indeed api to display on the home page.
-        $scope.getJobs = function(headline, location) {
-            indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
-                $scope.currentJob = 0;
-                $scope.jobArray = jobs.jobArray;
-                $scope.totalResults = jobs.totalResults;
+        $scope.getJobs = function(headline, location, start) {
+            indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
+                if(jobs.jobArray.length == 0){
+                    $scope.page +=1;
+                    $scope.getJobs(headline, location, (start+25))
+                }
+                else {
+                    $scope.currentJob = 0;
+                    $scope.jobArray = jobs.jobArray;
+                    $scope.totalResults = jobs.totalResults;
+                }
             })
         };
 
@@ -129,7 +135,6 @@ angular.module('jobsiesApp')
                 }
             } else {
                 $scope.jobsSeen += 1;
-                console.log($scope.userHeadline)
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
                 }
@@ -139,12 +144,7 @@ angular.module('jobsiesApp')
                         $scope.jobArray = [];
                         $scope.currentJob = 0;
                         ///what variables should get jobs be called with.
-                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 25 * $scope.page)
-                        .then(function(jobs) {
-                            $scope.currentJob = 0;
-                            $scope.jobArray = jobs.jobArray;
-                            $scope.totalResults = jobs.totalResults;
-                        })
+                        $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 25 * $scope.page)
                     }
                 }
                 if (status == 'save') {
