@@ -223,6 +223,9 @@ exports.getCheerio = function(req, res) {
                 summary_text.slice(requirementIndex, requirementIndex + 500) ||
                 summary_text.slice(skillsIndex, skillsIndex + 500) ||
                 "NA";
+                if (logo === undefined){
+                    logo = 'http://www.forexfactory.com/attachment.php?attachmentid=1557296&stc=1&thumb=1&d=1416835200'
+                }
             var new_stuff = {
                 logo: logo,
                 summary: summary,
