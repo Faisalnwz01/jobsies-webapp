@@ -18,6 +18,7 @@ angular.module('jobsiesApp')
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
             userPreferences.savePreferences($scope.user);
+            $scope.jobArray = [];
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
 
         }
@@ -120,13 +121,17 @@ angular.module('jobsiesApp')
                     } else if (status == 'pass') {
                         toast('Job Passed :(', 3000)
                     }
+                    ///what variables should get jobs be called with
                     if ($scope.numberOfRecruiterJobs == 1) {
-                        $scope.getJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
+                        $scope.jobArray = [];
+                        $scope.getJobs($scope.userHeadline, $scope.jobLocation);
                     }
                     $scope.numberOfRecruiterJobs -= 1;
                 }
             } else {
-                $scope.currentJob += 1;
+                //line needed?
+                //$scope.currentJob += 1;
+                console.log($scope.currentJob)
                 $scope.jobsSeen += 1;
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
@@ -134,8 +139,17 @@ angular.module('jobsiesApp')
                 if ($scope.currentJob === 25) {
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
+                        $scope.jobArray = [];
+                        console.log("calling new page", $scope.page)
                         $scope.currentJob = 0;
-                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn, 25 * $scope.page);
+                        ///what variables should get jobs be called with.
+                        indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation, 25 * $scope.page)
+                        .then(function(jobs) {
+                            console.log("new job list", jobs);
+                            $scope.currentJob = 0;
+                            $scope.jobArray = jobs.jobArray;
+                            $scope.totalResults = jobs.totalResults;
+                        })
                     }
                 }
                 if (status == 'save') {

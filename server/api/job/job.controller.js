@@ -33,6 +33,7 @@ exports.getIndeedJobs = function(req, res) {
         })
         .Limit(1000)
         .WhereKeywords([query])
+        .Start(start)
         .SortBy("date")
         .UserIP('1.2.3.4')
         .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
