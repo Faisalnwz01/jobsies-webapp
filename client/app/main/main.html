@@ -18,7 +18,7 @@
             <div class="card z-depth-5" ng-hide="searchDone">
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
-                         <div class="card-panel bluecolors"><h1>{{job.jobtitle}}</h1><h3 class="colorize">Job posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}}</h3></div><br>
+                         <div class="card-panel bluecolors"><h1>{{job.jobtitle}}</h1><h3 class="colorize">Posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}} by {{job.company}}</h3></div><br>
                         <div class="colorize"><p class="lead paddingdescription">{{job.snippet}}</p></div>
                         <br>
                         <br>
