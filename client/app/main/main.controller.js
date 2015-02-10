@@ -14,13 +14,14 @@ angular.module('jobsiesApp')
         // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
         $scope.updateJob = function(headline, location) {
+            $scope.user = Auth.getCurrentUser();
             $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
-            userPreferences.savePreferences($scope.user);
+            console.log("testing", $scope.user)
+            userPreferences.savePreferences($scope.user, {location: location, headline:headline})
             $scope.jobArray = [];
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
-
         }
 
         $scope.user = Auth.getCurrentUser();
@@ -33,9 +34,9 @@ angular.module('jobsiesApp')
             }
             // automatically fills in the job the user is searching for and location
             //based on linkedin profile or updated preferences.
-        $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title;
+        $scope.userHeadline = $scope.user.jobUserLookingFor || $scope.user.linkedin.positions.values[0].title || "intern";
         $scope.locationCutter = function() {
-            $scope.jobLocation = $scope.user.locationUserWantsToWorkIn || $scope.user.linkedin.location.name
+            $scope.jobLocation = $scope.user.locationUserWantsToWorkIn || $scope.user.linkedin.location.name || "new york";
             if ($scope.jobLocation.toLowerCase().search('greater') !== -1) {
                 $scope.jobLocation = $scope.user.linkedin.location.name.toLowerCase().replace('greater', '')
                 $scope.jobLocation = $scope.jobLocation.replace('area', '')
@@ -46,7 +47,6 @@ angular.module('jobsiesApp')
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location) {
             indeedapi.getIndeedJobs(headline, location, 0).then(function(jobs) {
-                console.log("job update", jobs);
                 $scope.currentJob = 0;
                 $scope.jobArray = jobs.jobArray;
                 $scope.totalResults = jobs.totalResults;
@@ -72,7 +72,7 @@ angular.module('jobsiesApp')
                 }
             })
         };
-
+        //function called to get the initial jobs.
         $scope.getRecruiterJobs($scope.userHeadline, $scope.jobLocation);
 
         //fills in the right sidebar with jobs that a user has previously saved
@@ -88,13 +88,11 @@ angular.module('jobsiesApp')
         var today = new Date().getFullYear();
         $scope.contact_info_for_job = false; 
 
-        console.log($scope.savedJobsFrontPage[index].contact_information)
 
             if($scope.savedJobsFrontPage[index].contact_information){
                 $scope.contact_info_for_job = true; 
             }
 
-            console.log($scope.contact_info_for_job)
             if($scope.user.jobsought === undefined){
                 var field = $scope.user.linkedin.positions.values[0].title
             }
@@ -110,6 +108,7 @@ angular.module('jobsiesApp')
         // after a user has gone through 25 jobs
         $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
+            console.log($scope.currentJob)
             if (job.recruiter_id != undefined) {
                 if ($scope.numberOfRecruiterJobs >= 1) {
                     if (status == 'save') {
@@ -124,15 +123,13 @@ angular.module('jobsiesApp')
                     ///what variables should get jobs be called with
                     if ($scope.numberOfRecruiterJobs == 1) {
                         $scope.jobArray = [];
-                        $scope.getJobs($scope.userHeadline, $scope.jobLocation);
+                        $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation);
                     }
                     $scope.numberOfRecruiterJobs -= 1;
                 }
             } else {
-                //line needed?
-                //$scope.currentJob += 1;
-                console.log($scope.currentJob)
                 $scope.jobsSeen += 1;
+                console.log($scope.userHeadline)
                 if ($scope.jobsSeen == $scope.totalResults) {
                     $scope.searchDone = true;
                 }
@@ -140,12 +137,10 @@ angular.module('jobsiesApp')
                     if ($scope.jobsSeen < $scope.totalResults) {
                         $scope.page += 1;
                         $scope.jobArray = [];
-                        console.log("calling new page", $scope.page)
                         $scope.currentJob = 0;
                         ///what variables should get jobs be called with.
-                        indeedapi.getIndeedJobs($scope.userHeadline, $scope.jobLocation, 25 * $scope.page)
+                        indeedapi.getIndeedJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 25 * $scope.page)
                         .then(function(jobs) {
-                            console.log("new job list", jobs);
                             $scope.currentJob = 0;
                             $scope.jobArray = jobs.jobArray;
                             $scope.totalResults = jobs.totalResults;
