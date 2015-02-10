@@ -112,10 +112,11 @@ li.a.active {
 }
 #buttonsDiv {
     height: 570px;
-    margin-bottom: 100px;
 }
 .jobsCard {
     margin-top: 50px;
+    width: 35%;
+    margin-left: 35%;
 }
 #rightsidebar {
     margin-top: 75px;
@@ -165,11 +166,14 @@ li.a.active {
 }
 
 .bluecolors {
-        color: #1B86BC;
+    color: #1B86BC;
 }
 
 .paddingdescription {
     padding-left: 30px;
     padding-right: 30px;
-    padding-bottom: 0;
+}
+
+.revealbottom {
+    padding-bottom: 30px;
 }

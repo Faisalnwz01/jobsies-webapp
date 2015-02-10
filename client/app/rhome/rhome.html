@@ -5,17 +5,14 @@
         <md-sidenav class="md-sidenav-left md-whiteframe-z2 col s1" md-component-id="left" md-is-locked-open="$media('gt-md')">
 
             <md-content class="md-padding" ng-controller="LeftCtrl">
-                <div>
-                Post a Job 
-                <a class="btn-floating btn-large waves-effect waves-light light-blue darken-4" ng-click="showJobPost();"><i class="mdi-content-add"></i></a>
-                <div class = "z-depth-2"><h2 class="postedJobsBanner"><center>Posted Jobs</center></h2> </div>
-                </div>
+                <a class="btn postAJob" ng-click="showJobPost()"><b>Post a Job</b></a>
+               <div class="card-panel bluecolors"><h3>Posted Jobs</h3> </div>
                 <ul class="collapsible raccordion" data-collapsible="accordion">
                    <li ng-repeat="job in jobs">
                        <div class="collapsible-header raccordion" ><i class="mdi-image-filter-drama"></i><p><b>{{job.jobtitle}}</b></p></div>
                        <div class="collapsible-body">
-                       Posted: <i>{{job.date | date}}</i><br>
-                       <button ng-click="showPosition($index)"> Edit Job</button>
+                       Posted: <i>{{job.date | date}}</i>
+                       <a class="btn" ng-click="showPosition($index)">Edit</a>
                        <hr>
                         <i>Prospective Candidates:</i><br>
                             <div class="users-for-jobs" ng-repeat="userj in job.user_ids">
@@ -27,9 +24,9 @@
                </ul>
             </md-content>
         </md-sidenav>
-        <div rusercard ng-show="showCard" class="col s4 offset-s2  ruser-card"></div>
-        <div rpostedjobs ng-show="showPostedJob" class="col s6 offset-s2"></div>
-        <div rpostjobs ng-show="showjobs"></div>
+        <div rusercard ng-if="showCard" class="col s4 offset-s2  ruser-card"></div>
+        <div rpostedjobs ng-if="showPostedJob" class="col s6 offset-s2"></div>
+        <div rpostjobs ng-if="showjobs"></div>
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s1" md-component-id="right">
             <md-content ng-controller="RightCtrl" class="md-padding">
                 <div ng-repeat="user in users_saved" class="row">
