@@ -4,6 +4,7 @@ var _ = require('lodash');
 var request = require('request');
 var cheerio = require('cheerio');
 var Job = require('./job.model');
+var User = require('../user/user.model');
 var async = require('async');
 var underscore = require('underscore');
 var Indeed = require('indeed-api').getInstance('4024430501334376')
@@ -25,24 +26,65 @@ exports.getIndeedJobs = function(req, res) {
     var city = req.body.city;
     var state = req.body.state;
     var start = req.body.start;
-    Indeed.JobSearch()
-        .Radius(20)
-        .WhereLocation({
-            city: city,
-            state: state
-        })
-        .Limit(12)
-        .WhereKeywords([query])
-        .Start(start)
-        .SortBy("date")
-        .UserIP('1.2.3.4')
-        .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
-        .Search(function(results) {
-                res.json(200, results);
-            },
-            function(error) {
-                console.log(error);
+    var user = req.body.user_info;
+    async.parallel([ 
+        function(cb) {
+            Indeed.JobSearch()
+            .Radius(20)
+            .WhereLocation({
+                city: city,
+                state: state
             })
+            .Limit(12)
+            .WhereKeywords([query])
+            .Start(start)
+            .SortBy("date")
+            .UserIP('1.2.3.4')
+            .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
+            .Search(
+                function(results) {
+                    cb(null, {total:results.totalResults, jobs:results.results});
+                },
+                function(error) {
+                    console.log(error);
+                })
+        },
+        function(cb){
+              User.findById(user)
+                .populate('jobs_saved')
+                .exec(function(err, user){
+                   if (err) return next(err);
+                   if (!user) return res.send(401);
+                   cb(null, user.jobs_saved);
+                });
+        }
+    ],
+    function(err, results){
+        var totalResultsToSendBack = results[0].total;
+        var jobsFromIndeed = results[0].jobs;
+        var jobsSavedByUser = results[1];
+
+        var savedJobKeys = [];
+        for (var j=0; j<jobsSavedByUser.length; j++) {
+            savedJobKeys.push(jobsSavedByUser[j].jobkey)
+        }
+
+        var jobArray = [];
+        for (var i=0; i<jobsFromIndeed.length; i++){
+            if (savedJobKeys.indexOf(jobsFromIndeed[i].jobkey) === -1) {
+                jobArray.push(jobsFromIndeed[i])
+            }
+        }
+        if(jobArray.length == 0 && (start+12)<totalResultsToSendBack){
+            exports.getIndeedJobs({query: query, city: city, state: state, start: (start+12) ,user: user})
+        }
+        else if(jobArray.length == 0){
+            res.json([{jobtitle: "No More Jobs", company:"Jobsies", snippet: "There are no more results for the current criteria. Please change your search preferences to a different job title or skill.                                                                                "}])
+        }
+        else{
+            exports.getCheerio(jobArray, res)
+        }
+    })
 }
 
 // Get a single job
@@ -158,7 +200,6 @@ exports.updateRecruiterJob = function(req, res) {
     });
 };
 exports.editRecruiterJob = function(req, res) {
-    console.log(req.body)
     if (req.body._id) {
         delete req.body._id;
     }
@@ -206,7 +247,7 @@ var contactReg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*
 exports.getCheerio = function(req, res) {
     var cheerioStuff = function(item, cb) {
         var url = item.url;
-        var indeedId = item.indeedId
+        var indeedId = item.jobkey
         request.get({
             url: url
         }, function(err, response) {
@@ -235,7 +276,7 @@ exports.getCheerio = function(req, res) {
             cb(err, updated);
         })
     }
-    async.map(req.body, cheerioStuff, function(err, results) {
+    async.map(req, cheerioStuff, function(err, results) {
         res.send(results)
     })
 }

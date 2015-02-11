@@ -17,6 +17,7 @@ $scope.user = User.get().$promise.then(function(user) {
         $scope.loading = true; 
         
 
+
         // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
         $scope.updateJob = function(headline, location) {
@@ -52,21 +53,9 @@ $scope.user = User.get().$promise.then(function(user) {
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-                if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
-                    $scope.page +=1;
-
-                    $scope.getJobs(headline, location, (start+25))
-                    $scope.loading = false; 
-                   
-
-
-                }
-                else {
-                    $scope.currentJob = 0;
-                    $scope.jobArray = jobs.jobArray;
-                    $scope.totalResults = jobs.totalResults;
-                    $scope.loading = false; 
-                }
+               console.log(jobs.data)
+               $scope.loading = false;
+               $scope.jobArray = jobs.data;
             })
         };
 
@@ -84,7 +73,9 @@ $scope.user = User.get().$promise.then(function(user) {
                 })
                 $scope.numberOfRecruiterJobs = jobsies.length;
                 $scope.jobArray = jobsies;
+                $scope.loading = false;
                 if ($scope.jobArray.length == 0) {
+                    $scope.loading = true;
                     $scope.getJobs(userHeadline, jobLocation)
                 }
             })
@@ -146,18 +137,23 @@ $scope.user = User.get().$promise.then(function(user) {
                 }
             } else {
                 $scope.jobsSeen += 1;
-                if ($scope.jobsSeen == $scope.totalResults) {
-                    $scope.searchDone = true;
+                if($scope.currentJob == $scope.jobArray.length){
+                    $scope.currentJob = 0;
+                    $scope.jobArray = [];
+                    $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, $scope.jobsSeen + 12)
                 }
-                if ($scope.currentJob === $scope.jobArray.length) {
-                    if ($scope.jobsSeen < $scope.totalResults) {
-                        $scope.page += 1;
-                        $scope.jobArray = [];
-                        $scope.currentJob = 0;
-                        ///what variables should get jobs be called with.
-                        $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 12 * $scope.page)
-                    }
-                }
+                // if ($scope.jobsSeen == $scope.totalResults) {
+                //     $scope.searchDone = true;
+                // }
+                // if ($scope.currentJob === $scope.jobArray.length) {
+                //     if ($scope.jobsSeen < $scope.totalResults) {
+                //         $scope.page += 1;
+                //         $scope.jobArray = [];
+                //         $scope.currentJob = 0;
+                //         ///what variables should get jobs be called with.
+                //         $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 12 * $scope.page)
+                //     }
+                // }
                 if (status == 'save') {
                     toast('Job Saved!! :)', 3000)
                     if(job.numLikes){
