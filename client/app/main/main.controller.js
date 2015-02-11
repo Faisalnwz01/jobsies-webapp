@@ -51,9 +51,12 @@ angular.module('jobsiesApp')
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
                 if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
                     $scope.page +=1;
+
                     $scope.getJobs(headline, location, (start+25))
                     $scope.loading = false; 
-                    console.log($scope.loading)
+                   
+
+
                 }
                 else {
                     $scope.currentJob = 0;
@@ -116,7 +119,7 @@ angular.module('jobsiesApp')
 
 
         //save jobs to the database, also call indeed for more results
-        // after a user has gone through 25 jobs
+        // after a user has gone through x jobs
         $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
             console.log($scope.currentJob)
@@ -149,7 +152,7 @@ angular.module('jobsiesApp')
                         $scope.jobArray = [];
                         $scope.currentJob = 0;
                         ///what variables should get jobs be called with.
-                        $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 25 * $scope.page)
+                        $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 12 * $scope.page)
                     }
                 }
                 if (status == 'save') {
