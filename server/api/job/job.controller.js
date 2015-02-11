@@ -31,7 +31,7 @@ exports.getIndeedJobs = function(req, res) {
             city: city,
             state: state
         })
-        .Limit(1000)
+        .Limit(12)
         .WhereKeywords([query])
         .Start(start)
         .SortBy("date")
