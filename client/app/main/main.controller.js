@@ -6,6 +6,10 @@ angular.module('jobsiesApp')
         //   socket.unsyncUpdates('thing');
         // });
 
+$scope.user = User.get().$promise.then(function(user) {
+    console.log($scope.user)
+                $scope.user = user
+
         $scope.currentJob = 0;
         $scope.page = 0;
         $scope.totalResults;
@@ -25,8 +29,7 @@ angular.module('jobsiesApp')
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
         }
 
-        $scope.user = Auth.getCurrentUser();
-        console.log($scope.user)
+     
        
 
         //this autocompletes the location search input with US cities
@@ -171,7 +174,7 @@ angular.module('jobsiesApp')
                 }
             }
         }
-
+})
 
         $scope.removeJobFromUser = function(job) {
             SaveJobs.removeJobFromUser(job, $scope.user).then(function() {
