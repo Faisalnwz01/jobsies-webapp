@@ -26,6 +26,7 @@ angular.module('jobsiesApp')
         }
 
         $scope.user = Auth.getCurrentUser();
+        console.log($scope.user)
        
 
         //this autocompletes the location search input with US cities
@@ -171,7 +172,6 @@ angular.module('jobsiesApp')
             }
         }
 
-        console.log($scope.user)
 
         $scope.removeJobFromUser = function(job) {
             SaveJobs.removeJobFromUser(job, $scope.user).then(function() {
