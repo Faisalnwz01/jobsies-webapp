@@ -69,11 +69,16 @@ function setTokenCookie(req, res) {
   var token = signToken(req.user._id, req.user.role);
   res.cookie('token', JSON.stringify(token));
   res.cookie('user', req.user._id)
-  console.log(req)
+  console.log(req, 'looking for referer for jobsies')
   if(req.headers.referer === "http://localhost:9000/"){
     res.redirect('/main')
 
   }
+
+  if(req.headers.referer === "https://jobsies.herokuapp.com/"){
+       res.redirect('https://jobsies.herokuapp.com/main')
+  }
+
   if(req.headers.referer === undefined){
      res.redirect('http://localhost:8100/#/tab/dash' + req.user._id);
   }
@@ -82,6 +87,8 @@ function setTokenCookie(req, res) {
   
   res.redirect('http://localhost:8100/#/tab/dash' + req.user._id);
 }
+
+
 
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
