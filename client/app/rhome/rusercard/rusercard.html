@@ -5,19 +5,32 @@
                 </div>
               </div>
               <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">{{cardUser.name}}<br>
-                                {{cardUser.linkedin.headline}} 
-                {{cardUser.linkedin.emailAddress}}<br> {{cardUser.linkedin.location.name}}<i class="mdi-navigation-more-vert right"></i></span>
+               <div class="card-title activator grey-text text-darken-4"><div style="float:left"> {{cardUser.name}}</div><i class="mdi-navigation-more-vert right">Read More</i></div><br>
+               <br><br>
+
+                 <div class="card-panel" style="text-align: left">{{cardUser.linkedin.headline}}<br>
+                {{cardUser.linkedin.emailAddress}}<br> 
+                {{cardUser.linkedin.location.name}}</div>
+                <p ng-repeat="job in cardUser.linkedin.positions.values">{{job.title}}<br> {{job.company.name}}<br>Start Date: {{job.startDate.month}}/{{job.startDate.year}}<br>
+                End Date: {{job.endDate.month}}/{{job.endDate.year}}
+                </p>
                 <br>
-                <p><a href="#!">This is a link</a></p>
+
+                 <a class="btn passtime" ng-click="removeUser(cardUser, cardJob)">
+                   <b> Discard</b>
+                </a>
+                <a class="btn savetime" ng-click="saveCandidate(cardUser, cardJob)">
+                    <b>  Save </b>
+                </a>
               </div>
               <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">Card Title <i class="mdi-navigation-close right"></i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                <md-button ng-click="discardCandidate(cardUser, cardJob)" class="md-primary">
-                    Discard Candidates
-                </md-button>
-                <md-button ng-click="saveCandidate(cardUser, cardJob)" class="md-primary">
-                    Save Candidates
-                </md-button>
+                <span class="card-title grey-text text-darken-4">Education and Skills<i class="mdi-navigation-close right">Go Back</i></span>
+                <row>
+                <h3>Education</h3>
+                <p class= "col s6" ng-repeat="education in cardUser.linkedin.educations.values"><i>{{education.schoolName}}</i><br>{{education.degree}}<br> {{education.fieldOfStudy}}</p>
+                </row>
+                <row>
+                <h3> Skills </h3>
+                <p class= "col s2" ng-repeat="skills in cardUser.linkedin.skills.values">{{skills.skill.name}}</p>
+                </row>
               </div>
