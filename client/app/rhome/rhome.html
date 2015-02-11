@@ -12,7 +12,7 @@
                        <div class="collapsible-header raccordion" ><i class="mdi-image-filter-drama"></i><p><b>{{job.jobtitle}}</b></p></div>
                        <div class="collapsible-body">
                        Posted: <i>{{job.date | date}}</i>
-                       <a class="btn" ng-click="showPosition($index)">Edit</a>
+                       <a class="btn" ng-click="showPosition($index)"><b>Edit</b></a>
                        <hr>
                         <i>Prospective Candidates:</i><br>
                             <div class="users-for-jobs" ng-repeat="userj in job.user_ids">

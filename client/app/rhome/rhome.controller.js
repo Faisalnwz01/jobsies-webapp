@@ -177,7 +177,9 @@ angular.module('jobsiesApp')
             var cardUserId = cardUser._id;
             cardJob.users_saved.push(cardUserId)
             $http.put('api/jobs/updateRecruiterJob/' + cardJob._id, {users_saved: cardUserId});
+            $scope.showCard = false;
         }
+
         $scope.removeUser = function(user, job){
             recruiterJobs.removeUser(user, job).then(function(){
                 $scope.showCard = false;

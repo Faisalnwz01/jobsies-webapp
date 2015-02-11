@@ -37,7 +37,14 @@ $btnGithubBackgroundHighlight:      #ccc;
 	opacity: .8;
 }
 .linked-in:hover {
-	opacity: 1;
+	background-color: #fff;
+	color: #1B86BC;
+}
+
+.linked-in:hover {
+	#login {
+	color: #1B86BC;
+	}
 }
 
 .jobsies {
@@ -47,3 +54,5 @@ $btnGithubBackgroundHighlight:      #ccc;
 a:hover {
 	text-decoration: none;
 }
+
+
