@@ -26,7 +26,7 @@ angular.module('jobsiesApp')
                                     for (var j=0; j<savedJobs.length; j++) {
                                         savedJobKeys.push(savedJobs[j].jobkey)
                                     }
-                                    var jobArray = [];
+                                       var jobArray = [];
                                     for (var i=0; i<search_response.data.results.length; i++){
                                         if (savedJobKeys.indexOf(search_response.data.results[i].jobkey) === -1) {
                                             jobArray.push(search_response.data.results[i])
