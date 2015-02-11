@@ -27,6 +27,7 @@ $scope.user = User.get().$promise.then(function(user) {
             $scope.user.locationUserWantsToWorkIn = location;
             userPreferences.savePreferences($scope.user, {location: location, headline:headline})
             $scope.jobArray = [];
+            $scope.loading = true;
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
         }
 
@@ -140,20 +141,9 @@ $scope.user = User.get().$promise.then(function(user) {
                 if($scope.currentJob == $scope.jobArray.length){
                     $scope.currentJob = 0;
                     $scope.jobArray = [];
+                    $scope.loading = true;
                     $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, $scope.jobsSeen + 12)
                 }
-                // if ($scope.jobsSeen == $scope.totalResults) {
-                //     $scope.searchDone = true;
-                // }
-                // if ($scope.currentJob === $scope.jobArray.length) {
-                //     if ($scope.jobsSeen < $scope.totalResults) {
-                //         $scope.page += 1;
-                //         $scope.jobArray = [];
-                //         $scope.currentJob = 0;
-                //         ///what variables should get jobs be called with.
-                //         $scope.getJobs($scope.user.jobUserLookingFor||$scope.userHeadline, $scope.user.locationUserWantsToWorkIn||$scope.jobLocation, 12 * $scope.page)
-                //     }
-                // }
                 if (status == 'save') {
                     toast('Job Saved!! :)', 3000)
                     if(job.numLikes){
