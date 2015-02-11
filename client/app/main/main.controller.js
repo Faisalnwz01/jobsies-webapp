@@ -11,7 +11,7 @@ angular.module('jobsiesApp')
         $scope.totalResults;
         $scope.jobsSeen = 0;
         $scope.loading = true; 
-        console.log($scope.loading)
+        
 
         // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
@@ -20,7 +20,6 @@ angular.module('jobsiesApp')
             $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
-            console.log("testing", $scope.user)
             userPreferences.savePreferences($scope.user, {location: location, headline:headline})
             $scope.jobArray = [];
             $scope.getRecruiterJobs($scope.user.jobUserLookingFor, $scope.user.locationUserWantsToWorkIn);
@@ -122,7 +121,7 @@ angular.module('jobsiesApp')
         // after a user has gone through x jobs
         $scope.saveOrPass = function(status, job) {
             $scope.currentJob += 1;
-            console.log($scope.currentJob)
+       
             if (job.recruiter_id != undefined) {
                 if ($scope.numberOfRecruiterJobs >= 1) {
                     if (status == 'save') {
@@ -172,6 +171,8 @@ angular.module('jobsiesApp')
             }
         }
 
+        console.log($scope.user)
+
         $scope.removeJobFromUser = function(job) {
             SaveJobs.removeJobFromUser(job, $scope.user).then(function() {
                 $scope.getSavedJobsies();
@@ -214,7 +215,6 @@ angular.module('jobsiesApp')
                     $log.debug("close RIGHT is done");
                 });
         };
-
 
 
     });
