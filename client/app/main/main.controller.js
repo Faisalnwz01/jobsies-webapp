@@ -10,6 +10,8 @@ angular.module('jobsiesApp')
         $scope.page = 0;
         $scope.totalResults;
         $scope.jobsSeen = 0;
+        $scope.loading = true; 
+        console.log($scope.loading)
 
         // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
@@ -49,12 +51,18 @@ angular.module('jobsiesApp')
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
                 if(jobs.jobArray.length == 0 && jobs.totalResults > 0){
                     $scope.page +=1;
-                    $scope.getJobs(headline, location, (start+12))
+
+                    $scope.getJobs(headline, location, (start+25))
+                    $scope.loading = false; 
+                   
+
+
                 }
                 else {
                     $scope.currentJob = 0;
                     $scope.jobArray = jobs.jobArray;
                     $scope.totalResults = jobs.totalResults;
+                    $scope.loading = false; 
                 }
             })
         };
