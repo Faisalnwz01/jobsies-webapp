@@ -14,6 +14,7 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id', auth.isAuthenticated(), controller.addJobsie);
 router.put('/mobile/:id', controller.addJobsie);
 router.put('/preferences/:id', auth.isAuthenticated(), controller.preferences);
+router.put('/preferences/mobile/:id', controller.preferences);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.post('/:id', controller.update);
