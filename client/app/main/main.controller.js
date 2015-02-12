@@ -22,7 +22,6 @@ $scope.user = User.get().$promise.then(function(user) {
         // these preferences are saved to the database and display new jobs results.
         $scope.updateJob = function(headline, location) {
             $scope.user = Auth.getCurrentUser();
-            $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
             $scope.userHeadline =  headline;
@@ -59,6 +58,9 @@ $scope.user = User.get().$promise.then(function(user) {
                console.log(jobs.data)
                $scope.loading = false;
                $scope.jobArray = jobs.data;
+               if(jobs.data[0].jobtitle == "No More Jobs"){
+                    $scope.searchDone = true;
+               }
             })
         };
 
