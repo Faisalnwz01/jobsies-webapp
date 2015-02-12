@@ -21,6 +21,7 @@ $scope.user = User.get().$promise.then(function(user) {
         // The user can changes the type of job they are looking for and/or location preferences.
         // these preferences are saved to the database and display new jobs results.
         $scope.updateJob = function(headline, location) {
+            $scope.searchDone = false;
             $scope.user = Auth.getCurrentUser();
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
