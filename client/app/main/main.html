@@ -25,11 +25,14 @@
         <!-- this is the end of right sidebar -->
         <div class="jobsCard" ng-show="loading">
             <div class="card z-depth-5">
-                <div >
-                    <center><h1> Searching for <span><i>{{user.linkedin.positions.values[0].title}} </i></span>Jobs in <span><i> {{user.linkedin.location.name}}</i></span></h1></center>
-                    <img style="width: 95%;" src = '/assets/images/loading.gif'>
-                </div>
-            </div>
+
+  <div >
+    <center><h1> Searching for <span><i>{{userHeadline}} </i></span>Jobs in <span><i> {{jobLocation}}</i></span></h1></center>
+      <img style="width: 95%;" src = '/assets/images/loading.gif'>
+
+  </div>
+           </div>
+
         </div>
         <div class="jobsCard">
             <div class="card z-depth-5" ng-hide="searchDone">
