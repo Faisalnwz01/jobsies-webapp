@@ -251,29 +251,31 @@ exports.getCheerio = function(req, res) {
         request.get({
             url: url
         }, function(err, response) {
-            if(err){console.log(err);}
-            var htmlFromIndeed = response.body;
-            var $ = cheerio.load(htmlFromIndeed);
-            var logo = $('.cmp_logo').find('img').attr('src');
-            var summary_text = $('#job_summary').text();
-            var summaryIndex = summary_text.search(qualReg);
-            var requirementIndex = summary_text.search(reqReg);
-            var skillsIndex = summary_text.search(skillReg);
-            var contact_information = summary_text.match(contactReg);
-            var summary = summary_text.slice(summaryIndex, summaryIndex + 500) ||
-                summary_text.slice(requirementIndex, requirementIndex + 500) ||
-                summary_text.slice(skillsIndex, skillsIndex + 500) ||
-                "NA";
-                if (logo === undefined){
-                    logo = 'http://www.forexfactory.com/attachment.php?attachmentid=1557296&stc=1&thumb=1&d=1416835200'
-                }
-            var new_stuff = {
-                logo: logo,
-                summary: summary,
-                contact_information: contact_information
-            };
-            var updated = _.merge(item, new_stuff);
-            cb(err, updated);
+            if(err){cb([{jobtitle: "No More Jobs", company:"Jobsies", snippet: "There are no more results for the current criteria. Please change your search preferences to a different job title or skill.                                                                                "}]);}
+                else{
+                var htmlFromIndeed = response.body;
+                var $ = cheerio.load(htmlFromIndeed);
+                var logo = $('.cmp_logo').find('img').attr('src');
+                var summary_text = $('#job_summary').text();
+                var summaryIndex = summary_text.search(qualReg);
+                var requirementIndex = summary_text.search(reqReg);
+                var skillsIndex = summary_text.search(skillReg);
+                var contact_information = summary_text.match(contactReg);
+                var summary = summary_text.slice(summaryIndex, summaryIndex + 500) ||
+                    summary_text.slice(requirementIndex, requirementIndex + 500) ||
+                    summary_text.slice(skillsIndex, skillsIndex + 500) ||
+                    "NA";
+                    if (logo === undefined){
+                        logo = 'http://www.forexfactory.com/attachment.php?attachmentid=1557296&stc=1&thumb=1&d=1416835200'
+                    }
+                var new_stuff = {
+                    logo: logo,
+                    summary: summary,
+                    contact_information: contact_information
+                };
+                var updated = _.merge(item, new_stuff);
+                cb(err, updated);
+            }
         })
     }
     async.map(req, cheerioStuff, function(err, results) {
