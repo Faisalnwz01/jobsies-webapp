@@ -7,7 +7,7 @@ var Job = require('./job.model');
 var User = require('../user/user.model');
 var async = require('async');
 var underscore = require('underscore');
-var Indeed = require('indeed-api').getInstance('4024430501334376')
+var Indeed = require('../../components/indeed-api/api.js').getInstance('4024430501334376')
 
 
 // Get list of jobs
@@ -28,7 +28,7 @@ exports.getIndeedJobs = function(req, res) {
     var start = req.body.start;
     var user = req.body.user_info;
     async.parallel([ 
-        function(cb) {
+        function(cb){
             Indeed.JobSearch()
             .Radius(20)
             .WhereLocation({
