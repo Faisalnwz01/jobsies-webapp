@@ -7,7 +7,6 @@ angular.module('jobsiesApp')
         // });
 
 $scope.user = User.get().$promise.then(function(user) {
-    console.log($scope.user)
                 $scope.user = user
 
         $scope.currentJob = 0;
@@ -56,7 +55,6 @@ $scope.user = User.get().$promise.then(function(user) {
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-               console.log(jobs)
                if(jobs === "ZERO_RESULTS"){
                     $scope.searchDone = true;
                     $scope.loading = false;

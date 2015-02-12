@@ -12,7 +12,6 @@ angular.module('jobsiesApp')
                     }
                     $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
                         .then(function(data) {
-                            console.log("fake location", data)
                             if(data.status === "ZERO_RESULTS"){
                                 resolve(data.status);
                             }
