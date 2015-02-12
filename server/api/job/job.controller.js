@@ -22,14 +22,6 @@ exports.index = function(req, res) {
 
 //get jobs from the indeed api
 exports.getIndeedJobs = function(req, res) {
-    this.Start = function(start){
-        if (Util.isNumeric(start))
-            query.start = start;
-        else
-            throw "start must be a numeric value!";
-
-        return this;
-    }
     var query = req.body.query;
     var city = req.body.city;
     var state = req.body.state;
