@@ -5,13 +5,13 @@
             <div class="row">
                 <div class="col s12">
                     <div class="intro-message">
-                    <h1>Welcome to Jobsies. </h1>
+                    <h1 ng-class="{loginhover: hover}">Welcome to Jobsies. </h1>
                     <h2>Read <a href="#about">more</a> or just log in with LinkedIn.<h2>
                         <ul class="intro-social-buttons">
                             <li>
-                               <a href="#" class="waves-effect waves-light btn-large linked-in" ng-click="loginOauth('linkedin')"><i class="fa fa-linkedin fa-fw"></i> </a>
+                               <a href="#" ng-mouseenter="hover = true" ng-mouseleave="hover = false" class="waves-effect waves-light btn-large linked-in" ng-click="loginOauth('linkedin')"><i class="fa fa-linkedin fa-fw"></i> </a>
                             </li>
-                            <li><div id="login"> Login </div>
+                            <li><div ng-class="{loginhover: hover}" class="login"> Login </div>
                             </li>
                         </ul>
                         <br>

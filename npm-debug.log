@@ -1,0 +1,106 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'restler', '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose readDependencies using package.json deps
+5 verbose cache add [ 'restler', null ]
+6 verbose cache add name=undefined spec="restler" args=["restler",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'restler',
+7 verbose parsed url   path: 'restler',
+7 verbose parsed url   href: 'restler' }
+8 silly lockFile fb93280d-restler restler
+9 verbose lock restler /Users/BeardedApple/.npm/fb93280d-restler.lock
+10 silly lockFile fb93280d-restler restler
+11 silly lockFile fb93280d-restler restler
+12 verbose addNamed [ 'restler', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile e35561c0-restler restler@
+15 verbose lock restler@ /Users/BeardedApple/.npm/e35561c0-restler.lock
+16 silly addNameRange { name: 'restler', range: '*', hasData: false }
+17 verbose request where is /restler
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 019fbf419d11b6b4
+20 verbose url raw /restler
+21 verbose url resolving [ 'https://registry.npmjs.org/', './restler' ]
+22 verbose url resolved https://registry.npmjs.org/restler
+23 verbose request where is https://registry.npmjs.org/restler
+24 info trying registry request attempt 1 at 11:35:59
+25 verbose etag "8RYOYS13T2UDNPHGFQP1MF3W3"
+26 http GET https://registry.npmjs.org/restler
+27 http 200 https://registry.npmjs.org/restler
+28 silly registry.get cb [ 200,
+28 silly registry.get   { date: 'Thu, 12 Feb 2015 16:35:59 GMT',
+28 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+28 silly registry.get     etag: '"7RN11K5J13TCHSH9D3VJWYTTP"',
+28 silly registry.get     'content-type': 'application/json',
+28 silly registry.get     'cache-control': 'max-age=60',
+28 silly registry.get     'content-length': '22828',
+28 silly registry.get     'accept-ranges': 'bytes',
+28 silly registry.get     via: '1.1 varnish',
+28 silly registry.get     age: '53',
+28 silly registry.get     'x-served-by': 'cache-atl6228-ATL',
+28 silly registry.get     'x-cache': 'HIT',
+28 silly registry.get     'x-cache-hits': '1',
+28 silly registry.get     'x-timer': 'S1423758959.532288,VS0,VE1',
+28 silly registry.get     vary: 'Accept',
+28 silly registry.get     'keep-alive': 'timeout=10, max=50',
+28 silly registry.get     connection: 'Keep-Alive' } ]
+29 silly addNameRange number 2 { name: 'restler', range: '*', hasData: true }
+30 silly addNameRange versions [ 'restler',
+30 silly addNameRange   [ '0.2.0',
+30 silly addNameRange     '0.2.1',
+30 silly addNameRange     '0.2.2',
+30 silly addNameRange     '0.2.3',
+30 silly addNameRange     '0.2.4',
+30 silly addNameRange     '0.2.5',
+30 silly addNameRange     '2.0.0',
+30 silly addNameRange     '2.0.1',
+30 silly addNameRange     '3.0.0',
+30 silly addNameRange     '3.1.0',
+30 silly addNameRange     '3.2.0',
+30 silly addNameRange     '3.2.1',
+30 silly addNameRange     '3.2.2' ] ]
+31 verbose addNamed [ 'restler', '3.2.2' ]
+32 verbose addNamed [ '3.2.2', '3.2.2' ]
+33 silly lockFile 37d209e7-restler-3-2-2 restler@3.2.2
+34 verbose lock restler@3.2.2 /Users/BeardedApple/.npm/37d209e7-restler-3-2-2.lock
+35 silly lockFile d3482ed9-js-org-restler-restler-3-2-2-tgz https://registry.npmjs.org/restler/-/restler-3.2.2.tgz
+36 verbose lock https://registry.npmjs.org/restler/-/restler-3.2.2.tgz /Users/BeardedApple/.npm/d3482ed9-js-org-restler-restler-3-2-2-tgz.lock
+37 verbose addRemoteTarball [ 'https://registry.npmjs.org/restler/-/restler-3.2.2.tgz',
+37 verbose addRemoteTarball   'f6c532b937746093e3486387e57fb1051bdb2857' ]
+38 info retry fetch attempt 1 at 11:35:59
+39 verbose fetch to= /var/folders/9k/v37rbpl95l3232ml_vq6py3w0000gn/T/npm-59936-0T3iT25g/registry.npmjs.org/restler/-/restler-3.2.2.tgz
+40 http GET https://registry.npmjs.org/restler/-/restler-3.2.2.tgz
+41 http 200 https://registry.npmjs.org/restler/-/restler-3.2.2.tgz
+42 silly lockFile d3482ed9-js-org-restler-restler-3-2-2-tgz https://registry.npmjs.org/restler/-/restler-3.2.2.tgz
+43 silly lockFile d3482ed9-js-org-restler-restler-3-2-2-tgz https://registry.npmjs.org/restler/-/restler-3.2.2.tgz
+44 silly lockFile 37d209e7-restler-3-2-2 restler@3.2.2
+45 silly lockFile 37d209e7-restler-3-2-2 restler@3.2.2
+46 silly lockFile e35561c0-restler restler@
+47 silly lockFile e35561c0-restler restler@
+48 error Error: EACCES, mkdir '/Users/BeardedApple/.npm/restler/3.2.2'
+48 error  { [Error: EACCES, mkdir '/Users/BeardedApple/.npm/restler/3.2.2']
+48 error   errno: 3,
+48 error   code: 'EACCES',
+48 error   path: '/Users/BeardedApple/.npm/restler/3.2.2',
+48 error   parent: 'jobsies' }
+49 error Please try running this command again as root/Administrator.
+50 error System Darwin 14.0.0
+51 error command "node" "/usr/local/bin/npm" "install" "restler" "--save"
+52 error cwd /Users/BeardedApple/jobsies-webapp
+53 error node -v v0.10.32
+54 error npm -v 1.4.28
+55 error path /Users/BeardedApple/.npm/restler/3.2.2
+56 error code EACCES
+57 error errno 3
+58 error stack Error: EACCES, mkdir '/Users/BeardedApple/.npm/restler/3.2.2'
+59 verbose exit [ 3, true ]
