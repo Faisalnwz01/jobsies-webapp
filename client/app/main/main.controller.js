@@ -25,6 +25,8 @@ $scope.user = User.get().$promise.then(function(user) {
             $scope.searchDone = false;
             $scope.user.jobUserLookingFor = headline;
             $scope.user.locationUserWantsToWorkIn = location;
+            $scope.userHeadline =  headline;
+            $scope.jobLocation = location;
             userPreferences.savePreferences($scope.user, {location: location, headline:headline})
             $scope.jobArray = [];
             $scope.loading = true;
