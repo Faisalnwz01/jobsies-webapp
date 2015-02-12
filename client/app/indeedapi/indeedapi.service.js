@@ -10,7 +10,7 @@ angular.module('jobsiesApp')
                     } else {
                         new_location = location;
                     }
-                    $.get("http://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
+                    $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
                         .then(function(data) {
                             var user_info = Auth.getCurrentUser()._id;
                             var state = data.results[0].address_components[2].short_name;
