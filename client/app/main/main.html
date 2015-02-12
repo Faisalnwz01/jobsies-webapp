@@ -2,18 +2,27 @@
 <div class="background">
     <div class="row">
         <!-- this is start of right side navbar -->
-        <md-sidenav id="sidenav-left"  class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+        <form name="newSearch">
+            <md-sidenav id="sidenav-left"  class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
             <md-content class="md-padding" ng-controller="LeftCtrl">
-             <div class="card-panel bluecolors"><h3>Job Title or Skill</h3></div><br>
-                <input type="text" placeholder="Job Title or Skill" class="form-control" ng-model="userHeadline" /><br>
-                <div class="card-panel bluecolors"><h3>Job Location</h3></div><br>
-                <input type="text" placeholder="City" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" /><br>
-                 <a class="btn update" ng-click="updateJob(userHeadline, jobLocation)" type="submit" name="action"><b>Update Search</b></a>
-                 <a class="btn savedjobs" ng-click="toggleRight()"><b>Saved Jobs</b></a>
+            <div class="card-panel bluecolors"><h3>Job Title or Skill</h3></div><br>
+            <input type="text" name="job" placeholder="Job Title or Skill" class="form-control" ng-model="userHeadline" required>
+            <small class="error" style ="color:red;" ng-show="newSearch.job.$error.required">
+            Your name is required.
+            </small>
+            <br>
+            <div class="card-panel bluecolors"><h3>Job Location</h3></div><br>
+            <input type="text" placeholder="City" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" name="jobLocation"  required/>
+            <small class="error" style ="color:red;" ng-show="newSearch.jobLocation.$error.required">
+            Your Location is required.
+            </small>
+            <br>
+            <a class="btn update" ng-click="updateJob(userHeadline, jobLocation)" type="submit" name="action" ng-disabled="newSearch.$invalid"><b>Update Search</b></a>
+            <a class="btn savedjobs" ng-click="toggleRight()"><b>Saved Jobs</b></a>
             </md-content>
-        </md-sidenav>
+            </md-sidenav>
+        </form>
         <!-- this is the end of right sidebar -->
-
         <div class="jobsCard" ng-show="loading">
             <div class="card z-depth-5">
 
@@ -23,25 +32,24 @@
 
   </div>
            </div>
-        </div>
 
+        </div>
         <div class="jobsCard">
             <div class="card z-depth-5" ng-hide="searchDone">
                 <div ng-repeat="job in jobArray" ng-show="$index===currentJob">
                     <div class='card-image'>
-                         <div class="card-panel bluecolors"><h1>{{job.jobtitle}}</h1><h3 class="colorize">Posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}} by {{job.company}}</h3></div><br>
+                        <div class="card-panel bluecolors"><h1>{{job.jobtitle}}</h1><h3 class="colorize">Posted {{job.formattedRelativeTime}} in {{job.formattedLocationFull}} by {{job.company}}</h3></div><br>
                         <div class="colorize"><p class="lead paddingdescription">{{job.snippet}}</p></div>
                         <br>
                         <br>
                         <center><img style='max-width:300px;max-height:150px' src='http://indeed.com/{{job.logo}}' onerror='this.onerror = null; this.src="http://i.imgur.com/TdzE0yr.jpg"'>
                         </center>
-
                     </div>
                     <div id="buttonsDiv" class="card-content">
                         <div>
                             <a class="btn passtime" ng-click="saveOrPass('pass', job)"><b>Pass Job</b></a>
                             <a class="btn savetime" ng-click="saveOrPass('save', job)"><b>Save Job</b></a>
-                        </div> 
+                        </div>
                     </div>
                     <div class="revealbottom"><div class="card-title activator details">Click for more details!<i class="mdi-navigation-more-vert right"></i></div></div>
                     <div class="card-reveal">
@@ -51,44 +59,41 @@
                             <a target="_blank" href="{{job.url}}"class="btn"><b>Read More...</b></a>
                         </div>
                         <span class="card-title details">Go back! <i class="mdi-navigation-close right"></i></span>
-
                     </div>
                 </div>
             </div>
         </div>
-
-       
-
- 
+        
+        
         <md-sidenav id='rightsidebar' class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
-                <div class="card-panel bluecolors"><h2>Saved Jobs</h2></div>
-            <md-content ng-controller="RightCtrl" class="md-padding">
-                <div class="collapsible" data-collapsible="accordion">
-                  <ul ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
-                    <li>
-                        <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>  {{job.company.substring(0,24)}}
-                        </div>
-                        <div class="collapsible-body">
-                            <p> <strong>Job Title:</strong> {{job.jobtitle}}
-                                <br> <strong>Location:</strong> {{job.formattedLocationFull}}
-                                <br> <strong>Date Posted:</strong> {{job.date | date}}
-                                <br> {{job.snippet}}
-                                <br> <strong>{{job.numLikes}}<strong> users saved this job
-                                <br>
-                                <strong ng-show="{{job.numLikes}}>50" style="color: red;">Competitive</strong>
-                               <strong  ng-show="{{job.numLikes}}<50" style="color: green;">Not Competitive</strong>
-                                <br>
-                                <a href="{{job.url}}" target="_blank">More Info </a>
-                                <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
-                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank" ng-show="contact_info_for_job">Auto Apply</a>
-                            </p>
-                        </div>
-                    </li>
-                  </ul>
-                </div>
-                <md-button ng-click="close()" class="md-primary">
-                </md-button>
-            </md-content>
+        <div class="card-panel bluecolors"><h2>Saved Jobs</h2></div>
+        <md-content ng-controller="RightCtrl" class="md-padding">
+        <div class="collapsible" data-collapsible="accordion">
+            <ul ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
+                <li>
+                    <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>  {{job.company.substring(0,24)}}
+                    </div>
+                    <div class="collapsible-body">
+                        <p> <strong>Job Title:</strong> {{job.jobtitle}}
+                        <br> <strong>Location:</strong> {{job.formattedLocationFull}}
+                        <br> <strong>Date Posted:</strong> {{job.date | date}}
+                        <br> {{job.snippet}}
+                        <br> <strong>{{job.numLikes}}<strong> users saved this job
+                        <br>
+                        <strong ng-show="{{job.numLikes}}>50" style="color: red;">Competitive</strong>
+                        <strong  ng-show="{{job.numLikes}}<50" style="color: green;">Not Competitive</strong>
+                        <br>
+                        <a href="{{job.url}}" target="_blank">More Info </a>
+                        <md-button ng-click="removeJobFromUser(job)">Remove job</md-button>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{job.contact_information[0]}}&su={{job.jobtitle}} Position At {{job.company}}&body={{encodedEmail}}" target="_blank" ng-show="contact_info_for_job">Auto Apply</a>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <md-button ng-click="close()" class="md-primary">
+        </md-button>
+        </md-content>
         </md-sidenav>
     </div>
 </div>
