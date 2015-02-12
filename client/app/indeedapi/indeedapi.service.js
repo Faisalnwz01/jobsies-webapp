@@ -12,18 +12,24 @@ angular.module('jobsiesApp')
                     }
                     $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + new_location + "&sensor=true")
                         .then(function(data) {
-                            var user_info = Auth.getCurrentUser()._id;
-                            var state = data.results[0].address_components[2].short_name;
-                            $http.put('api/jobs/getIndeedJobs/', {
-                                query: query,
-                                city: new_location,
-                                state: state,
-                                start: start,
-                                user_info: user_info
-                            })
-                                .then(function(response){
-                                    resolve(response);
+                            console.log("fake location", data)
+                            if(data.status === "ZERO_RESULTS"){
+                                resolve(data.status);
+                            }
+                            else{
+                                var user_info = Auth.getCurrentUser()._id;
+                                var state = data.results[0].address_components[2].short_name;
+                                $http.put('api/jobs/getIndeedJobs/', {
+                                    query: query,
+                                    city: new_location,
+                                    state: state,
+                                    start: start,
+                                    user_info: user_info
                                 })
+                                    .then(function(response){
+                                        resolve(response);
+                                    })
+                                }
                         })
 
                 })

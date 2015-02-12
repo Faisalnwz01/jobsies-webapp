@@ -56,11 +56,18 @@ $scope.user = User.get().$promise.then(function(user) {
         //gets  jobs from the indeed api to display on the home page.
         $scope.getJobs = function(headline, location, start) {
             indeedapi.getIndeedJobs(headline, location, start||0).then(function(jobs) {
-               console.log(jobs.data)
-               $scope.loading = false;
-               $scope.jobArray = jobs.data;
-               if(jobs.data[0].jobtitle == "No More Jobs"){
+               console.log(jobs)
+               if(jobs === "ZERO_RESULTS"){
                     $scope.searchDone = true;
+                    $scope.loading = false;
+                    alert("No jobs for this location and/or job title or skill. Check your input for spelling mistakes.") 
+               }
+               else{
+                    $scope.loading = false;
+                   $scope.jobArray = jobs.data;
+                   if(jobs.data[0].jobtitle == "No More Jobs"){
+                        $scope.searchDone = true;
+                    }
                }
             })
         };
