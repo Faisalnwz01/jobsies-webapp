@@ -75,7 +75,7 @@ function setTokenCookie(req, res) {
 
   }
 
-  if(req.headers.referer === "https://jobsies.herokuapp.com/"){
+  if(req.headers.referer === "https://jobsies.herokuapp.com/" || req.headers.referer === "http://jobsies.herokuapp.com/" ){
        res.redirect('https://jobsies.herokuapp.com/main')
   }
 
