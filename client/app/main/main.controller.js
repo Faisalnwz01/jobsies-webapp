@@ -160,10 +160,8 @@ $scope.user = User.get().$promise.then(function(user) {
                         job.numLikes +=1;
                     }
                     else{job.numLikes =1}
-                    SaveJobs.postJobs(job).then(function(){console.log("saved job")})
-                    setTimeout(function() {
-                        $scope.getSavedJobsies();
-                    }, 1000)
+                    SaveJobs.postJobs(job)
+                        .then($scope.getSavedJobsies())
                 }
                 if (status == 'pass') {
                     toast('Job Passed :(', 3000)
