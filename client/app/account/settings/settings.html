@@ -3,7 +3,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Change Password</h1>
+      <h1 style="color: #1B86BC">Change Password</h1>
+      <br>
+      <br>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
@@ -32,8 +34,10 @@
 
         <p class="help-block"> {{ message }} </p>
 
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        <button class="btn btn-lg btn-primary" type="submit"><b>Save changes</b></button>
       </form>
     </div>
   </div>
 </div>
+
+<div ng-include="'components/footer/footer.html'"></div>
