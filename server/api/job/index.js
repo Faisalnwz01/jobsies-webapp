@@ -7,7 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.put('/getIndeedJobs/', controller.getIndeedJobs);
-router.get('/:id', controller.show);
+router.put('/saveJobs/:id', controller.show);
 router.get('/recruiterJobs/:id', controller.getRecruiterJobs);
 router.post('/', controller.create);
 router.post('/cheerio', controller.getCheerio);

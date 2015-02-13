@@ -89,17 +89,57 @@ exports.getIndeedJobs = function(req, res) {
 
 // Get a single job
 exports.show = function(req, res) {
-    Job.find({
-        jobkey: req.params.id
-    }, function(err, job) {
-        if (err) {
-            return handleError(res, err);
+    var job = req.body.job;
+    var user = req.body.user;
+    async.parallel([
+        function(cb){
+            Job.find({
+                jobkey: req.params.id
+            })
+            .exec(function(err, job){
+                   if (err) return next(err);
+                   if (!job) return res.send(401);
+                   cb(null, job);
+                });
+            },
+        function(cb) {
+            User.findById(user)
+                .populate('jobs_saved')
+                .exec(function(err, full_user){
+                   if (err) return next(err);
+                   if (!full_user) return res.send(401);
+                   cb(null, full_user);
+                });
+            }
+        ],
+        function(err, results){
+            var currentJob = results[0];
+            var currentUser = results[1];
+            if(currentJob.length === 0){
+                job.users_saved =[currentUser._id];
+                var new_job = new Job(job);
+                new_job.save(function(err){
+                    if(err){console.log(err)}
+                })
+                console.log("new job", new_job)
+                if(currentUser.jobs_saved){
+                    currentUser.jobs_saved.push(new_job._id)
+                    currentUser.save(function(err){
+                        if(err){console.log(err);}
+                    })
+                }
+                else{
+                    currentUser.jobs_saved = [new_job._id];
+                    currentUser.save(function(err){
+                        if(err){console.log(err);}
+                    })
+                }
+            }
+            else{
+                console.log("job here")
+            }
         }
-        if (!job) {
-            return res.send(404);
-        }
-        return res.json(job);
-    });
+    )
 };
 
 exports.jobShow = function(req, res) {
