@@ -121,7 +121,6 @@ exports.show = function(req, res) {
                 new_job.save(function(err){
                     if(err){console.log(err)}
                 })
-                console.log("new job", new_job)
                 if(currentUser.jobs_saved){
                     currentUser.jobs_saved.push(new_job._id)
                     currentUser.save(function(err){
