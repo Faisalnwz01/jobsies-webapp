@@ -8,13 +8,13 @@
             <div class="card-panel bluecolors"><h3>Job Title or Skill</h3></div><br>
             <input type="text" name="job" placeholder="Job Title or Skill" class="form-control" ng-model="userHeadline" required>
             <small class="error" style ="color:red;" ng-show="newSearch.job.$error.required">
-            Your name is required.
+            A jobtitle required.
             </small>
             <br>
             <div class="card-panel bluecolors"><h3>Job Location</h3></div><br>
             <input type="text" placeholder="City" id="Autocomplete" class="form-control" ng-autocomplete details="details2" options="options" ng-model="jobLocation" name="jobLocation"  required/>
             <small class="error" style ="color:red;" ng-show="newSearch.jobLocation.$error.required">
-            Your Location is required.
+            Your location is required.
             </small>
             <br>
             <a class="btn update" ng-click="updateJob(userHeadline, jobLocation)" type="submit" name="action" ng-disabled="newSearch.$invalid"><b>Update Search</b></a>
@@ -67,7 +67,7 @@
         
         
         <md-sidenav id='rightsidebar' class="md-sidenav-right md-whiteframe-z2 col s2" md-component-id="right">
-        <div class="card-panel bluecolors"><h2>Saved Jobs</h2></div>
+        <div class="card-panel bluecolors" ng-click="toggleRight()"><h2>Saved Jobs</h2></div>
         <md-content ng-controller="RightCtrl" class="md-padding">
         <div class="collapsible" data-collapsible="accordion">
             <ul ng-repeat="job in savedJobsFrontPage" ng-click="generateCoverLetter($index)">
@@ -79,7 +79,7 @@
                         <br> <strong>Location:</strong> {{job.formattedLocationFull}}
                         <br> <strong>Date Posted:</strong> {{job.date | date}}
                         <br> {{job.snippet}}
-                        <br> <strong>{{job.numLikes}}<strong> users saved this job
+                        <br> <strong>{{job.numLikes}} <strong> saved
                         <br>
                         <strong ng-show="{{job.numLikes}}>50" style="color: red;">Competitive</strong>
                         <strong  ng-show="{{job.numLikes}}<50" style="color: green;">Not Competitive</strong>
