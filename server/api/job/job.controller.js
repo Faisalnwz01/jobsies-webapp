@@ -116,7 +116,7 @@ exports.show = function(req, res) {
             var currentJob = results[0];
             var currentUser = results[1];
             if(currentJob.length === 0){
-                job.users_saved =[currentUser._id];
+                job.user_ids =[currentUser._id];
                 var new_job = new Job(job);
                 new_job.save(function(err){
                     if(err){console.log(err)}
@@ -136,7 +136,37 @@ exports.show = function(req, res) {
                 }
             }
             else{
-                console.log("job here")
+                console.log(currentJob);
+                var thisJob = currentJob[0]
+                if(thisJob.user_ids){
+                    if(thisJob.user_ids.indexOf(currentUser._id) === -1){
+                        thisJob.user_ids.push(currentUser._id)
+                        thisJob.save(function(err){
+                         if(err){console.log(err);}
+                        })
+                    }
+                } 
+                else if(!thisJob.user_ids){
+                    thisJob.user_ids = [currentUser._id];
+                    thisJob.save(function(err){
+                         if(err){console.log(err);}
+                    })
+                }
+                if(currentUser.jobs_saved){
+                    if(currentUser.jobs_saved.indexOf(thisJob._id)===-1){
+                        currentUser.jobs_saved.push(thisJob._id)
+                        currentUser.save(function(err){
+                            if(err){console.log(err);}
+                        })
+                    }
+                }
+                else if(!currentUser.jobs_saved){
+                    currentUser.jobs_saved = [thisJob._id];
+                    currentUser.save(function(err){
+                        if(err){console.log(err);}
+                    })
+                }
+
             }
         }
     )
