@@ -1,37 +1,32 @@
-
-<div class="col-md-9 container cards">
-    <div class="col-md-6 col-lg-6 col-sm-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-        <md-card ng-hide="searchDone">
-            <md-content class="md-padding">
-                <form name="newPost">
-                    <textarea ng-model="job.jobtitle" name="title" class="form-control" rows="1" placeholder="Enter Position Title" required></textarea>
-                    <small class="error" ng-show="newPost.title.$error.required">
-                     Your name is required.
-                      </small>
-                    <br>
-                    <textarea ng-model="job.formattedLocationFull" class="form-control" rows="1" placeholder="Location"></textarea>
-                    <br>
-                    <textarea ng-model="job.company" class="form-control" rows="1" placeholder="Company"></textarea>
-                    <br>
-                    <textarea ng-model="job.snippet" name="snippet" class="form-control" rows="3" placeholder="Snippet" type="text" ng-minlength=100></textarea>
-                    <small style="color: red;" class="error" ng-show="newPost.snippet.$error.minlength">
-                      Snippet requires at least 100 characters
-                    </small>
-                    <br>
-                    <br>
-                    <textarea ng-model="job.summary" name='summary' class="form-control" rows="3" placeholder="Description" type="text" ng-minlength=200></textarea>
-                    <small style="color: red;" class="error" ng-show="newPost.summary.$error.minlength">
-                      Description requires at least 200 characters
-                    </small>
-                    <br>
-                    <br>
-                    <textarea ng-model="job.qualifications" class="form-control" rows="3" placeholder="Qualifications"></textarea>
-                    <br>
-                </form>
-                <md-button ng-disabled="newPost.$invalid" class="md-raised md-primary save" type="submit" ng-click="postJob(job)">Save</md-button>
-                <md-button class="md-raised md-warn pass" ng-click="discardForm()">Discard</md-button>
-            </md-content>
-        </md-card>
+<div class="card large toppost">
+    <div class="postform">
+    <form name="newPost">
+        <textarea ng-model="job.jobtitle" name="title" class="form-control" rows="1" placeholder="Enter Position Title" required></textarea>
+        <small class="error" ng-show="newPost.title.$error.required">
+         Your name is required.
+          </small>
+        <br>
+        <textarea ng-model="job.formattedLocationFull" class="form-control" rows="1" placeholder="Location"></textarea>
+        <br>
+        <textarea ng-model="job.company" class="form-control" rows="1" placeholder="Company"></textarea>
+        <br>
+        <textarea ng-model="job.snippet" name="snippet" class="form-control" rows="3" placeholder="Snippet" type="text" ng-minlength=100></textarea>
+        <small style="color: red;" class="error" ng-show="newPost.snippet.$error.minlength">
+          Snippet requires at least 100 characters
+        </small>
+        <br>
+        <br>
+        <textarea ng-model="job.summary" name='summary' class="form-control" rows="3" placeholder="Description" type="text" ng-minlength=200></textarea>
+        <small style="color: red;" class="error" ng-show="newPost.summary.$error.minlength">
+          Description requires at least 200 characters
+        </small>
+        <br>
+        <br>
+        <textarea ng-model="job.qualifications" class="form-control" rows="3" placeholder="Qualifications"></textarea>
+        <br>
+    </form>
+                <a class="btn savetime" ng-disabled="newPost.$invalid" type="submit" ng-click="postJob(job)">Save</a>
+                <a class="btn passtime" ng-click="discardForm()">Discard</a>
     </div>
 </div>
 <!--
