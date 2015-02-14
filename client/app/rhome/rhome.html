@@ -26,7 +26,7 @@
         </md-sidenav>
         <div rusercard ng-if="showCard" class="col s4 offset-s2  ruser-card"></div>
         <div rpostedjobs ng-if="showPostedJob" class="col s6 offset-s2"></div>
-        <div rpostjobs ng-if="showjobs"></div>
+        <div rpostjobs ng-if="showjobs" class="col s4 offset-s2"></div>
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 col s1" md-component-id="right">
             <md-content ng-controller="RightCtrl" class="md-padding">
                 <div ng-repeat="user in users_saved" class="row">

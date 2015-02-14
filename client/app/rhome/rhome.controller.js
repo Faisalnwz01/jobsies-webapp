@@ -171,6 +171,17 @@ angular.module('jobsiesApp')
             console.log("wtf",job)
           });
         };
+      $scope.deleteJob = function(job, index) {
+            console.log(index)
+            $scope.jobs.slice(index, 1);
+            if ($scope.jobs.length<0) {
+                $scope.jobs = '';
+            }
+        $http.delete('/api/jobs/' + job._id).success(function() {
+            console.log("deleted")
+            $scope.showPostedJob = false;
+        })
+      }
 
         $scope.saveCandidate = function(cardUser, cardJob) {
             //cardJob.users_saved.push(cardUser._id)

@@ -2,6 +2,7 @@
     <div class="card-image waves-effect waves-block waves-light">
         <div class="user-information">
             <h1 class="bluecolors">View or Edit Your Posted Position <button class="btn btn-lg-default" ng-click="jobPostEdit.$show()" ng-show="!jobPostEdit.$visible" ng-hide="jobPostEdit.$visible">Edit</button></h1>
+            <h1 class="bluecolors">Delete Posted Position <button class="btn btn-lg-default" ng-click="deleteJob(job)">Delete</button></h1>
             <form editable-form name="jobPostEdit" onaftersave="edit(job)">
                 <div ng-show="jobPostEdit.$visible" class='row'>
                     <button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="jobPostEdit.$waiting">
