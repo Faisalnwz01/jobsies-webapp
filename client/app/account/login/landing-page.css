@@ -25,7 +25,8 @@ html {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(/assets/images/intro-bg.jpg) no-repeat center center;
+/*    background-color:#F8F8F8;
+*/    background: url(/assets/images/building.jpg) no-repeat center center;
     background-size: cover;
 }
 
