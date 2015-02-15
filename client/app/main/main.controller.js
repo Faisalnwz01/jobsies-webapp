@@ -8,7 +8,7 @@ angular.module('jobsiesApp')
 
 $scope.user = User.get().$promise.then(function(user) {
                 $scope.user = user
-
+                console.log($scope.user);
         $scope.currentJob = 0;
         $scope.page = 0;
         $scope.totalResults;
