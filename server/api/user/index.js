@@ -24,6 +24,6 @@ router.get('/:id/resume', controller.resume);
 router.get('/:id/jobPopulate', controller.jobPopulate);
 router.put('/:id/removeJob/:jobId', auth.isAuthenticated(), controller.removeJob);
 router.put('/:id/removeJob/mobile/:jobId', controller.removeJob);
-// router.get('/mobile/:id', controller.mobile);
+router.get('/mobile/:id', controller.mobile);
 router.put('/mobile/getUser/:id', controller.findUserOrAdd);
 module.exports = router;
