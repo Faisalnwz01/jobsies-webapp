@@ -195,21 +195,21 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
-// exports.findUserOrAdd = function(req, res, next){
-//   var linkedinId = req.params.id;
-//   User.findOne({linkedin.id: linkedinId}, function(err, user){
-//     if (err) {
-//       User.create(req.body);
-//       User.save(function(err){
-//         res.json(user);
-//         if(err){console.log(err);}
-//       })
-//     }
-//     else {
-//       res.json(user);
-//     }
-//   })
-// }
+exports.findUserOrAdd = function(req, res, next){
+  var linkedinId = req.params.id;
+  User.findOne({'linkedin.id': linkedinId}, function(err, user){
+    if (err) {
+      User.create(req.body);
+      User.save(function(err){
+        res.json(user);
+        if(err){console.log(err);}
+      })
+    }
+    else {
+      res.json(user);
+    }
+  })
+}
 
 exports.preferences = function(req, res, next){
   if(req.body._id) { delete req.body._id; }
