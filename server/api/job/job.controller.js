@@ -107,7 +107,7 @@ exports.onlyIndeedJobs = function (req, res) {
             .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
             .Search(
                 function(results) {
-                     res.json(results.results);
+                     exports.getCheerio(results.results, res)
                 },
                 function(error) {
                     console.log(error);
