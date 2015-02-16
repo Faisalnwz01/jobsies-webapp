@@ -59,8 +59,8 @@
 <!-- Jeff added ui-view here to connect profile.html here when page goes to /main/profile -->
 <div id="cover" class = "container">
   
-  <h2 class=''>Cover Letter <span><md-button ng-click="filter()">
-    {{profileInformation.linkedin.ShowCoverLetter}}
+  <h2 class=''>Cover Letter - <span><md-button ng-click="filter()" style="font-size: 15px">
+   <span ng-show="profileInformation.linkedin.ShowCoverLetter">Include</span><span ng-show="!profileInformation.linkedin.ShowCoverLetter">Don't Include</span>
   </md-button></span></h2>
     <div class="dropdown" ng-show="profileInformation.linkedin.ShowCoverLetter">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">

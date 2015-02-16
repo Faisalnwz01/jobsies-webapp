@@ -13,11 +13,11 @@
       <ul class="list-inline intro-social-buttons">
         <li>
           <a href="" ng-click="show('formal')"><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
-          <button class="btn btn-default btn-lg" ng-click="show('formal')"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Formal</span></button>
+          <md-button class="btn btn-default btn-lg" ng-click="show('formal')">Formal</md-button>
         </li>
         <li>
           <a href="" ng-click="show('fancy')"><center><img src = '../../assets/images/comp.png' class='ngdialog-content' width='200px'></center></a>
-          <button class="btn btn-default btn-lg" ng-click="show('fancy')"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Fancy</span></button>
+          <md-button class="btn btn-default btn-lg" ng-click="show('fancy')">Fancy</md-button>
         </li>
       </ul>
     </div>
@@ -38,5 +38,4 @@
 <formal-template class = 'formal' ng-hide='!image.formal' ng-show="clicked"></formal-template>
 <fancy-template class='fancy' ng-hide='!image.fancy'></fancy-template>
 
-<div ng-show="clicked"> whattttttttttttttttttttttttt</div>
 </div>
