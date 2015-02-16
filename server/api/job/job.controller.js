@@ -87,6 +87,34 @@ exports.getIndeedJobs = function(req, res) {
     })
 }
 
+exports.onlyIndeedJobs = function (req, res) {
+      var query = req.body.query;
+    var city = req.body.city;
+    var state = req.body.state;
+    var start = req.body.start;
+    
+            Indeed.JobSearch()
+            .Radius(20)
+            .WhereLocation({
+                city: city,
+                state: state
+            })
+            .Limit(12)
+            .WhereKeywords([query])
+            .Start(start)
+            .SortBy("date")
+            .UserIP('1.2.3.4')
+            .UserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)')
+            .Search(
+                function(results) {
+                     res.json(results.results);
+                },
+                function(error) {
+                    console.log(error);
+                })
+       
+}
+
 // Get a single job
 exports.show = function(req, res) {
     var job = req.body.job;
