@@ -1,96 +1,251 @@
-<md-button ng-show="profileInformation.linkedin.ShowCoverLetter" ng-click = "openModal()">Cover Letter</md-button>
-<div layout="column" layout-fill class='resumeFormal container nopadding'>
-<h1>fancy</h1>
-<md-whiteframe class="md-whiteframe-z1">
-<div class = 'contactInfo'>
-<h1>
-{{profileInformation.name}}
-</h1>
-<div>
-<span class="glyphicon glyphicon-home"></span>
-<span class="content">{{profileInformation.linkedin.location.name}}</span>
-<span class="glyphicon glyphicon-earphone"></span>
-<span class="content">{{profileInformation.linkedin.phone}}</span>
-<div>
-  <span class="glyphicon glyphicon-envelope"></span>
-  <span class="content">{{profileInformation.linkedin.emailAddress}}</span>
-</div>
-</div>
-</div>
-<br>
-<br>
+<div id="fancy">
+    <div id="top" class="jumbotron" data-src="../../assets/images/rain.gif" data-position="bottom right">
+        
+      <div class="container">
+        <h1>{{profileInformation.name}}</h1>
+        <p class="lead">Resume</p>
+
+      </div>
+      
+      <div class="overlay"></div>
+      
+      <a href="#profile" class="scroll-down"> 
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
+    </div>
+    
+     
+      <!-- Brand and toggle get grouped for better mobile display -->
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+   
+    </nav>
+    
+    
+    <div class="background-white">
+      <md-button class="lead" style="float:right; margin-right:20px;" ng-click="openModal()"> View Cover Letter</md-button>
+      <div id="profile" class="container">
+        <h2>Profile</h2>
+<p class="lead">{{profileInformation.linkedin.headline}}</p>
+
+<hr />
 
 <div class="row">
-    <div class="col-md-3 educationFormal">
-    <h2>EDUCATION</h2>
-    </div>
-    <div ng-repeat="educations in profileInformation.linkedin.educations.values">
-      <div class="col-md-3 educationFormal">
-    </div>
-
-    <div class="col-md-7" >
-      <div class="boldText"><strong>{{educations.schoolName}}</strong>
-      </div>
-
-        <span><i>{{educations.degree}}</span>,
-        <span>{{educations.fieldOfStudy}}</i></span>
+ 
+  <div class="col-md-offset-4 col-md-4 text-center">
+    <img src="{{profileInformation.linkedin.pictureUrl}}" style="border-radius: 50%; border: 5px solid rgb(34, 163, 159);" width="246" height="246" class = "profilePicture" />
   </div>
-      <div class="col-md-2 educationFormal">
-        <span class="start-year">{{educations.startDate.year}}</span>
-        -
-        <span class="end-year">{{educations.endDate.year}}</span>
-      </div>
-      <br>
-      <br>
-      <br>
-</div>
-</div>
+  <div class="col-md-4">
+    <h3>Details</h3>
+    <p>
+      <strong>Name:</strong><br />
+      {{profileInformation.name}}<br />
+      <strong>Location:</strong><br />
+      {{profileInformation.linkedin.location.name}}</p>
+    
+  
+  </div>
+</div>      </div>  
+    </div>  
+    
+    <div id="experiences" class="container">
+      <h2>Educations</h2>
+<hr />
 
-<div class="row">
-    <div class="col-md-3 educationFormal">
-    <h2>SKILLS</h2>
+
+
+<div class="experiences">
+
+          
+  <div class="experience row" ng-repeat="educations in profileInformation.linkedin.educations.values">
+    <div class="col-md-4">
+      <h4>{{educations.schoolName}}</h4>
+      <p class="experience-period">
+        {{educations.startDate.year}}       - 
+        {{educations.endDate.year}}     </p>
     </div>
-
-
-  <ul class="col-md-7 col-lg-7 skills">
-    <li class="skill first" ng-repeat="skill in profileInformation.linkedin.skills.values">
-      <span class="skill-name">{{skill.skill.name}}</span>
-    </li>
-  </ul>
+    <div class="col-md-8">
+      <p>
+        <strong>{{educations.degree}} - {{educations.fieldOfStudy}}</strong>
+        <p>
+        <span class="hidden-phone">{{educations.notes}}</span>
+      </p>
+        <span class="experience-details">
+          <span class="location">
+            <span class="glyphicon glyphicon-map-marker"></span>
+            <a href  = 'http://maps.google.com/?q={{educations.schoolName}}' target="_blank">Location</a></span>
+        </span>
+      </p>
+    </div>
+  </div>
+  
+  
 </div>
+  
+  
 <br>
 <br>
+<h2 id="interests">Careers</h2>
+<hr />
 
+
+
+<div class="experiences">
+
+          
+  <div class="experience row" ng-repeat="position in profileInformation.linkedin.positions.values">
+    <div class="col-md-4">
+      <h4>{{position.company.name}}</h4>
+      <p class="experience-period">
+        {{position.startDate.year}}        - 
+        {{position.endDate.year || 'Present'}}    </p>
+    </div>
+    <div class="col-md-8">
+      <p>
+        <strong>{{position.title}} -</strong>
+        <span class="hidden-phone">
+        {{position.summary}}</span>
+      </p>
+    </div>
+  </div>
+  
+          
+    
+  
+          
+
+
+  
+  
+</div>
+  
+    </div>
+    
+    <div class="background-white">
+      <div id="abilities" class="container">
+        <h2>Skills</h2>
+<hr />
 
 <div class="row">
-    <div class="col-md-3 educationFormal">
-    <h2>EXPERIENCE</h2>
-    </div>
-<div ng-repeat="position in profileInformation.linkedin.positions.values">
-  <div class="col-md-3 educationFormal">
-    </div>
 
+    
+  <div class="col-md-6">
+    <ul class="no-bullets" ng-repeat="skill in profileInformation.linkedin.skills.values.slice(0, profileInformation.linkedin.skills.values.length / 2) | orderBy: '-skill.level'">
+    
+        
+      <li>
+        <span class="ability-title">{{skill.skill.name}}</span>
+        <span class="ability-score">
+        
+                
+          <span class="glyphicon glyphicon-star filled" ng-repeat="i in getNumber(skill.skill.level) track by $index"> </span>  
+          <span class="glyphicon glyphicon-star" ng-repeat="i in getNumber(4 - skill.skill.level) track by $index"></span>
+          
+          
+                  
+        </span>
+      </li>
+      
+          
+      
+      
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <ul class="no-bullets" ng-repeat="skill in profileInformation.linkedin.skills.values.slice(profileInformation.linkedin.skills.values.length / 2, profileInformation.linkedin.skills.values.length) | orderBy: '-skill.level'">
 
-    <div class="col-md-7">
-      <div class='bold'><strong>{{position.company.name}}</strong>
-      </div>
-      <div><i>{{position.title}}</i>
-      </div>
-        <br>
-      <div>{{position.summary}}
-      </div>
-      <br>
-
+      
+          
+        
+      <li>
+        <span class="ability-title">{{skill.skill.name}}</span>
+        <span class="ability-score">
+        
+                
+          <span class="glyphicon glyphicon-star filled" ng-repeat="i in getNumber(skill.skill.level) track by $index"> </span>  
+          <span class="glyphicon glyphicon-star" ng-repeat="i in getNumber(4 - skill.skill.level) track by $index"></span>
+          
+          
+                  
+        </span>
+      </li>
+      
+          
+        
+    </ul>
 
   </div>
-      <div class="col-md-2 educationFormal">
-        <span class="start-year">{{position.startDate.total}}</span>
-        -
-        <span class="end-year">{{position.endDate.total}}</span>
+  
+    
+</div>
+
+<hr />
+
+<div class="row">
+
+    
+  <div class="col-md-6">
+    
+        
+      
+        
+                
+      
+      
+      
+  </div>
+  <div class="col-md-6">
+    
+  </div>
+  
+    
+</div>
+
+    </div>
+    </div>
+    
+
+    
+    <div class="background-gray">
+      <div id="contact" class="container">
+        <h2>Contact</h2>
+
+<hr />
+<center> 
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <ul class="no-bullets">
+      <li>
+        <a href="{{profileInformation.email}}" target="_blank">
+          <span class="glyphicon glyphicon-envelope">
+          {{profileInformation.email}}</span>
+          
+                  </a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul class="no-bullets">
+      <li class="centerLi" >
+        <a href="{{contact.information}}" target="_blank">
+          <span class="glyphicon glyphicon-link">
+{{profileInformation.linkedin.publicProfileUrl}}
+          </span>
+          </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</center>
+
+<hr />
       </div>
-</div>
-</div>
+    </div>
+  
+ <script type="text/javascript" src="http://peterschoffelen.us/view/js/script.js"></script>
+  
 
-
-</md-whiteframe>
 </div>
