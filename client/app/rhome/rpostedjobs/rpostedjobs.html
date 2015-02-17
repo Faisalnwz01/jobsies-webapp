@@ -1,36 +1,41 @@
-<div class="card" ng-repeat="job in jobs" ng-show="$index===currentJob">
-    <div class="card-image waves-effect waves-block waves-light">
+<div class="card col s8" ng-repeat="job in jobs" ng-show="$index===currentJob" style="padding-bottom: 50px;">
+    <div class="card-image waves-effect waves-block waves-light jobPostedCard">
         <div class="user-information">
-            <h1 class="bluecolors">View or Edit Your Posted Position <button class="btn btn-lg-default" ng-click="jobPostEdit.$show()" ng-show="!jobPostEdit.$visible" ng-hide="jobPostEdit.$visible">Edit</button></h1>
-            <h1 class="bluecolors">Delete Posted Position <button class="btn btn-lg-default" ng-click="deleteJob(job)">Delete</button></h1>
-            <form editable-form name="jobPostEdit" onaftersave="edit(job)">
+            <h1 class="bluecolors">Your Posted Position <a class="btn" ng-click="jobPostEdit.$show()" ng-show="!jobPostEdit.$visible" ng-hide="jobPostEdit.$visible"><b>Edit</b></a><a class="btn" ng-click="deleteJob(job)"><b>Delete</b></a></h1>
+            <form class"edit-job" editable-form name="jobPostEdit" onaftersave="edit(job)">
                 <div ng-show="jobPostEdit.$visible" class='row'>
-                    <button type="submit" class="md-raised md-primary glyphicon glyphicon-saved" ng-disabled="jobPostEdit.$waiting">
-                        Save
+                    <button type="submit" class="glyphicon glyphicon-saved btn btn-default" ng-disabled="jobPostEdit.$waiting">
+                        <b>Save</b>
                     </button>
-                    <button type="button" class="md-raised glyphicon glyphicon-remove-sign" ng-disabled="jobPostEdit.$waiting" ng-click="jobPostEdit.$cancel()">
-                        Cancel
+                    <button type="button" class="glyphicon glyphicon-remove-sign btn btn-default" ng-disabled="jobPostEdit.$waiting" ng-click="jobPostEdit.$cancel()">
+                        <b>Cancel</b>
                     </button>
                 </div>
               <div id="smallEdits">
+              <div class="editTitles" ng-show="jobPostEdit.$visible">Title</div>
                 <div editable-textarea="job.jobtitle">
-                    <h1>Position Title: {{job.jobtitle}}</h1>
+                    <h2>{{job.jobtitle}} </h2></div>
+                <div class="editTitles" ng-show="jobPostEdit.$visible">Company</div>
+                    <div editable-textarea="job.company"><h2> {{job.company}}</h2>
                 </div>
-                <div editable-textarea="job.company">
-                    <h2>Company: {{job.company}}</h2>
-                </div>
+                <div class="editTitles" ng-show="jobPostEdit.$visible">Location</div>
                 <div editable-textarea="job.formattedLocationFull">
-                    <h2>Location: {{job.formattedLocationFull}}</h2>
+                    <h2> {{job.formattedLocationFull}}</h2>
                 </div>
               </div>
               <div id="bigEdits">
+              <div class="editTitles" ng-show="jobPostEdit.$visible">Qualifications</div>
                 <div id="qualifications" editable-textarea="job.qualifications">
-                    <h3>Qualifications: {{job.qualifications}}</h3>
-                </div>
-                <div  editable-textarea="job.snippet">Snippet: {{job.snippet}}
-                </div>
-                <div id="summary" editable-textarea="job.summary">Description: {{job.summary}}
-                </div>
+                    <p class="lead">{{job.qualifications}}</p>
+                </div><br>
+                <div class="editTitles" ng-show="jobPostEdit.$visible">Snippet</div>
+                <div editable-textarea="job.snippet"><p class="lead">{{job.snippet}}</p>
+                </div><br>
+                <div class="editTitles" ng-show="jobPostEdit.$visible">Description</div>
+                <div id="summary" editable-textarea="job.summary"><p class="lead">{{job.summary}}</p>
+                </div><br>
+                <br>
+                <br>
               </div>
             </form>
         </div>
