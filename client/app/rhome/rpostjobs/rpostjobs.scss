@@ -13,18 +13,27 @@
 }
 
 #bigEdits {
+	float: left;
 	textarea {
-		height: 150px;
-		width: 300px;
+		margin-top: 15px;
+		height: 100px;
+		width: 474px;
 		margin-bottom: 15px; 
 		padding: 15px;
-	}
+		float: left;	}
 }
 
+#smallEdits {
+	position: relative;
+}
 .postform {
 	padding: 20px;
 }
 
 .toppost {
 	top: 50px;
+}
+
+.jobPostedCard {
+	height: 750px;
 }
