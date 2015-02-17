@@ -2,7 +2,6 @@
 <div layout="column" layout-fill class='resumeFormal container nopadding'>
 
 <md-whiteframe class="md-whiteframe-z1">
-<h1>Formal</h1>
 <div class = 'contactInfo'>
 <h1>
 {{profileInformation.name}}
@@ -10,8 +9,6 @@
 <div>
 <span class="glyphicon glyphicon-home"></span>
 <span class="content">{{profileInformation.linkedin.location.name}}</span>
-<span class="glyphicon glyphicon-earphone"></span>
-<span class="content">{{profileInformation.linkedin.phone}}</span>
 <div>
   <span class="glyphicon glyphicon-envelope"></span>
   <span class="content">{{profileInformation.email}}</span>
@@ -85,9 +82,9 @@
 
   </div>
       <div class="col-md-2 educationFormal">
-        <span class="start-year">{{position.startDate.total}}</span>
+        <span class="start-year">{{position.startDate.year}}</span>
         -
-        <span class="end-year">{{position.endDate.total}}</span>
+        <span class="end-year">{{position.endDate.year || "Present"}}</span>
       </div>
 </div>
 </div>
