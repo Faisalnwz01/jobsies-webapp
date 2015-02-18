@@ -29,6 +29,7 @@ $scope.update()
 
             })
             $scope.update = function() {
+             User.save($scope.profileInformation)
                
             }
 
