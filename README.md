@@ -88,6 +88,8 @@ __Note:__ If you encounter errors in the installation process for npm, it is rec
 * __Faisal Nawaz__ - Project Lead [LinkedIn](https://www.linkedin.com/in/faisalnwz) | [GitHub](https://github.com/faisalnwz01)
 * __Grant Chapman Schoffelen__ - Project Lead  [LinkedIn](https://www.linkedin.com/profile/view?id=365808666) | [GitHub](https://github.com/GrantSchoffelen)
 * __Pawel Socha__ - Project Lead [LinkedIn](https://www.linkedin.com/in/sochapawel) | [GitHub](https://github.com/psoch)
+* __Michael Abraham__ - Project Lead [LinkedIn](https://www.linkedin.com/in/mjabraham) | [GitHub](https://github.com/mjabraham47)
+* 
 
 ## License
 
