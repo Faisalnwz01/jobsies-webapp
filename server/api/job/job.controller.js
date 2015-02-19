@@ -152,23 +152,25 @@ exports.show = function(req, res) {
                 if(currentUser.jobs_saved){
                     currentUser.jobs_saved.push(new_job._id)
                     currentUser.save(function(err){
+                        res.send(200);
                         if(err){console.log(err);}
                     })
                 }
                 else{
                     currentUser.jobs_saved = [new_job._id];
                     currentUser.save(function(err){
+                        res.send(200);
                         if(err){console.log(err);}
                     })
                 }
             }
             else{
-                console.log(currentJob);
                 var thisJob = currentJob[0]
                 if(thisJob.user_ids){
                     if(thisJob.user_ids.indexOf(currentUser._id) === -1){
                         thisJob.user_ids.push(currentUser._id)
                         thisJob.save(function(err){
+                            res.send(200);
                          if(err){console.log(err);}
                         })
                     }
@@ -176,6 +178,7 @@ exports.show = function(req, res) {
                 else if(!thisJob.user_ids){
                     thisJob.user_ids = [currentUser._id];
                     thisJob.save(function(err){
+                        res.send(200);
                          if(err){console.log(err);}
                     })
                 }
@@ -183,6 +186,7 @@ exports.show = function(req, res) {
                     if(currentUser.jobs_saved.indexOf(thisJob._id)===-1){
                         currentUser.jobs_saved.push(thisJob._id)
                         currentUser.save(function(err){
+                            res.send(200);
                             if(err){console.log(err);}
                         })
                     }
@@ -190,11 +194,13 @@ exports.show = function(req, res) {
                 else if(!currentUser.jobs_saved){
                     currentUser.jobs_saved = [thisJob._id];
                     currentUser.save(function(err){
+                        res.send(200);
                         if(err){console.log(err);}
                     })
                 }
 
             }
+            console.log("done with backend function")
         }
     )
 };
