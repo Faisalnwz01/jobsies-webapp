@@ -7,6 +7,9 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 /**
  * App-wide Styles
  */
+body {
+	font-family: 'Lato', sans-serif;
+}
 
 .browsehappy {
     margin: 0.2em 0;

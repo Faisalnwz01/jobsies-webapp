@@ -1,9 +1,8 @@
 'use strict';
 
 angular.module('jobsiesApp')
-    .controller('RhomeCtrl', function($scope, User, $http, Auth, $mdSidenav, $log, recruiterJobs) {
+    .controller('RhomeCtrl', function($scope, User, $http, Auth, $mdSidenav, $log, recruiterJobs, users, jobs) {
         $scope.recruiter = {};
-
 
         $scope.user = function() {
             User.get().$promise.then(function(user) {
@@ -13,11 +12,13 @@ angular.module('jobsiesApp')
                 if ($scope.recruiter.job_postings.length > 0) {
                     for (var i = 0; i < $scope.recruiter.job_postings.length; i++) {
                         $scope.jobs = [];
-                        $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
-                            console.log(data)
-                            $scope.jobs.push(data[0])
-                            console.log($scope.jobs);
-                        });
+                        var jobPosting = $scope.recruiter.job_postings[i]
+                        $scope.jobs.push(jobs.getJobs(jobPosting))
+                        // $http.get('/api/jobs/' + $scope.recruiter.job_postings[i] + '/showJobs').success(function(data) {
+                        //     console.log(data)
+                        //     $scope.jobs.push(data[0])
+                        //     console.log($scope.jobs);
+                        // });
                     }
                 } 
                 else {
@@ -26,34 +27,39 @@ angular.module('jobsiesApp')
             });
         };
         $scope.user();
-
+        
 
         $scope.currentUser = 0;
         $scope.userSeen = 0;
         $scope.currentJob = 0;
 
-        $http.get('/api/users/').success(function(users) {
-            $scope.users = users;
-            console.log($scope.users)
-        })
+        // $http.get('/api/users/').success(function(users) {
+        //     $scope.users = users;
+        //     console.log($scope.users)
+        // })
+
+        // $scope.users = users;
 
         $scope.savedUser = function(user) {
-            console.log(user);
             $scope.currentUser += 1;
             $scope.userSeen += 1;
-            $http.post('/api/users/' + Auth.getCurrentUser()._id + '/savedUser', {
-                users_saved: user
-            }).success(function(data) {
-                console.log(data);
-            });
+            // $http.post('/api/users/' + Auth.getCurrentUser()._id + '/savedUser', {
+            //     users_saved: user
+            // }).success(function(data) {
+            //     console.log(data);
+            // });
+            users.savedUser(user)
         }
 
-        $scope.saved_users = User.get().$promise.then(function(user) {
-            $scope.profileInformation = user
-            console.log($scope.profileInformation)
-            $scope.users_saved = $scope.profileInformation.users_saved
-            console.log($scope.users_saved)
-        })
+        // $scope.saved_users = User.get().$promise.then(function(user) {
+        //     $scope.profileInformation = user
+        //     console.log($scope.profileInformation)
+        //     $scope.users_saved = $scope.profileInformation.users_saved
+        //     console.log($scope.users_saved)
+        // })
+        
+        $scope.users_saved = users.savedUsers().then(function(user) {
+            return user.users_saved });
 
         $scope.userID = Auth.getCurrentUser()._id;
 
@@ -73,7 +79,6 @@ angular.module('jobsiesApp')
         }
 
         $scope.showjobs = false;
-
         $scope.showJobPost = function() {
             if ($scope.showjobs === false) {
                 $scope.showusers = false;
@@ -86,7 +91,6 @@ angular.module('jobsiesApp')
         }
 
         $scope.showusers = false;
-
         $scope.showUsers = function() {
             if ($scope.showusers === false) {
                 $scope.showjobs = false;
@@ -97,25 +101,29 @@ angular.module('jobsiesApp')
                 $scope.showusers = false;
             }
         }
+
+
         $scope.postJob = function(job) {
-            console.log("step1")
             $scope.job = angular.copy(job);
             $scope.job.recruiter_id = Auth.getCurrentUser()._id;
             $scope.job.date = new Date();
-            console.log($scope.job)
-            $http.post('/api/jobs/', $scope.job).success(function(jobs) {
-                console.log("JOB DONE", jobs);
-                var jobs_id = jobs._id
-            $scope.jobs.push(jobs)
-                $http.post('/api/users/' + Auth.getCurrentUser()._id + '/jobPost', {
-                    job_postings: jobs_id
-                }).success(function(data) {
-                    console.log(data);
-                    $scope.formReset();
-                });
-            });
+            jobs.postJobs(Auth.getCurrentUser()._id, $scope.job).then(function(jobs) {
+            $scope.jobs.push(jobs) });
+            $scope.formReset();
 
+            // $http.post('/api/jobs/', $scope.job).success(function(jobs) {
+            //     console.log("JOB DONE", jobs);
+            //     var jobs_id = jobs._id
+            //     $scope.jobs.push(jobs)
+            //     $http.post('/api/users/' + Auth.getCurrentUser()._id + '/jobPost', {
+            //         job_postings: jobs_id
+            //     }).success(function(data) {
+            //         console.log(data);
+            //         $scope.formReset();
+            //     });
+            // });
         }
+
         $scope.formReset = function() {
             $scope.job.jobtitle = '';
             $scope.job.formattedLocationFull = '';

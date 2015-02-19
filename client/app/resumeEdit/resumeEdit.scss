@@ -11,4 +11,40 @@
 	}
 }
 
+#editPage {
+	padding-left: 200px; 
+	padding-right: 500px; 
+}
 
+
+#careers {
+	textarea{
+		height: 200px;
+		margin-bottom: 15px; 
+		padding: 15px;
+		width: 350px; 
+
+	}
+}
+
+#education {
+	textarea{
+		height: 200px;
+		margin-bottom: 15px; 
+		padding: 15px;
+		width: 350px; 
+
+	}
+}
+
+
+.editTitles{
+	color: #1B86BC; 
+	font-style: bold; 
+}
+
+#wholePage{
+	.container{
+	  width: 1000px; 
+	}
+}
